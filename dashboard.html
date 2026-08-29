@@ -1,0 +1,351 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BLACKLINE | Dashboard</title>
+
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <header class="topbar">
+
+            <div class="brand">
+                BLACKLINE
+            </div>
+
+            <div class="network-status">
+                <span class="status-dot"></span>
+                NETWORK ONLINE
+            </div>
+
+        </header>
+
+
+        <main class="dashboard">
+
+            <!-- PLAYER HEADER -->
+
+            <section class="player-header">
+
+                <div>
+
+                    <p class="eyebrow">
+                        CONTRACTOR PROFILE
+                    </p>
+
+                    <h1 id="codename">
+                        NIGHTFALL
+                    </h1>
+
+                    <p class="contractor-id">
+                        CONTRACTOR ID:
+                        <span id="contractorId">00417</span>
+                    </p>
+
+                </div>
+
+                <div class="rank">
+
+                    <span class="rank-label">
+                        RANK
+                    </span>
+
+                    <strong id="level">
+                        01
+                    </strong>
+
+                </div>
+
+            </section>
+
+
+            <!-- PLAYER STATS -->
+
+            <section class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-header">
+
+                        <span>EXPERIENCE</span>
+
+                        <span id="xpText">
+                            250 / 500 XP
+                        </span>
+
+                    </div>
+
+                    <div class="xp-bar">
+
+                        <div id="xpProgress"></div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card money-card">
+
+                    <span class="stat-label">
+                        AVAILABLE FUNDS
+                    </span>
+
+                    <strong id="money">
+                        $2,500
+                    </strong>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <span class="stat-label">
+                        CONTRACTS COMPLETED
+                    </span>
+
+                    <strong id="contractsCompleted">
+                        0
+                    </strong>
+
+                </div>
+
+            </section>
+
+
+            <!-- OPERATIONS -->
+
+            <section class="operations-grid">
+
+                <!-- CONTRACTS -->
+
+                <article class="operation-card">
+
+                    <div class="operation-top">
+
+                        <div>
+
+                            <p class="operation-label">
+                                OPERATIONS
+                            </p>
+
+                            <h2>
+                                CONTRACTS
+                            </h2>
+
+                        </div>
+
+                        <span class="operation-count">
+                            04
+                        </span>
+
+                    </div>
+
+                    <p class="operation-description">
+                        Review available contracts, targets,
+                        rewards, and operational requirements.
+                    </p>
+
+                    <button
+                        class="operation-button"
+                        id="contractsButton"
+                        type="button">
+
+                        ACCESS CONTRACTS
+
+                    </button>
+
+                </article>
+
+
+                <!-- DAILY MISSIONS -->
+
+                <article class="operation-card">
+
+                    <div class="operation-top">
+
+                        <div>
+
+                            <p class="operation-label">
+                                DAILY OPERATIONS
+                            </p>
+
+                            <h2>
+                                MISSIONS
+                            </h2>
+
+                        </div>
+
+                        <span class="operation-count">
+                            03
+                        </span>
+
+                    </div>
+
+                    <p class="operation-description">
+                        Complete today's objectives to earn
+                        additional XP and contractor funds.
+                    </p>
+
+                    <button
+                        class="operation-button"
+                        id="dailyButton"
+                        type="button">
+
+                        VIEW MISSIONS
+
+                    </button>
+
+                </article>
+
+
+                <!-- EVENTS -->
+
+                <article class="operation-card">
+
+                    <div class="operation-top">
+
+                        <div>
+
+                            <p class="operation-label">
+                                SPECIAL OPERATIONS
+                            </p>
+
+                            <h2>
+                                EVENTS
+                            </h2>
+
+                        </div>
+
+                        <span class="operation-count">
+                            01
+                        </span>
+
+                    </div>
+
+                    <p class="operation-description">
+                        Participate in limited-time investigations,
+                        special operations, and classified cases.
+                    </p>
+
+                    <button
+                        class="operation-button"
+                        id="eventsButton"
+                        type="button">
+
+                        VIEW EVENTS
+
+                    </button>
+
+                </article>
+
+            </section>
+
+
+            <!-- RECENT ACTIVITY -->
+
+            <section class="activity">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <p class="operation-label">
+                            CONTRACTOR LOG
+                        </p>
+
+                        <h2>
+                            RECENT ACTIVITY
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="activity-list">
+
+                    <div class="activity-item">
+
+                        <span class="activity-indicator"></span>
+
+                        <div class="activity-info">
+
+                            <strong>
+                                NETWORK ACCESS GRANTED
+                            </strong>
+
+                            <span>
+                                Welcome to BLACKLINE contractor network.
+                            </span>
+
+                        </div>
+
+                        <time>
+                            NOW
+                        </time>
+
+                    </div>
+
+
+                    <div class="activity-item">
+
+                        <span class="activity-indicator"></span>
+
+                        <div class="activity-info">
+
+                            <strong>
+                                CONTRACTOR PROFILE CREATED
+                            </strong>
+
+                            <span>
+                                Contractor ID 00417 registered.
+                            </span>
+
+                        </div>
+
+                        <time>
+                            NOW
+                        </time>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <footer class="footer">
+
+            <span>
+                BLACKLINE CONTRACTOR NETWORK
+            </span>
+
+            <span>
+                ENCRYPTION: ACTIVE
+            </span>
+
+            <span>
+                SYSTEM STATUS: SECURE
+            </span>
+
+        </footer>
+
+    </div>
+
+
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>
+```

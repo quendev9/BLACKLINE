@@ -1,0 +1,475 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>BLACKLINE | Daily Operations</title>
+
+    <link
+        rel="stylesheet"
+        href="css/missions.css"
+    >
+
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div class="brand">
+                BLACKLINE
+            </div>
+
+            <div class="topbar-right">
+
+                <div class="network-status">
+
+                    <span class="status-dot"></span>
+
+                    NETWORK ONLINE
+
+                </div>
+
+                <button
+                    class="back-button"
+                    id="backButton"
+                    type="button"
+                >
+
+                    DASHBOARD
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- MAIN -->
+
+        <main class="missions-page">
+
+
+            <!-- PAGE HEADER -->
+
+            <section class="page-header">
+
+                <p class="eyebrow">
+                    BLACKLINE CONTRACTOR NETWORK
+                </p>
+
+                <h1>
+                    DAILY OPERATIONS
+                </h1>
+
+                <p class="page-description">
+
+                    Complete assigned objectives before the
+                    operational cycle ends to receive additional
+                    contractor rewards.
+
+                </p>
+
+            </section>
+
+
+            <!-- DAILY STATUS -->
+
+            <section class="daily-status">
+
+                <div>
+
+                    <span class="status-label">
+                        OPERATIONAL CYCLE
+                    </span>
+
+                    <strong>
+                        DAY 01
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span class="status-label">
+                        MISSIONS COMPLETE
+                    </span>
+
+                    <strong id="missionProgress">
+                        0 / 3
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span class="status-label">
+                        RESET
+                    </span>
+
+                    <strong id="resetTimer">
+                        23:59:59
+                    </strong>
+
+                </div>
+
+            </section>
+
+
+            <!-- MISSIONS -->
+
+            <section class="missions-section">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <p class="section-label">
+                            ASSIGNED OBJECTIVES
+                        </p>
+
+                        <h2>
+                            TODAY'S MISSIONS
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="missions-grid">
+
+
+                    <!-- MISSION 1 -->
+
+                    <article
+                        class="mission-card"
+                        data-mission="1"
+                    >
+
+                        <div class="mission-number">
+                            01
+                        </div>
+
+                        <div class="mission-content">
+
+                            <span class="mission-type">
+                                FIELDWORK
+                            </span>
+
+                            <h3>
+                                FIRST BLOOD
+                            </h3>
+
+                            <p>
+
+                                Complete one contract successfully.
+
+                            </p>
+
+                            <div class="mission-progress">
+
+                                <div class="progress-info">
+
+                                    <span>
+                                        PROGRESS
+                                    </span>
+
+                                    <span>
+                                        <strong id="progress1">
+                                            0
+                                        </strong>
+                                        / 1
+                                    </span>
+
+                                </div>
+
+                                <div class="progress-bar">
+
+                                    <div
+                                        id="bar1"
+                                        style="width: 0%;"
+                                    ></div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="mission-footer">
+
+                                <div class="reward">
+
+                                    <span>
+                                        REWARD
+                                    </span>
+
+                                    <strong>
+                                        +150 XP
+                                    </strong>
+
+                                </div>
+
+                                <button
+                                    class="claim-button"
+                                    data-claim="1"
+                                    type="button"
+                                    disabled
+                                >
+                                    INCOMPLETE
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- MISSION 2 -->
+
+                    <article
+                        class="mission-card"
+                        data-mission="2"
+                    >
+
+                        <div class="mission-number">
+                            02
+                        </div>
+
+                        <div class="mission-content">
+
+                            <span class="mission-type">
+                                PRECISION
+                            </span>
+
+                            <h3>
+                                CLEAN WORK
+                            </h3>
+
+                            <p>
+
+                                Complete a contract without losing
+                                reputation.
+
+                            </p>
+
+                            <div class="mission-progress">
+
+                                <div class="progress-info">
+
+                                    <span>
+                                        PROGRESS
+                                    </span>
+
+                                    <span>
+                                        <strong id="progress2">
+                                            0
+                                        </strong>
+                                        / 1
+                                    </span>
+
+                                </div>
+
+                                <div class="progress-bar">
+
+                                    <div
+                                        id="bar2"
+                                        style="width: 0%;"
+                                    ></div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="mission-footer">
+
+                                <div class="reward">
+
+                                    <span>
+                                        REWARD
+                                    </span>
+
+                                    <strong>
+                                        $750
+                                    </strong>
+
+                                </div>
+
+                                <button
+                                    class="claim-button"
+                                    data-claim="2"
+                                    type="button"
+                                    disabled
+                                >
+                                    INCOMPLETE
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- MISSION 3 -->
+
+                    <article
+                        class="mission-card"
+                        data-mission="3"
+                    >
+
+                        <div class="mission-number">
+                            03
+                        </div>
+
+                        <div class="mission-content">
+
+                            <span class="mission-type">
+                                OPERATIONS
+                            </span>
+
+                            <h3>
+                                ACTIVE CONTRACTOR
+                            </h3>
+
+                            <p>
+
+                                Complete two contracts during today's
+                                operational cycle.
+
+                            </p>
+
+                            <div class="mission-progress">
+
+                                <div class="progress-info">
+
+                                    <span>
+                                        PROGRESS
+                                    </span>
+
+                                    <span>
+                                        <strong id="progress3">
+                                            0
+                                        </strong>
+                                        / 2
+                                    </span>
+
+                                </div>
+
+                                <div class="progress-bar">
+
+                                    <div
+                                        id="bar3"
+                                        style="width: 0%;"
+                                    ></div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="mission-footer">
+
+                                <div class="reward">
+
+                                    <span>
+                                        REWARD
+                                    </span>
+
+                                    <strong>
+                                        +5 REP
+                                    </strong>
+
+                                </div>
+
+                                <button
+                                    class="claim-button"
+                                    data-claim="3"
+                                    type="button"
+                                    disabled
+                                >
+                                    INCOMPLETE
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- COMPLETION -->
+
+            <section
+                class="completion-panel"
+                id="completionPanel"
+            >
+
+                <span>
+                    DAILY OPERATIONS STATUS
+                </span>
+
+                <strong>
+                    COMPLETE ALL THREE MISSIONS
+                </strong>
+
+                <p>
+                    Completing every daily operation grants
+                    an additional contractor bonus.
+                </p>
+
+                <div class="bonus">
+                    +500 XP
+                </div>
+
+            </section>
+
+
+        </main>
+
+
+        <!-- FOOTER -->
+
+        <footer class="footer">
+
+            <span>
+                BLACKLINE CONTRACTOR NETWORK
+            </span>
+
+            <span>
+                DAILY OPERATIONS
+            </span>
+
+            <span>
+                ENCRYPTION: ACTIVE
+            </span>
+
+        </footer>
+
+    </div>
+
+
+    <script src="js/missions.js"></script>
+
+</body>
+
+</html>
+```
