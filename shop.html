@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>BLACKLINE | Shop</title>
+
+    <link
+        rel="stylesheet"
+        href="css/shop.css"
+    >
+
+</head>
+
+<body>
+
+    <div class="app">
+
+
+        <!-- ========================================
+             TOP BAR
+        ========================================= -->
+
+        <header class="topbar">
+
+            <div class="brand">
+                BLACKLINE
+            </div>
+
+            <div class="topbar-right">
+
+                <div class="network-status">
+
+                    <span class="status-dot"></span>
+
+                    NETWORK ONLINE
+
+                </div>
+
+                <button
+                    class="back-button"
+                    id="backButton"
+                    type="button"
+                >
+
+                    DASHBOARD
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- ========================================
+             MAIN SHOP
+        ========================================= -->
+
+        <main class="shop-page">
+
+
+            <!-- SHOP HEADER -->
+
+            <section class="page-header">
+
+                <div>
+
+                    <p class="eyebrow">
+                        BLACKLINE CONTRACTOR MARKET
+                    </p>
+
+                    <h1>
+                        SHOP
+                    </h1>
+
+                    <p class="page-description">
+
+                        Authorized equipment, intelligence,
+                        and operational resources available
+                        to registered contractors.
+
+                    </p>
+
+                </div>
+
+
+                <!-- FUNDS -->
+
+                <div class="funds-display">
+
+                    <span>
+                        AVAILABLE FUNDS
+                    </span>
+
+                    <strong id="shopMoney">
+                        $2,500
+                    </strong>
+
+                </div>
+
+            </section>
+
+
+            <!-- ========================================
+                 CATEGORY NAVIGATION
+            ========================================= -->
+
+            <nav class="shop-navigation">
+
+                <button
+                    class="category-button active"
+                    data-category="equipment"
+                    type="button"
+                >
+
+                    EQUIPMENT
+
+                </button>
+
+                <button
+                    class="category-button"
+                    data-category="intel"
+                    type="button"
+                >
+
+                    INTELLIGENCE
+
+                </button>
+
+                <button
+                    class="category-button"
+                    data-category="special"
+                    type="button"
+                >
+
+                    SPECIAL
+
+                </button>
+
+            </nav>
+
+
+            <!-- ========================================
+                 SHOP CONTENT
+            ========================================= -->
+
+            <section class="shop-section">
+
+
+                <div class="section-title">
+
+                    <div>
+
+                        <p class="section-label">
+                            CONTRACTOR MARKET
+                        </p>
+
+                        <h2 id="categoryTitle">
+                            EQUIPMENT
+                        </h2>
+
+                    </div>
+
+                    <span id="itemCount">
+                        03 ITEMS
+                    </span>
+
+                </div>
+
+
+                <!-- ====================================
+                     EQUIPMENT
+                ===================================== -->
+
+                <div
+                    class="shop-grid"
+                    id="equipmentCategory"
+                >
+
+
+                    <!-- ITEM 1 -->
+
+                    <article class="shop-card">
+
+                        <div class="item-header">
+
+                            <span class="item-number">
+                                01
+                            </span>
+
+                            <span class="item-type">
+                                FIELD EQUIPMENT
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            LOCKPICK SET
+                        </h3>
+
+                        <p class="item-description">
+
+                            Professional-grade lockpicking
+                            equipment designed for discreet
+                            entry operations.
+
+                        </p>
+
+                        <div class="item-footer">
+
+                            <strong>
+                                $500
+                            </strong>
+
+                            <button
+                                class="purchase-button"
+                                data-item="lockpick"
+                                data-price="500"
+                                type="button"
+                            >
+
+                                PURCHASE
+
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- ITEM 2 -->
+
+                    <article class="shop-card">
+
+                        <div class="item-header">
+
+                            <span class="item-number">
+                                02
+                            </span>
+
+                            <span class="item-type">
+                                SURVEILLANCE
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            SURVEILLANCE KIT
+                        </h3>
+
+                        <p class="item-description">
+
+                            Compact surveillance equipment
+                            for gathering information during
+                            field operations.
+
+                        </p>
+
+                        <div class="item-footer">
+
+                            <strong>
+                                $1,200
+                            </strong>
+
+                            <button
+                                class="purchase-button"
+                                data-item="surveillance"
+                                data-price="1200"
+                                type="button"
+                            >
+
+                                PURCHASE
+
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- ITEM 3 -->
+
+                    <article class="shop-card">
+
+                        <div class="item-header">
+
+                            <span class="item-number">
+                                03
+                            </span>
+
+                            <span class="item-type">
+                                FIELD OPERATIONS
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            DISGUISE KIT
+                        </h3>
+
+                        <p class="item-description">
+
+                            Collection of civilian clothing,
+                            identification materials, and
+                            basic disguise equipment.
+
+                        </p>
+
+                        <div class="item-footer">
+
+                            <strong>
+                                $800
+                            </strong>
+
+                            <button
+                                class="purchase-button"
+                                data-item="disguise"
+                                data-price="800"
+                                type="button"
+                            >
+
+                                PURCHASE
+
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+
+                <!-- ====================================
+                     INTELLIGENCE
+                ===================================== -->
+
+                <div
+                    class="shop-grid hidden"
+                    id="intelCategory"
+                >
+
+
+                    <article class="shop-card">
+
+                        <div class="item-header">
+
+                            <span class="item-number">
+                                01
+                            </span>
+
+                            <span class="item-type">
+                                INTELLIGENCE
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            TARGET PROFILE
+                        </h3>
+
+                        <p class="item-description">
+
+                            Additional intelligence regarding
+                            an assigned target.
+
+                        </p>
+
+                        <div class="item-footer">
+
+                            <strong>
+                                $750
+                            </strong>
+
+                            <button
+                                class="purchase-button"
+                                data-item="target-profile"
+                                data-price="750"
+                                type="button"
+                            >
+
+                                PURCHASE
+
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="shop-card">
+
+                        <div class="item-header">
+
+                            <span class="item-number">
+                                02
+                            </span>
+
+                            <span class="item-type">
+                                INTELLIGENCE
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            SECURITY LAYOUT
+                        </h3>
+
+                        <p class="item-description">
+
+                            Detailed information regarding
+                            security arrangements at a target
+                            location.
+
+                        </p>
+
+                        <div class="item-footer">
+
+                            <strong>
+                                $1,000
+                            </strong>
+
+                            <button
+                                class="purchase-button"
+                                data-item="security-layout"
+                                data-price="1000"
+                                type="button"
+                            >
+
+                                PURCHASE
+
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="shop-card">
+
+                        <div class="item-header">
+
+                            <span class="item-number">
+                                03
+                            </span>
+
+                            <span class="item-type">
+                                INTELLIGENCE
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            LOCATION INTEL
+                        </h3>
+
+                        <p class="item-description">
+
+                            Reconnaissance data and
+                            environmental intelligence
+                            for an operational location.
+
+                        </p>
+
+                        <div class="item-footer">
+
+                            <strong>
+                                $650
+                            </strong>
+
+                            <button
+                                class="purchase-button"
+                                data-item="location-intel"
+                                data-price="650"
+                                type="button"
+                            >
+
+                                PURCHASE
+
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+
+                <!-- ====================================
+                     SPECIAL
+                ===================================== -->
+
+                <div
+                    class="shop-grid hidden"
+                    id="specialCategory"
+                >
+
+
+                    <article class="shop-card special-card">
+
+                        <div class="item-header">
+
+                            <span class="item-number">
+                                01
+                            </span>
+
+                            <span class="item-type">
+                                CLASSIFIED
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            CLASSIFIED ACCESS
+                        </h3>
+
+                        <p class="item-description">
+
+                            Temporary access to restricted
+                            BLACKLINE intelligence channels.
+
+                        </p>
+
+                        <div class="item-footer">
+
+                            <strong>
+                                $2,000
+                            </strong>
+
+                            <button
+                                class="purchase-button"
+                                data-item="classified-access"
+                                data-price="2000"
+                                type="button"
+                            >
+
+                                PURCHASE
+
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- ========================================
+                 STATUS MESSAGE
+            ========================================= -->
+
+            <div
+                class="shop-message"
+                id="shopMessage"
+            ></div>
+
+
+        </main>
+
+
+        <!-- ========================================
+             FOOTER
+        ========================================= -->
+
+        <footer class="footer">
+
+            <span>
+                BLACKLINE CONTRACTOR NETWORK
+            </span>
+
+            <span>
+                MARKET DATABASE
+            </span>
+
+            <span>
+                ENCRYPTION: ACTIVE
+            </span>
+
+        </footer>
+
+
+    </div>
+
+
+    <script src="./js/player-state.js"></script>
+    <script src="./js/shop.js"></script>>
+
+</body>
+
+</html>
+

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>BLACKLINE | Contracts</title>
+
+    <link
+        rel="stylesheet"
+        href="./css/contracts.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ========================================
+         TOP BAR
+    ========================================= -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <span class="brand-name">
+                BLACKLINE
+            </span>
+
+            <span class="network-status">
+                NETWORK ONLINE
+            </span>
+
+        </div>
+
+
+        <button
+            id="backButton"
+            class="back-button"
+        >
+            DASHBOARD
+        </button>
+
+    </header>
+
+
+
+    <!-- ========================================
+         MAIN CONTENT
+    ========================================= -->
+
+    <main class="contracts-container">
+
+
+        <!-- PAGE HEADER -->
+
+        <section class="page-header">
+
+            <div>
+
+                <p class="classification">
+                    BLACKLINE CONTRACTOR NETWORK
+                </p>
+
+                <h1>
+                    CONTRACT DATABASE
+                </h1>
+
+                <p class="page-description">
+                    Active assignments available to qualified
+                    contractors.
+                </p>
+
+            </div>
+
+
+            <div class="contract-count">
+
+                <span id="contractCount">
+                    0
+                </span>
+
+                <small>
+                    AVAILABLE
+                </small>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ========================================
+             CONTRACT LIST
+        ========================================= -->
+
+        <section class="contracts-section">
+
+            <div
+                id="contractsGrid"
+                class="contracts-grid"
+            >
+            </div>
+
+        </section>
+
+
+
+        <!-- ========================================
+             CONTRACT DETAILS
+        ========================================= -->
+
+        <section
+            id="contractDetails"
+            class="contract-details hidden"
+        >
+
+            <button
+                id="closeDetails"
+                class="close-button"
+            >
+                ← BACK TO CONTRACTS
+            </button>
+
+
+            <div class="details-header">
+
+                <div>
+
+                    <p
+                        id="detailsClassification"
+                        class="classification"
+                    >
+                    </p>
+
+                    <h2 id="detailsTitle">
+                    </h2>
+
+                    <p
+                        id="detailsId"
+                        class="contract-id"
+                    >
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="detailsDifficulty"
+                    class="difficulty"
+                >
+                </div>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-panel">
+
+                    <span class="detail-label">
+                        TARGET
+                    </span>
+
+                    <span
+                        id="detailsTarget"
+                        class="detail-value"
+                    >
+                    </span>
+
+                </div>
+
+
+                <div class="detail-panel">
+
+                    <span class="detail-label">
+                        LOCATION
+                    </span>
+
+                    <span
+                        id="detailsLocation"
+                        class="detail-value"
+                    >
+                    </span>
+
+                </div>
+
+
+                <div class="detail-panel">
+
+                    <span class="detail-label">
+                        REQUIRED LEVEL
+                    </span>
+
+                    <span
+                        id="detailsLevel"
+                        class="detail-value"
+                    >
+                    </span>
+
+                </div>
+
+
+                <div class="detail-panel">
+
+                    <span class="detail-label">
+                        REWARD
+                    </span>
+
+                    <span
+                        id="detailsReward"
+                        class="detail-value reward"
+                    >
+                    </span>
+
+                </div>
+
+
+                <div class="detail-panel">
+
+                    <span class="detail-label">
+                        EXPERIENCE
+                    </span>
+
+                    <span
+                        id="detailsXP"
+                        class="detail-value"
+                    >
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="details-description">
+
+                <span class="detail-label">
+                    CONTRACT BRIEF
+                </span>
+
+                <p id="detailsDescription">
+                </p>
+
+            </div>
+
+
+
+            <div class="details-actions">
+
+                <button
+                    id="acceptContract"
+                    class="accept-button"
+                >
+                    ACCEPT CONTRACT
+                </button>
+
+            </div>
+
+
+            <div
+                id="contractMessage"
+                class="contract-message"
+            >
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ========================================
+         FOOTER
+    ========================================= -->
+
+    <footer>
+
+        BLACKLINE NETWORK // CONTRACTOR ACCESS
+
+    </footer>
+
+
+
+    <script src="./js/player-state.js"></script>
+    <script src="./js/contracts.js"></script> 
+
+</body>
+
+</html>

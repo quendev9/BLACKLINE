@@ -1,0 +1,719 @@
+/* ========================================
+   GLOBAL
+======================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    background: #050706;
+
+    color: #d9e6dc;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+}
+
+
+/* ========================================
+   TOP BAR
+======================================== */
+
+.topbar {
+
+    height: 70px;
+
+    padding: 0 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom: 1px solid #1b3323;
+
+    background: #070b08;
+
+}
+
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+}
+
+
+.brand-name {
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    letter-spacing: 4px;
+
+    color: #e8f5eb;
+
+}
+
+
+.network-status {
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    color: #4fa36a;
+
+}
+
+
+.back-button {
+
+    padding: 10px 18px;
+
+    background: transparent;
+
+    color: #7bc98d;
+
+    border: 1px solid #315c3d;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+
+.back-button:hover {
+
+    background: #102016;
+
+    border-color: #4fa36a;
+
+}
+
+
+/* ========================================
+   MAIN CONTAINER
+======================================== */
+
+.contracts-container {
+
+    width: min(1200px, 92%);
+
+    margin: 0 auto;
+
+    padding: 60px 0 80px;
+
+}
+
+
+/* ========================================
+   PAGE HEADER
+======================================== */
+
+.page-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    margin-bottom: 40px;
+
+    padding-bottom: 25px;
+
+    border-bottom: 1px solid #1b3323;
+
+}
+
+
+.classification {
+
+    margin-bottom: 10px;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    color: #4fa36a;
+
+}
+
+
+.page-header h1 {
+
+    font-size: 32px;
+
+    letter-spacing: 3px;
+
+    color: #edf7ef;
+
+}
+
+
+.page-description {
+
+    margin-top: 12px;
+
+    color: #718078;
+
+    font-size: 13px;
+
+}
+
+
+.contract-count {
+
+    text-align: right;
+
+}
+
+
+.contract-count span {
+
+    display: block;
+
+    font-size: 32px;
+
+    font-weight: bold;
+
+    color: #7bc98d;
+
+}
+
+
+.contract-count small {
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    color: #65746a;
+
+}
+
+
+/* ========================================
+   CONTRACT GRID
+======================================== */
+
+.contracts-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+}
+
+
+.contract-card {
+
+    position: relative;
+
+    padding: 25px;
+
+    min-height: 270px;
+
+    background: #0b120e;
+
+    border: 1px solid #1a3021;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s,
+        background 0.2s,
+        transform 0.2s;
+
+}
+
+
+.contract-card:hover {
+
+    background: #0f1a13;
+
+    border-color: #3b754c;
+
+    transform: translateY(-3px);
+
+}
+
+
+.card-classification {
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    color: #4fa36a;
+
+    margin-bottom: 15px;
+
+}
+
+
+.contract-card h3 {
+
+    font-size: 20px;
+
+    letter-spacing: 1px;
+
+    color: #e8f5eb;
+
+    margin-bottom: 10px;
+
+}
+
+
+.card-id {
+
+    font-size: 10px;
+
+    color: #59675e;
+
+    margin-bottom: 25px;
+
+}
+
+
+.card-info {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    padding-top: 15px;
+
+    border-top: 1px solid #17271b;
+
+}
+
+
+.card-info div {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+}
+
+
+.card-label {
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+
+    color: #59675e;
+
+}
+
+
+.card-value {
+
+    font-size: 12px;
+
+    color: #c7d6cb;
+
+}
+
+
+.card-reward {
+
+    color: #7bc98d;
+
+}
+
+
+.difficulty {
+
+    display: inline-block;
+
+    padding: 5px 8px;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+
+    border: 1px solid #315c3d;
+
+    color: #7bc98d;
+
+}
+
+
+/* ========================================
+   CONTRACT DETAILS
+======================================== */
+
+.contract-details {
+
+    margin-top: 30px;
+
+    padding: 35px;
+
+    background: #0b120e;
+
+    border: 1px solid #294b32;
+
+}
+
+
+.hidden {
+
+    display: none;
+
+}
+
+
+.close-button {
+
+    background: transparent;
+
+    border: none;
+
+    color: #65746a;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    margin-bottom: 35px;
+
+}
+
+
+.close-button:hover {
+
+    color: #7bc98d;
+
+}
+
+
+.details-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    padding-bottom: 25px;
+
+    border-bottom: 1px solid #1b3323;
+
+}
+
+
+.details-header h2 {
+
+    font-size: 30px;
+
+    letter-spacing: 2px;
+
+    color: #edf7ef;
+
+}
+
+
+.contract-id {
+
+    margin-top: 10px;
+
+    color: #59675e;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+
+}
+
+
+/* ========================================
+   DETAILS GRID
+======================================== */
+
+.details-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 10px;
+
+    margin-top: 25px;
+
+}
+
+
+.detail-panel {
+
+    padding: 18px;
+
+    background: #080d0a;
+
+    border: 1px solid #17271b;
+
+}
+
+
+.detail-label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+
+    color: #59675e;
+
+}
+
+
+.detail-value {
+
+    font-size: 13px;
+
+    color: #d4dfd7;
+
+}
+
+
+.reward {
+
+    color: #7bc98d;
+
+}
+
+
+/* ========================================
+   DESCRIPTION
+======================================== */
+
+.details-description {
+
+    margin-top: 30px;
+
+    padding: 25px;
+
+    background: #080d0a;
+
+    border-left: 2px solid #3b754c;
+
+}
+
+
+.details-description p {
+
+    max-width: 850px;
+
+    line-height: 1.8;
+
+    color: #9aa89e;
+
+    font-size: 13px;
+
+}
+
+
+/* ========================================
+   ACTIONS
+======================================== */
+
+.details-actions {
+
+    margin-top: 30px;
+
+}
+
+
+.accept-button {
+
+    width: 100%;
+
+    padding: 15px;
+
+    background: #102417;
+
+    border: 1px solid #3b754c;
+
+    color: #9ce3aa;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+
+.accept-button:hover {
+
+    background: #17351f;
+
+    border-color: #68b879;
+
+}
+
+
+.accept-button:disabled {
+
+    cursor: not-allowed;
+
+    opacity: 0.5;
+
+}
+
+
+.contract-message {
+
+    margin-top: 15px;
+
+    text-align: center;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+
+    color: #7bc98d;
+
+}
+
+
+/* ========================================
+   FOOTER
+======================================== */
+
+footer {
+
+    padding: 25px;
+
+    text-align: center;
+
+    border-top: 1px solid #17271b;
+
+    color: #3f4d44;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 900px) {
+
+    .contracts-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+    .details-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .topbar {
+
+        padding: 0 20px;
+
+    }
+
+    .contracts-container {
+
+        padding-top: 35px;
+
+    }
+
+    .page-header {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 20px;
+
+    }
+
+    .contract-count {
+
+        text-align: left;
+
+    }
+
+    .contracts-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .details-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .details-header {
+
+        flex-direction: column;
+
+        gap: 20px;
+
+    }
+
+}

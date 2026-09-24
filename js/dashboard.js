@@ -2,19 +2,8 @@
 // PLAYER DATA
 // ========================================
 
-const player = {
-    codename: "NIGHTFALL",
-    contractorId: "00417",
-
-    level: 1,
-
-    xp: 250,
-    xpRequired: 500,
-
-    money: 2500,
-
-    contractsCompleted: 0
-};
+const player =
+    getPlayer();
 
 
 // ========================================
@@ -127,16 +116,13 @@ if (contractsButton) {
         "click",
         function () {
 
-            alert(
-                "CONTRACT DATABASE\n\n" +
-                "Contract system coming soon."
-            );
+            window.location.href =
+                "./contracts.html";
 
         }
     );
 
 }
-
 
 // ========================================
 // DAILY MISSIONS BUTTON
@@ -181,3 +167,24 @@ if (eventsButton) {
 
 }
 
+
+// ========================================
+// SHOP BUTTON
+// ========================================
+
+const shopButton =
+    document.getElementById("shopButton");
+
+if (shopButton) {
+
+    shopButton.addEventListener(
+        "click",
+        function () {
+
+            window.location.href =
+                "./shop.html";
+
+        }
+    );
+
+}

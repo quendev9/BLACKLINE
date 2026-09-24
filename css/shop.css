@@ -1,0 +1,931 @@
+/* ========================================
+   RESET
+======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* ========================================
+   ROOT
+======================================== */
+
+:root {
+
+    --black: #050706;
+
+    --panel: #0b120e;
+
+    --panel-light: #0f1a13;
+
+    --border: #183221;
+
+    --border-light: #23472f;
+
+    --green: #286b3e;
+
+    --green-bright: #3faf62;
+
+    --green-light: #75c98a;
+
+    --white: #e8eee9;
+
+    --text: #b6c3ba;
+
+    --muted: #68766e;
+
+}
+
+
+/* ========================================
+   BASE
+======================================== */
+
+html {
+
+    background: var(--black);
+
+}
+
+
+body {
+
+    background: var(--black);
+
+    color: var(--white);
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    min-height: 100vh;
+
+}
+
+
+button {
+
+    font-family: inherit;
+
+}
+
+
+.app {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+/* ========================================
+   TOP BAR
+======================================== */
+
+.topbar {
+
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 45px;
+
+    border-bottom:
+        1px solid var(--border);
+
+    background:
+        rgba(5, 7, 6, 0.96);
+
+}
+
+
+.brand {
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    letter-spacing: 5px;
+
+}
+
+
+.topbar-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 30px;
+
+}
+
+
+.network-status {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.status-dot {
+
+    width: 7px;
+
+    height: 7px;
+
+    display: inline-block;
+
+    border-radius: 50%;
+
+    background:
+        var(--green-bright);
+
+    box-shadow:
+        0 0 10px
+        rgba(63, 175, 98, 0.45);
+
+}
+
+
+.back-button {
+
+    padding: 10px 15px;
+
+    background: transparent;
+
+    color: var(--muted);
+
+    border:
+        1px solid var(--border);
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+
+}
+
+
+.back-button:hover {
+
+    color: var(--green-light);
+
+    border-color:
+        var(--green);
+
+    background:
+        var(--panel);
+
+}
+
+
+/* ========================================
+   SHOP PAGE
+======================================== */
+
+.shop-page {
+
+    width:
+        min(1150px, 92%);
+
+    margin: 0 auto;
+
+    padding:
+        65px 0 80px;
+
+    flex: 1;
+
+}
+
+
+/* ========================================
+   PAGE HEADER
+======================================== */
+
+.page-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    gap: 40px;
+
+    padding-bottom: 45px;
+
+    border-bottom:
+        1px solid var(--border);
+
+}
+
+
+.eyebrow {
+
+    color:
+        var(--green-light);
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 12px;
+
+}
+
+
+.page-header h1 {
+
+    font-size:
+        clamp(48px, 8vw, 82px);
+
+    letter-spacing: 9px;
+
+    font-weight: 800;
+
+}
+
+
+.page-description {
+
+    max-width: 600px;
+
+    margin-top: 20px;
+
+    color:
+        var(--muted);
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+}
+
+
+/* ========================================
+   FUNDS
+======================================== */
+
+.funds-display {
+
+    min-width: 200px;
+
+    padding-left: 30px;
+
+    border-left:
+        1px solid var(--border);
+
+}
+
+
+.funds-display span {
+
+    display: block;
+
+    color:
+        var(--muted);
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.funds-display strong {
+
+    color:
+        var(--green-light);
+
+    font-size: 30px;
+
+    letter-spacing: 1px;
+
+}
+
+
+/* ========================================
+   CATEGORY NAVIGATION
+======================================== */
+
+.shop-navigation {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 35px;
+
+    border-bottom:
+        1px solid var(--border);
+
+    padding-bottom: 15px;
+
+}
+
+
+.category-button {
+
+    padding:
+        12px 20px;
+
+    background: transparent;
+
+    color:
+        var(--muted);
+
+    border:
+        1px solid var(--border);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition:
+        0.25s ease;
+
+}
+
+
+.category-button:hover {
+
+    color:
+        var(--green-light);
+
+    border-color:
+        var(--green);
+
+}
+
+
+.category-button.active {
+
+    color:
+        var(--white);
+
+    background:
+        var(--green);
+
+    border-color:
+        var(--green-bright);
+
+}
+
+
+/* ========================================
+   SHOP SECTION
+======================================== */
+
+.shop-section {
+
+    margin-top: 40px;
+
+}
+
+
+.section-title {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    margin-bottom: 20px;
+
+}
+
+
+.section-label {
+
+    color:
+        var(--green-light);
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.section-title h2 {
+
+    font-size: 20px;
+
+    letter-spacing: 3px;
+
+}
+
+
+#itemCount {
+
+    color:
+        var(--muted);
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* ========================================
+   SHOP GRID
+======================================== */
+
+.shop-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+}
+
+
+.hidden {
+
+    display: none;
+
+}
+
+
+/* ========================================
+   SHOP CARD
+======================================== */
+
+.shop-card {
+
+    min-height: 300px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--panel-light),
+            var(--panel)
+        );
+
+    border:
+        1px solid var(--border);
+
+    position: relative;
+
+    overflow: hidden;
+
+    transition:
+        0.25s ease;
+
+}
+
+
+.shop-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 2px;
+
+    height: 100%;
+
+    background:
+        var(--green);
+
+    transition:
+        0.25s ease;
+
+}
+
+
+.shop-card:hover {
+
+    border-color:
+        var(--border-light);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.shop-card:hover::before {
+
+    background:
+        var(--green-bright);
+
+    box-shadow:
+        0 0 15px
+        rgba(63, 175, 98, 0.3);
+
+}
+
+
+/* ========================================
+   ITEM HEADER
+======================================== */
+
+.item-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 30px;
+
+}
+
+
+.item-number {
+
+    color:
+        var(--green);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+}
+
+
+.item-type {
+
+    color:
+        var(--muted);
+
+    font-size: 7px;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* ========================================
+   ITEM CONTENT
+======================================== */
+
+.shop-card h3 {
+
+    font-size: 20px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.item-description {
+
+    margin-top: 15px;
+
+    color:
+        var(--muted);
+
+    font-size: 11px;
+
+    line-height: 1.8;
+
+}
+
+
+/* ========================================
+   ITEM FOOTER
+======================================== */
+
+.item-footer {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: auto;
+
+    padding-top: 25px;
+
+    border-top:
+        1px solid var(--border);
+
+}
+
+
+.item-footer strong {
+
+    color:
+        var(--green-light);
+
+    font-size: 20px;
+
+}
+
+
+.purchase-button {
+
+    padding:
+        11px 14px;
+
+    background: transparent;
+
+    color:
+        var(--green-light);
+
+    border:
+        1px solid var(--green);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    cursor: pointer;
+
+    transition:
+        0.25s ease;
+
+}
+
+
+.purchase-button:hover {
+
+    background:
+        var(--green);
+
+    border-color:
+        var(--green-bright);
+
+    color:
+        var(--white);
+
+    box-shadow:
+        0 0 18px
+        rgba(63, 175, 98, 0.12);
+
+}
+
+
+.purchase-button.owned {
+
+    color:
+        var(--muted);
+
+    border-color:
+        var(--border);
+
+    cursor: default;
+
+}
+
+
+.purchase-button.owned:hover {
+
+    background: transparent;
+
+    color:
+        var(--muted);
+
+    border-color:
+        var(--border);
+
+    box-shadow: none;
+
+}
+
+
+/* ========================================
+   SPECIAL CARD
+======================================== */
+
+.special-card {
+
+    border-color:
+        #25452f;
+
+}
+
+
+.special-card::before {
+
+    background:
+        var(--green-bright);
+
+}
+
+
+/* ========================================
+   STATUS MESSAGE
+======================================== */
+
+.shop-message {
+
+    min-height: 25px;
+
+    margin-top: 20px;
+
+    color:
+        var(--green-light);
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    text-align: center;
+
+}
+
+
+.shop-message.error {
+
+    color:
+        #a56b6b;
+
+}
+
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.footer {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 35px;
+
+    padding:
+        20px 30px;
+
+    border-top:
+        1px solid var(--border);
+
+    color:
+        #46534b;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 900px) {
+
+    .shop-grid {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .page-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+
+    .funds-display {
+
+        width: 100%;
+
+        padding-left: 0;
+
+        padding-top: 20px;
+
+        border-left: none;
+
+        border-top:
+            1px solid var(--border);
+
+    }
+
+
+    .shop-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .topbar {
+
+        padding:
+            0 20px;
+
+    }
+
+
+    .network-status {
+
+        display: none;
+
+    }
+
+
+    .shop-page {
+
+        width: 90%;
+
+        padding-top: 40px;
+
+    }
+
+
+    .page-header h1 {
+
+        letter-spacing: 5px;
+
+    }
+
+
+    .shop-navigation {
+
+        overflow-x: auto;
+
+    }
+
+
+    .category-button {
+
+        white-space: nowrap;
+
+    }
+
+
+    .footer {
+
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 10px;
+
+    }
+
+}
