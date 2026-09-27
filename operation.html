@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>BLACKLINE | Operation</title>
+
+    <link
+        rel="stylesheet"
+        href="./css/operation.css"
+    >
+
+</head>
+
+<body>
+
+    <div class="app">
+
+
+        <!-- ========================================
+             TOP BAR
+        ======================================== -->
+
+        <header class="topbar">
+
+            <div class="brand">
+                BLACKLINE
+            </div>
+
+
+            <div class="operation-status">
+
+                <span class="status-dot"></span>
+
+                OPERATION ACTIVE
+
+            </div>
+
+        </header>
+
+
+        <!-- ========================================
+             OPERATION
+        ======================================== -->
+
+        <main class="operation">
+
+
+            <!-- ====================================
+                 OPERATION HEADER
+            ==================================== -->
+
+            <section class="operation-header">
+
+                <div>
+
+                    <p class="eyebrow">
+                        ACTIVE CONTRACT
+                    </p>
+
+                    <h1 id="operationTitle">
+                        THE SILENT WITNESS
+                    </h1>
+
+                    <p class="operation-id">
+
+                        CONTRACT:
+
+                        <span id="operationId">
+                            CN-001
+                        </span>
+
+                    </p>
+
+                </div>
+
+
+                <div class="operation-classification">
+
+                    <span>
+                        CLASSIFICATION
+                    </span>
+
+                    <strong id="operationClassification">
+                        ELIMINATION CONTRACT
+                    </strong>
+
+                </div>
+
+            </section>
+
+
+            <!-- ====================================
+                 MISSION TERMINAL
+            ==================================== -->
+
+            <section class="mission-terminal">
+
+
+                <!-- TERMINAL HEADER -->
+
+                <div class="terminal-header">
+
+                    <div>
+
+                        <span class="terminal-label">
+                            BLACKLINE OPERATIONS TERMINAL
+                        </span>
+
+                        <span
+                            id="sceneStatus"
+                            class="scene-status"
+                        >
+                            AWAITING DEPLOYMENT
+                        </span>
+
+                    </div>
+
+
+                    <span id="sceneNumber">
+                        SCENE 01
+                    </span>
+
+                </div>
+
+
+                <!-- TERMINAL CONTENT -->
+
+                <div class="terminal-content">
+
+
+                    <p
+                        id="sceneEyebrow"
+                        class="scene-eyebrow"
+                    >
+                        MISSION BRIEFING
+                    </p>
+
+
+                    <h2 id="sceneTitle">
+                        THE SILENT WITNESS
+                    </h2>
+
+
+                    <div
+                        id="sceneText"
+                        class="scene-text"
+                    >
+
+                        Contract information loading...
+
+                    </div>
+
+
+                    <!-- CHOICES -->
+
+                    <div
+                        id="choices"
+                        class="choices hidden"
+                    >
+
+                        <!-- JavaScript inserts choices here -->
+
+                    </div>
+
+
+                    <!-- ACTION -->
+
+                    <div class="terminal-action">
+
+                        <button
+                            id="actionButton"
+                            class="action-button"
+                            type="button"
+                        >
+
+                            BEGIN OPERATION
+
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- ====================================
+                 CONTRACT INFORMATION
+            ==================================== -->
+
+            <section class="contract-info">
+
+
+                <div class="info-card">
+
+                    <span class="info-label">
+                        TARGET
+                    </span>
+
+                    <strong id="target">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <span class="info-label">
+                        LOCATION
+                    </span>
+
+                    <strong id="location">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <span class="info-label">
+                        DIFFICULTY
+                    </span>
+
+                    <strong id="difficulty">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <span class="info-label">
+                        CONTRACT VALUE
+                    </span>
+
+                    <strong id="reward">
+                        —
+                    </strong>
+
+                </div>
+
+
+            </section>
+
+
+        </main>
+
+
+        <!-- ========================================
+             FOOTER
+        ======================================== -->
+
+        <footer class="footer">
+
+            <span>
+                BLACKLINE CONTRACTOR NETWORK
+            </span>
+
+            <span>
+                OPERATIONAL CHANNEL: ENCRYPTED
+            </span>
+
+            <span>
+                STATUS: ACTIVE
+            </span>
+
+        </footer>
+
+
+    </div>
+
+
+    <!-- ========================================
+         JAVASCRIPT
+    ======================================== -->
+
+    <script src="./js/player-state.js"></script>
+
+    <script src="./js/operation.js"></script>
+
+</body>
+
+</html>

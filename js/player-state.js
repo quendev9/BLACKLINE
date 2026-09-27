@@ -2,6 +2,11 @@
 // BLACKLINE PLAYER STATE
 // ========================================
 
+
+// ========================================
+// DEFAULT PLAYER
+// ========================================
+
 const DEFAULT_PLAYER = {
 
     codename: "NIGHTFALL",
@@ -17,6 +22,8 @@ const DEFAULT_PLAYER = {
     money: 0,
 
     contractsCompleted: 0,
+
+    activeContract: null,
 
     inventory: {}
 
@@ -35,6 +42,10 @@ function getPlayer() {
         );
 
 
+    // ------------------------------------
+    // NO SAVED PLAYER
+    // ------------------------------------
+
     if (!savedPlayer) {
 
         localStorage.setItem(
@@ -50,9 +61,52 @@ function getPlayer() {
     }
 
 
+    // ------------------------------------
+    // LOAD SAVED PLAYER
+    // ------------------------------------
+
     try {
 
-        return JSON.parse(savedPlayer);
+        const player =
+            JSON.parse(savedPlayer);
+
+
+        // --------------------------------
+        // DATA COMPATIBILITY
+        // --------------------------------
+        //
+        // If an older BLACKLINE save
+        // doesn't have activeContract,
+        // add it automatically.
+        //
+
+        if (
+            !Object.prototype.hasOwnProperty.call(
+                player,
+                "activeContract"
+            )
+        ) {
+
+            player.activeContract =
+                null;
+
+        }
+
+
+        // --------------------------------
+        // INVENTORY COMPATIBILITY
+        // --------------------------------
+
+        if (
+            !player.inventory
+        ) {
+
+            player.inventory = {};
+
+        }
+
+
+        return player;
 
     }
 
@@ -120,6 +174,71 @@ function updatePlayer(changes) {
 
 
 // ========================================
+// START CONTRACT
+// ========================================
+
+function startContract(contractId) {
+
+    const player =
+        getPlayer();
+
+
+    // ------------------------------------
+    // CHECK FOR ACTIVE CONTRACT
+    // ------------------------------------
+
+    if (
+        player.activeContract !== null
+    ) {
+
+        return false;
+
+    }
+
+
+    // ------------------------------------
+    // SET ACTIVE CONTRACT
+    // ------------------------------------
+
+    player.activeContract =
+        contractId;
+
+
+    savePlayer(
+        player
+    );
+
+
+    return true;
+
+}
+
+
+// ========================================
+// ABANDON CONTRACT
+// ========================================
+
+function abandonContract() {
+
+    const player =
+        getPlayer();
+
+
+    player.activeContract =
+        null;
+
+
+    savePlayer(
+        player
+    );
+
+
+    return player;
+
+}
+
+
+// ========================================
 // ADD MONEY
 // ========================================
 
@@ -129,7 +248,8 @@ function addMoney(amount) {
         getPlayer();
 
 
-    player.money += amount;
+    player.money +=
+        amount;
 
 
     savePlayer(
@@ -152,14 +272,17 @@ function removeMoney(amount) {
         getPlayer();
 
 
-    if (player.money < amount) {
+    if (
+        player.money < amount
+    ) {
 
         return false;
 
     }
 
 
-    player.money -= amount;
+    player.money -=
+        amount;
 
 
     savePlayer(
@@ -182,12 +305,13 @@ function addXP(amount) {
         getPlayer();
 
 
-    player.xp += amount;
+    player.xp +=
+        amount;
 
 
-    // ====================================
+    // ------------------------------------
     // LEVEL UP
-    // ====================================
+    // ------------------------------------
 
     while (
         player.xp >=
@@ -200,9 +324,6 @@ function addXP(amount) {
 
         player.level++;
 
-
-        // Increase the amount of XP
-        // required for the next level.
 
         player.xpRequired =
             Math.floor(
@@ -235,20 +356,40 @@ function completeContract(
         getPlayer();
 
 
+    // ------------------------------------
+    // REWARD
+    // ------------------------------------
+
     player.money +=
         reward;
 
+
+    // ------------------------------------
+    // XP
+    // ------------------------------------
 
     player.xp +=
         xp;
 
 
+    // ------------------------------------
+    // CONTRACT COUNT
+    // ------------------------------------
+
     player.contractsCompleted++;
 
 
-    // ====================================
+    // ------------------------------------
+    // CLEAR ACTIVE CONTRACT
+    // ------------------------------------
+
+    player.activeContract =
+        null;
+
+
+    // ------------------------------------
     // LEVEL UP
-    // ====================================
+    // ------------------------------------
 
     while (
         player.xp >=

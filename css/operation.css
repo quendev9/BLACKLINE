@@ -1,0 +1,764 @@
+/* ========================================
+   BLACKLINE OPERATION
+======================================== */
+
+* {
+
+    box-sizing: border-box;
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    background: #050505;
+
+    color: #d8d8d8;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+}
+
+
+button {
+
+    font-family: inherit;
+
+}
+
+
+.app {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+/* ========================================
+   TOP BAR
+======================================== */
+
+.topbar {
+
+    height: 64px;
+
+    padding:
+        0 32px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom:
+        1px solid #1c1c1c;
+
+    background: #080808;
+
+}
+
+
+.brand {
+
+    color: #f0f0f0;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    letter-spacing: 4px;
+
+}
+
+
+.operation-status {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    color: #5cff91;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+}
+
+
+.status-dot {
+
+    width: 7px;
+
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #5cff91;
+
+    box-shadow:
+        0 0 8px rgba(
+            92,
+            255,
+            145,
+            0.7
+        );
+
+}
+
+
+/* ========================================
+   MAIN
+======================================== */
+
+.operation {
+
+    width: min(
+        1100px,
+        calc(100% - 40px)
+    );
+
+    margin:
+        0 auto;
+
+    padding:
+        60px 0 80px;
+
+    flex: 1;
+
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.operation-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    gap: 30px;
+
+    margin-bottom: 35px;
+
+}
+
+
+.eyebrow {
+
+    margin-bottom: 9px;
+
+    color: #5cff91;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+}
+
+
+.operation-header h1 {
+
+    color: #f2f2f2;
+
+    font-size: clamp(
+        32px,
+        5vw,
+        52px
+    );
+
+    letter-spacing: 2px;
+
+}
+
+
+.operation-id {
+
+    margin-top: 10px;
+
+    color: #777;
+
+    font-size: 11px;
+
+    letter-spacing: 1.5px;
+
+}
+
+
+.operation-id span {
+
+    color: #aaa;
+
+}
+
+
+.operation-classification {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    text-align: right;
+
+}
+
+
+.operation-classification span {
+
+    color: #666;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+}
+
+
+.operation-classification strong {
+
+    color: #d8d8d8;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+
+}
+
+
+/* ========================================
+   MISSION TERMINAL
+======================================== */
+
+.mission-terminal {
+
+    border:
+        1px solid #242424;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0a0a0a,
+            #070707
+        );
+
+    box-shadow:
+        0 20px 60px rgba(
+            0,
+            0,
+            0,
+            0.4
+        );
+
+}
+
+
+.terminal-header {
+
+    min-height: 52px;
+
+    padding:
+        0 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom:
+        1px solid #1d1d1d;
+
+    background: #0b0b0b;
+
+}
+
+
+.terminal-header > div {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+}
+
+
+.terminal-label {
+
+    color: #888;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+}
+
+
+.scene-status {
+
+    color: #5cff91;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+}
+
+
+.terminal-header > span:last-child {
+
+    color: #555;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+}
+
+
+/* ========================================
+   TERMINAL CONTENT
+======================================== */
+
+.terminal-content {
+
+    padding:
+        55px;
+
+}
+
+
+.scene-eyebrow {
+
+    margin-bottom: 12px;
+
+    color: #5cff91;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+}
+
+
+.terminal-content h2 {
+
+    margin-bottom: 28px;
+
+    color: #f1f1f1;
+
+    font-size: 28px;
+
+    letter-spacing: 1px;
+
+}
+
+
+.scene-text {
+
+    max-width: 800px;
+
+    color: #aaa;
+
+    font-size: 15px;
+
+    line-height: 1.9;
+
+    white-space: pre-line;
+
+}
+
+
+/* ========================================
+   CHOICES
+======================================== */
+
+.choices {
+
+    display: grid;
+
+    gap: 12px;
+
+    margin-top: 35px;
+
+}
+
+
+.choice-button {
+
+    width: 100%;
+
+    padding:
+        18px 20px;
+
+    border:
+        1px solid #252525;
+
+    background: #0d0d0d;
+
+    color: #bbb;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s,
+        background 0.2s,
+        color 0.2s;
+
+}
+
+
+.choice-button:hover {
+
+    border-color: #5cff91;
+
+    background: #101510;
+
+    color: #5cff91;
+
+}
+
+
+.choice-number {
+
+    display: inline-block;
+
+    min-width: 28px;
+
+    color: #5cff91;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+}
+
+
+.choice-text {
+
+    font-size: 13px;
+
+    letter-spacing: 0.5px;
+
+}
+
+
+.hidden {
+
+    display: none;
+
+}
+
+
+/* ========================================
+   ACTION
+======================================== */
+
+.terminal-action {
+
+    margin-top: 40px;
+
+}
+
+
+.action-button {
+
+    padding:
+        15px 24px;
+
+    border:
+        1px solid #5cff91;
+
+    background: #0b140e;
+
+    color: #5cff91;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s,
+        color 0.2s;
+
+}
+
+
+.action-button:hover {
+
+    background: #5cff91;
+
+    color: #050505;
+
+}
+
+
+.action-button:disabled {
+
+    border-color: #333;
+
+    background: #111;
+
+    color: #555;
+
+    cursor: not-allowed;
+
+}
+
+
+/* ========================================
+   CONTRACT INFO
+======================================== */
+
+.contract-info {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            4,
+            1fr
+        );
+
+    gap: 12px;
+
+    margin-top: 15px;
+
+}
+
+
+.info-card {
+
+    padding: 20px;
+
+    border:
+        1px solid #1d1d1d;
+
+    background: #090909;
+
+}
+
+
+.info-label {
+
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: #555;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+}
+
+
+.info-card strong {
+
+    color: #cfcfcf;
+
+    font-size: 12px;
+
+    letter-spacing: 0.5px;
+
+}
+
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.footer {
+
+    min-height: 55px;
+
+    padding:
+        0 32px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    border-top:
+        1px solid #1c1c1c;
+
+    background: #080808;
+
+    color: #444;
+
+    font-size: 9px;
+
+    letter-spacing: 1.2px;
+
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (
+    max-width: 800px
+) {
+
+    .operation-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+
+    .operation-classification {
+
+        text-align: left;
+
+    }
+
+
+    .contract-info {
+
+        grid-template-columns:
+            repeat(
+                2,
+                1fr
+            );
+
+    }
+
+
+    .terminal-content {
+
+        padding: 35px;
+
+    }
+
+}
+
+
+@media (
+    max-width: 600px
+) {
+
+    .topbar {
+
+        padding:
+            0 18px;
+
+    }
+
+
+    .operation {
+
+        width:
+            calc(
+                100% - 24px
+            );
+
+        padding-top: 35px;
+
+    }
+
+
+    .operation-header h1 {
+
+        font-size: 30px;
+
+    }
+
+
+    .terminal-content {
+
+        padding: 25px 20px;
+
+    }
+
+
+    .terminal-header {
+
+        padding:
+            0 15px;
+
+    }
+
+
+    .terminal-label {
+
+        display: none;
+
+    }
+
+
+    .contract-info {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .footer {
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        padding:
+            15px;
+
+    }
+
+}
