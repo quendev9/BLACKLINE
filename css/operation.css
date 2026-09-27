@@ -1,49 +1,77 @@
 /* ========================================
    BLACKLINE OPERATION
+   UNIFIED DASHBOARD UI
+======================================== */
+
+
+/* ========================================
+   RESET
 ======================================== */
 
 * {
-
-    box-sizing: border-box;
-
     margin: 0;
-
     padding: 0;
+    box-sizing: border-box;
+}
 
+
+:root {
+    --black: #050706;
+    --black-light: #080c09;
+
+    --panel: #0b120e;
+    --panel-light: #0f1a13;
+
+    --border: #183221;
+    --border-light: #23472f;
+
+    --green-dark: #174428;
+    --green: #286b3e;
+    --green-bright: #3faf62;
+    --green-light: #75c98a;
+
+    --white: #e8eee9;
+    --text: #b6c3ba;
+    --muted: #68766e;
+
+    --danger: #8f4545;
+}
+
+
+html {
+    background: var(--black);
 }
 
 
 body {
-
     min-height: 100vh;
 
-    background: #050505;
+    background: var(--black);
 
-    color: #d8d8d8;
+    color: var(--white);
 
     font-family:
         Arial,
         Helvetica,
         sans-serif;
-
 }
 
 
 button {
-
     font-family: inherit;
-
 }
 
 
-.app {
+/* ========================================
+   APP
+======================================== */
 
+.app {
     min-height: 100vh;
 
     display: flex;
 
     flex-direction: column;
-
 }
 
 
@@ -52,11 +80,7 @@ button {
 ======================================== */
 
 .topbar {
-
-    height: 64px;
-
-    padding:
-        0 32px;
+    height: 70px;
 
     display: flex;
 
@@ -64,64 +88,63 @@ button {
 
     justify-content: space-between;
 
-    border-bottom:
-        1px solid #1c1c1c;
+    padding: 0 45px;
 
-    background: #080808;
+    border-bottom: 1px solid var(--border);
 
+    background: rgba(
+        5,
+        7,
+        6,
+        0.95
+    );
 }
 
 
 .brand {
-
-    color: #f0f0f0;
+    color: var(--white);
 
     font-size: 18px;
 
-    font-weight: 700;
+    font-weight: 800;
 
-    letter-spacing: 4px;
-
+    letter-spacing: 5px;
 }
 
 
 .operation-status {
-
     display: flex;
 
     align-items: center;
 
     gap: 9px;
 
-    color: #5cff91;
+    color: var(--muted);
 
-    font-size: 11px;
+    font-size: 9px;
 
     font-weight: 700;
 
-    letter-spacing: 1.5px;
-
+    letter-spacing: 2px;
 }
 
 
 .status-dot {
-
     width: 7px;
-
     height: 7px;
 
     border-radius: 50%;
 
-    background: #5cff91;
+    background: var(--green-bright);
 
     box-shadow:
-        0 0 8px rgba(
-            92,
-            255,
-            145,
-            0.7
+        0 0 10px
+        rgba(
+            63,
+            175,
+            98,
+            0.45
         );
-
 }
 
 
@@ -130,499 +153,140 @@ button {
 ======================================== */
 
 .operation {
-
     width: min(
-        1100px,
-        calc(100% - 40px)
+        1200px,
+        92%
     );
 
-    margin:
-        0 auto;
+    margin: 0 auto;
 
-    padding:
-        60px 0 80px;
+    padding: 65px 0 80px;
 
     flex: 1;
-
 }
 
 
 /* ========================================
-   HEADER
+   OPERATION HEADER
 ======================================== */
 
 .operation-header {
-
     display: flex;
-
-    justify-content: space-between;
 
     align-items: flex-end;
 
+    justify-content: space-between;
+
     gap: 30px;
 
-    margin-bottom: 35px;
+    padding-bottom: 35px;
 
+    border-bottom: 1px solid var(--border);
 }
 
 
 .eyebrow {
+    color: var(--green-light);
 
-    margin-bottom: 9px;
-
-    color: #5cff91;
-
-    font-size: 11px;
+    font-size: 9px;
 
     font-weight: 700;
 
-    letter-spacing: 2px;
+    letter-spacing: 3px;
 
+    margin-bottom: 10px;
 }
 
 
 .operation-header h1 {
-
-    color: #f2f2f2;
+    color: var(--white);
 
     font-size: clamp(
-        32px,
-        5vw,
-        52px
+        40px,
+        6vw,
+        60px
     );
 
-    letter-spacing: 2px;
+    font-weight: 800;
 
+    line-height: 1.05;
+
+    letter-spacing: 5px;
 }
 
 
 .operation-id {
-
     margin-top: 10px;
 
-    color: #777;
+    color: var(--muted);
 
-    font-size: 11px;
+    font-size: 10px;
 
-    letter-spacing: 1.5px;
-
+    letter-spacing: 2px;
 }
 
 
 .operation-id span {
-
-    color: #aaa;
-
+    color: var(--text);
 }
 
 
-.operation-classification {
+/* ========================================
+   CLASSIFICATION
+======================================== */
 
+.operation-classification {
     display: flex;
 
     flex-direction: column;
 
-    gap: 7px;
+    align-items: flex-end;
 
-    text-align: right;
-
+    gap: 5px;
 }
 
 
 .operation-classification span {
-
-    color: #666;
+    color: var(--muted);
 
     font-size: 9px;
 
-    font-weight: 700;
-
-    letter-spacing: 2px;
-
+    letter-spacing: 3px;
 }
 
 
 .operation-classification strong {
+    color: var(--green-light);
 
-    color: #d8d8d8;
+    font-size: 10px;
 
-    font-size: 11px;
-
-    letter-spacing: 1px;
-
+    letter-spacing: 2px;
 }
 
 
 /* ========================================
-   MISSION TERMINAL
+   MISSION
 ======================================== */
 
-.mission-terminal {
-
-    border:
-        1px solid #242424;
+.mission {
+    margin-top: 15px;
 
     background:
         linear-gradient(
             145deg,
-            #0a0a0a,
-            #070707
+            var(--panel-light),
+            var(--panel)
         );
 
-    box-shadow:
-        0 20px 60px rgba(
-            0,
-            0,
-            0,
-            0.4
-        );
-
-}
-
-
-.terminal-header {
-
-    min-height: 52px;
-
-    padding:
-        0 22px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    border-bottom:
-        1px solid #1d1d1d;
-
-    background: #0b0b0b;
-
-}
-
-
-.terminal-header > div {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 15px;
-
-}
-
-
-.terminal-label {
-
-    color: #888;
-
-    font-size: 10px;
-
-    font-weight: 700;
-
-    letter-spacing: 1.5px;
-
-}
-
-
-.scene-status {
-
-    color: #5cff91;
-
-    font-size: 9px;
-
-    font-weight: 700;
-
-    letter-spacing: 1px;
-
-}
-
-
-.terminal-header > span:last-child {
-
-    color: #555;
-
-    font-size: 9px;
-
-    font-weight: 700;
-
-    letter-spacing: 1.5px;
-
+    border: 1px solid var(--border);
 }
 
 
 /* ========================================
-   TERMINAL CONTENT
+   MISSION HEADER
 ======================================== */
 
-.terminal-content {
-
-    padding:
-        55px;
-
-}
-
-
-.scene-eyebrow {
-
-    margin-bottom: 12px;
-
-    color: #5cff91;
-
-    font-size: 10px;
-
-    font-weight: 700;
-
-    letter-spacing: 2px;
-
-}
-
-
-.terminal-content h2 {
-
-    margin-bottom: 28px;
-
-    color: #f1f1f1;
-
-    font-size: 28px;
-
-    letter-spacing: 1px;
-
-}
-
-
-.scene-text {
-
-    max-width: 800px;
-
-    color: #aaa;
-
-    font-size: 15px;
-
-    line-height: 1.9;
-
-    white-space: pre-line;
-
-}
-
-
-/* ========================================
-   CHOICES
-======================================== */
-
-.choices {
-
-    display: grid;
-
-    gap: 12px;
-
-    margin-top: 35px;
-
-}
-
-
-.choice-button {
-
-    width: 100%;
-
-    padding:
-        18px 20px;
-
-    border:
-        1px solid #252525;
-
-    background: #0d0d0d;
-
-    color: #bbb;
-
-    text-align: left;
-
-    cursor: pointer;
-
-    transition:
-        border-color 0.2s,
-        background 0.2s,
-        color 0.2s;
-
-}
-
-
-.choice-button:hover {
-
-    border-color: #5cff91;
-
-    background: #101510;
-
-    color: #5cff91;
-
-}
-
-
-.choice-number {
-
-    display: inline-block;
-
-    min-width: 28px;
-
-    color: #5cff91;
-
-    font-size: 10px;
-
-    font-weight: 700;
-
-    letter-spacing: 1px;
-
-}
-
-
-.choice-text {
-
-    font-size: 13px;
-
-    letter-spacing: 0.5px;
-
-}
-
-
-.hidden {
-
-    display: none;
-
-}
-
-
-/* ========================================
-   ACTION
-======================================== */
-
-.terminal-action {
-
-    margin-top: 40px;
-
-}
-
-
-.action-button {
-
-    padding:
-        15px 24px;
-
-    border:
-        1px solid #5cff91;
-
-    background: #0b140e;
-
-    color: #5cff91;
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-    letter-spacing: 1.5px;
-
-    cursor: pointer;
-
-    transition:
-        background 0.2s,
-        color 0.2s;
-
-}
-
-
-.action-button:hover {
-
-    background: #5cff91;
-
-    color: #050505;
-
-}
-
-
-.action-button:disabled {
-
-    border-color: #333;
-
-    background: #111;
-
-    color: #555;
-
-    cursor: not-allowed;
-
-}
-
-
-/* ========================================
-   CONTRACT INFO
-======================================== */
-
-.contract-info {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            4,
-            1fr
-        );
-
-    gap: 12px;
-
-    margin-top: 15px;
-
-}
-
-
-.info-card {
-
-    padding: 20px;
-
-    border:
-        1px solid #1d1d1d;
-
-    background: #090909;
-
-}
-
-
-.info-label {
-
-    display: block;
-
-    margin-bottom: 9px;
-
-    color: #555;
-
-    font-size: 9px;
-
-    font-weight: 700;
-
-    letter-spacing: 1.5px;
-
-}
-
-
-.info-card strong {
-
-    color: #cfcfcf;
-
-    font-size: 12px;
-
-    letter-spacing: 0.5px;
-
-}
-
-
-/* ========================================
-   FOOTER
-======================================== */
-
-.footer {
-
-    min-height: 55px;
-
-    padding:
-        0 32px;
-
+.mission-header {
     display: flex;
 
     align-items: center;
@@ -631,17 +295,355 @@ button {
 
     gap: 20px;
 
-    border-top:
-        1px solid #1c1c1c;
+    padding: 25px 30px;
 
-    background: #080808;
+    border-bottom: 1px solid var(--border);
+}
 
-    color: #444;
+
+.operation-label {
+    color: var(--green-light);
 
     font-size: 9px;
 
-    letter-spacing: 1.2px;
+    font-weight: 700;
 
+    letter-spacing: 3px;
+
+    margin-bottom: 9px;
+}
+
+
+.mission-header h2 {
+    color: var(--white);
+
+    font-size: 21px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+}
+
+
+.scene-meta {
+    text-align: right;
+}
+
+
+.scene-meta span {
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 5px;
+}
+
+
+.scene-meta strong {
+    color: var(--green-light);
+
+    font-size: 22px;
+
+    font-weight: 700;
+}
+
+
+/* ========================================
+   SCENE
+======================================== */
+
+.scene {
+    padding: 45px 50px;
+}
+
+
+.scene-eyebrow {
+    color: var(--green-light);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 12px;
+}
+
+
+.scene-text {
+    max-width: 850px;
+
+    color: var(--text);
+
+    font-size: 13px;
+
+    line-height: 1.9;
+
+    white-space: pre-line;
+}
+
+
+/* ========================================
+   CHOICES
+======================================== */
+
+.choices {
+    max-width: 850px;
+
+    display: grid;
+
+    gap: 10px;
+
+    margin-top: 32px;
+}
+
+
+.choice-button {
+    width: 100%;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 15px;
+
+    padding: 18px 20px;
+
+    border: 1px solid var(--border);
+
+    background: var(--panel);
+
+    color: var(--text);
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.choice-button:hover {
+    background: var(--panel-light);
+
+    border-color: var(--green);
+
+    color: var(--white);
+
+    transform: translateX(3px);
+}
+
+
+.choice-button:active {
+    transform: translateX(1px);
+}
+
+
+.choice-number {
+    flex-shrink: 0;
+
+    min-width: 28px;
+
+    color: var(--green-light);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+
+.choice-text {
+    color: inherit;
+
+    font-size: 11px;
+
+    line-height: 1.7;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* ========================================
+   ACTION
+======================================== */
+
+.terminal-action {
+    margin-top: 35px;
+}
+
+
+.action-button {
+    padding: 13px 20px;
+
+    background: transparent;
+
+    color: var(--green-light);
+
+    border: 1px solid var(--border-light);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease;
+}
+
+
+.action-button:hover {
+    background: var(--green-dark);
+
+    border-color: var(--green-bright);
+
+    color: var(--white);
+}
+
+
+/* ========================================
+   OPERATION DATA
+======================================== */
+
+.operation-data {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            4,
+            1fr
+        );
+
+    gap: 15px;
+
+    margin-top: 15px;
+}
+
+
+.stat-card {
+    min-height: 110px;
+
+    padding: 24px;
+
+    background: var(--panel);
+
+    border: 1px solid var(--border);
+
+    transition:
+        border-color 0.25s ease,
+        background 0.25s ease;
+}
+
+
+.stat-card:hover {
+    border-color: var(--border-light);
+
+    background: var(--panel-light);
+}
+
+
+.stat-label {
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 14px;
+}
+
+
+.stat-card strong {
+    color: var(--text);
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    letter-spacing: 1px;
+}
+
+
+.stat-card .reward {
+    color: var(--green-light);
+}
+
+
+/* ========================================
+   RETURN BUTTON
+======================================== */
+
+.back-button {
+    margin-top: 15px;
+
+    padding: 13px 20px;
+
+    background: transparent;
+
+    color: var(--muted);
+
+    border: 1px solid var(--border);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease;
+}
+
+
+.back-button:hover {
+    background: var(--panel-light);
+
+    border-color: var(--border-light);
+
+    color: var(--text);
+}
+
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.footer {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 35px;
+
+    padding: 20px 30px;
+
+    border-top: 1px solid var(--border);
+
+    color: #46534b;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
 }
 
 
@@ -649,116 +651,91 @@ button {
    RESPONSIVE
 ======================================== */
 
-@media (
-    max-width: 800px
-) {
+@media (max-width: 850px) {
 
-    .operation-header {
-
-        flex-direction: column;
-
-        align-items: flex-start;
-
-    }
-
-
-    .operation-classification {
-
-        text-align: left;
-
-    }
-
-
-    .contract-info {
-
+    .operation-data {
         grid-template-columns:
-            repeat(
-                2,
-                1fr
-            );
-
-    }
-
-
-    .terminal-content {
-
-        padding: 35px;
-
+            1fr 1fr;
     }
 
 }
 
 
-@media (
-    max-width: 600px
-) {
+@media (max-width: 700px) {
 
     .topbar {
-
-        padding:
-            0 18px;
-
+        padding: 0 20px;
     }
 
 
     .operation {
+        width: 90%;
 
-        width:
-            calc(
-                100% - 24px
-            );
+        padding-top: 40px;
+    }
 
-        padding-top: 35px;
 
+    .operation-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .operation-classification {
+        align-items: flex-start;
     }
 
 
     .operation-header h1 {
+        font-size: 36px;
 
-        font-size: 30px;
-
+        letter-spacing: 4px;
     }
 
 
-    .terminal-content {
-
-        padding: 25px 20px;
-
+    .mission-header {
+        padding: 22px;
     }
 
 
-    .terminal-header {
-
-        padding:
-            0 15px;
-
+    .scene {
+        padding: 30px 22px;
     }
 
 
-    .terminal-label {
-
-        display: none;
-
-    }
-
-
-    .contract-info {
-
-        grid-template-columns:
-            1fr;
-
+    .operation-data {
+        grid-template-columns: 1fr;
     }
 
 
     .footer {
-
         flex-direction: column;
 
-        justify-content: center;
+        align-items: center;
 
-        padding:
-            15px;
+        gap: 10px;
+    }
 
+}
+
+
+@media (max-width: 450px) {
+
+    .operation-status span:last-child {
+        display: none;
+    }
+
+
+    .mission-header h2 {
+        font-size: 17px;
+
+        letter-spacing: 2px;
+    }
+
+
+    .scene-meta strong {
+        font-size: 18px;
     }
 
 }

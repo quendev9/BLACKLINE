@@ -23,11 +23,34 @@ const DEFAULT_PLAYER = {
 
     contractsCompleted: 0,
 
+    inventory: {},
+
     activeContract: null,
 
-    inventory: {}
+    activeScene: null,
+
+    completedContracts: []
 
 };
+
+
+// ========================================
+// CREATE DEFAULT PLAYER
+// ========================================
+
+function createDefaultPlayer() {
+
+    return {
+
+        ...DEFAULT_PLAYER,
+
+        inventory: {},
+
+        completedContracts: []
+
+    };
+
+}
 
 
 // ========================================
@@ -42,43 +65,45 @@ function getPlayer() {
         );
 
 
-    // ------------------------------------
-    // NO SAVED PLAYER
-    // ------------------------------------
-
     if (!savedPlayer) {
 
-        localStorage.setItem(
-            "blackline_player",
-            JSON.stringify(DEFAULT_PLAYER)
+        const newPlayer =
+            createDefaultPlayer();
+
+        savePlayer(
+            newPlayer
         );
 
-
-        return {
-            ...DEFAULT_PLAYER
-        };
+        return newPlayer;
 
     }
 
 
-    // ------------------------------------
-    // LOAD SAVED PLAYER
-    // ------------------------------------
-
     try {
 
         const player =
-            JSON.parse(savedPlayer);
+            JSON.parse(
+                savedPlayer
+            );
 
 
-        // --------------------------------
-        // DATA COMPATIBILITY
-        // --------------------------------
-        //
-        // If an older BLACKLINE save
-        // doesn't have activeContract,
-        // add it automatically.
-        //
+        if (!player.inventory) {
+
+            player.inventory = {};
+
+        }
+
+
+        if (
+            !Array.isArray(
+                player.completedContracts
+            )
+        ) {
+
+            player.completedContracts = [];
+
+        }
+
 
         if (
             !Object.prototype.hasOwnProperty.call(
@@ -87,21 +112,19 @@ function getPlayer() {
             )
         ) {
 
-            player.activeContract =
-                null;
+            player.activeContract = null;
 
         }
 
 
-        // --------------------------------
-        // INVENTORY COMPATIBILITY
-        // --------------------------------
-
         if (
-            !player.inventory
+            !Object.prototype.hasOwnProperty.call(
+                player,
+                "activeScene"
+            )
         ) {
 
-            player.inventory = {};
+            player.activeScene = null;
 
         }
 
@@ -118,15 +141,14 @@ function getPlayer() {
         );
 
 
-        localStorage.setItem(
-            "blackline_player",
-            JSON.stringify(DEFAULT_PLAYER)
+        const newPlayer =
+            createDefaultPlayer();
+
+        savePlayer(
+            newPlayer
         );
 
-
-        return {
-            ...DEFAULT_PLAYER
-        };
+        return newPlayer;
 
     }
 
@@ -137,11 +159,15 @@ function getPlayer() {
 // SAVE PLAYER
 // ========================================
 
-function savePlayer(player) {
+function savePlayer(
+    player
+) {
 
     localStorage.setItem(
         "blackline_player",
-        JSON.stringify(player)
+        JSON.stringify(
+            player
+        )
     );
 
 }
@@ -151,7 +177,9 @@ function savePlayer(player) {
 // UPDATE PLAYER
 // ========================================
 
-function updatePlayer(changes) {
+function updatePlayer(
+    changes
+) {
 
     const player =
         getPlayer();
@@ -174,75 +202,12 @@ function updatePlayer(changes) {
 
 
 // ========================================
-// START CONTRACT
-// ========================================
-
-function startContract(contractId) {
-
-    const player =
-        getPlayer();
-
-
-    // ------------------------------------
-    // CHECK FOR ACTIVE CONTRACT
-    // ------------------------------------
-
-    if (
-        player.activeContract !== null
-    ) {
-
-        return false;
-
-    }
-
-
-    // ------------------------------------
-    // SET ACTIVE CONTRACT
-    // ------------------------------------
-
-    player.activeContract =
-        contractId;
-
-
-    savePlayer(
-        player
-    );
-
-
-    return true;
-
-}
-
-
-// ========================================
-// ABANDON CONTRACT
-// ========================================
-
-function abandonContract() {
-
-    const player =
-        getPlayer();
-
-
-    player.activeContract =
-        null;
-
-
-    savePlayer(
-        player
-    );
-
-
-    return player;
-
-}
-
-
-// ========================================
 // ADD MONEY
 // ========================================
 
-function addMoney(amount) {
+function addMoney(
+    amount
+) {
 
     const player =
         getPlayer();
@@ -266,14 +231,17 @@ function addMoney(amount) {
 // REMOVE MONEY
 // ========================================
 
-function removeMoney(amount) {
+function removeMoney(
+    amount
+) {
 
     const player =
         getPlayer();
 
 
     if (
-        player.money < amount
+        player.money <
+        amount
     ) {
 
         return false;
@@ -299,7 +267,9 @@ function removeMoney(amount) {
 // ADD XP
 // ========================================
 
-function addXP(amount) {
+function addXP(
+    amount
+) {
 
     const player =
         getPlayer();
@@ -308,10 +278,6 @@ function addXP(amount) {
     player.xp +=
         amount;
 
-
-    // ------------------------------------
-    // LEVEL UP
-    // ------------------------------------
 
     while (
         player.xp >=
@@ -348,6 +314,7 @@ function addXP(amount) {
 // ========================================
 
 function completeContract(
+    contractId,
     reward,
     xp
 ) {
@@ -356,40 +323,48 @@ function completeContract(
         getPlayer();
 
 
-    // ------------------------------------
-    // REWARD
-    // ------------------------------------
-
     player.money +=
         reward;
 
-
-    // ------------------------------------
-    // XP
-    // ------------------------------------
 
     player.xp +=
         xp;
 
 
-    // ------------------------------------
-    // CONTRACT COUNT
-    // ------------------------------------
-
     player.contractsCompleted++;
 
 
-    // ------------------------------------
-    // CLEAR ACTIVE CONTRACT
-    // ------------------------------------
+    if (
+        !Array.isArray(
+            player.completedContracts
+        )
+    ) {
+
+        player.completedContracts = [];
+
+    }
+
+
+    if (
+        !player.completedContracts.includes(
+            contractId
+        )
+    ) {
+
+        player.completedContracts.push(
+            contractId
+        );
+
+    }
+
 
     player.activeContract =
         null;
 
 
-    // ------------------------------------
-    // LEVEL UP
-    // ------------------------------------
+    player.activeScene =
+        null;
+
 
     while (
         player.xp >=
@@ -409,6 +384,60 @@ function completeContract(
             );
 
     }
+
+
+    savePlayer(
+        player
+    );
+
+
+    return player;
+
+}
+
+
+// ========================================
+// FAIL CONTRACT
+// ========================================
+
+function failContract(
+    contractId
+) {
+
+    const player =
+        getPlayer();
+
+
+    if (
+        !Array.isArray(
+            player.completedContracts
+        )
+    ) {
+
+        player.completedContracts = [];
+
+    }
+
+
+    if (
+        !player.completedContracts.includes(
+            contractId
+        )
+    ) {
+
+        player.completedContracts.push(
+            contractId
+        );
+
+    }
+
+
+    player.activeContract =
+        null;
+
+
+    player.activeScene =
+        null;
 
 
     savePlayer(

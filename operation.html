@@ -10,7 +10,9 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>BLACKLINE | Operation</title>
+    <title>
+        BLACKLINE | Operation
+    </title>
 
     <link
         rel="stylesheet"
@@ -18,6 +20,7 @@
     >
 
 </head>
+
 
 <body>
 
@@ -39,15 +42,18 @@
 
                 <span class="status-dot"></span>
 
-                OPERATION ACTIVE
+                <span>
+                    OPERATION ACTIVE
+                </span>
 
             </div>
 
         </header>
 
 
+
         <!-- ========================================
-             OPERATION
+             MAIN
         ======================================== -->
 
         <main class="operation">
@@ -62,11 +68,11 @@
                 <div>
 
                     <p class="eyebrow">
-                        ACTIVE CONTRACT
+                        ACTIVE OPERATION
                     </p>
 
                     <h1 id="operationTitle">
-                        THE SILENT WITNESS
+                        OPERATION
                     </h1>
 
                     <p class="operation-id">
@@ -74,7 +80,7 @@
                         CONTRACT:
 
                         <span id="operationId">
-                            CN-001
+                            CN-000
                         </span>
 
                     </p>
@@ -89,7 +95,7 @@
                     </span>
 
                     <strong id="operationClassification">
-                        ELIMINATION CONTRACT
+                        CLASSIFICATION
                     </strong>
 
                 </div>
@@ -97,77 +103,73 @@
             </section>
 
 
+
             <!-- ====================================
-                 MISSION TERMINAL
+                 MISSION
             ==================================== -->
 
-            <section class="mission-terminal">
+            <section class="mission">
 
 
-                <!-- TERMINAL HEADER -->
+                <!-- MISSION HEADER -->
 
-                <div class="terminal-header">
+                <div class="mission-header">
 
                     <div>
 
-                        <span class="terminal-label">
-                            BLACKLINE OPERATIONS TERMINAL
-                        </span>
+                        <p class="operation-label">
+                            MISSION TERMINAL
+                        </p>
 
-                        <span
-                            id="sceneStatus"
-                            class="scene-status"
-                        >
-                            AWAITING DEPLOYMENT
-                        </span>
+                        <h2 id="sceneTitle">
+                            INITIALIZING
+                        </h2>
 
                     </div>
 
 
-                    <span id="sceneNumber">
-                        SCENE 01
-                    </span>
+                    <div class="scene-meta">
+
+                        <span>
+                            SCENE
+                        </span>
+
+                        <strong id="sceneNumber">
+                            01
+                        </strong>
+
+                    </div>
 
                 </div>
 
 
-                <!-- TERMINAL CONTENT -->
 
-                <div class="terminal-content">
+                <!-- SCENE -->
 
+                <div class="scene">
 
                     <p
                         id="sceneEyebrow"
                         class="scene-eyebrow"
                     >
-                        MISSION BRIEFING
+                        BLACKLINE
                     </p>
 
 
-                    <h2 id="sceneTitle">
-                        THE SILENT WITNESS
-                    </h2>
-
-
-                    <div
+                    <p
                         id="sceneText"
                         class="scene-text"
                     >
-
-                        Contract information loading...
-
-                    </div>
+                        Establishing secure connection...
+                    </p>
 
 
                     <!-- CHOICES -->
 
                     <div
                         id="choices"
-                        class="choices hidden"
+                        class="choices"
                     >
-
-                        <!-- JavaScript inserts choices here -->
-
                     </div>
 
 
@@ -178,31 +180,29 @@
                         <button
                             id="actionButton"
                             class="action-button"
-                            type="button"
+                            style="display: none;"
                         >
-
-                            BEGIN OPERATION
-
+                            CONTINUE
                         </button>
 
                     </div>
-
 
                 </div>
 
             </section>
 
 
+
             <!-- ====================================
-                 CONTRACT INFORMATION
+                 OPERATION DATA
             ==================================== -->
 
-            <section class="contract-info">
+            <section class="operation-data">
 
 
-                <div class="info-card">
+                <div class="stat-card">
 
-                    <span class="info-label">
+                    <span class="stat-label">
                         TARGET
                     </span>
 
@@ -213,9 +213,9 @@
                 </div>
 
 
-                <div class="info-card">
+                <div class="stat-card">
 
-                    <span class="info-label">
+                    <span class="stat-label">
                         LOCATION
                     </span>
 
@@ -226,9 +226,9 @@
                 </div>
 
 
-                <div class="info-card">
+                <div class="stat-card">
 
-                    <span class="info-label">
+                    <span class="stat-label">
                         DIFFICULTY
                     </span>
 
@@ -239,23 +239,39 @@
                 </div>
 
 
-                <div class="info-card">
+                <div class="stat-card">
 
-                    <span class="info-label">
-                        CONTRACT VALUE
+                    <span class="stat-label">
+                        REWARD
                     </span>
 
-                    <strong id="reward">
+                    <strong
+                        id="reward"
+                        class="reward"
+                    >
                         —
                     </strong>
 
                 </div>
 
-
             </section>
 
 
+
+            <!-- ====================================
+                 RETURN
+            ==================================== -->
+
+            <button
+                class="back-button"
+                onclick="window.location.href='./contracts.html'"
+            >
+                RETURN TO CONTRACTS
+            </button>
+
+
         </main>
+
 
 
         <!-- ========================================
@@ -269,11 +285,11 @@
             </span>
 
             <span>
-                OPERATIONAL CHANNEL: ENCRYPTED
+                SECURE CONNECTION
             </span>
 
             <span>
-                STATUS: ACTIVE
+                SYSTEM STATUS: ACTIVE
             </span>
 
         </footer>
@@ -282,13 +298,17 @@
     </div>
 
 
+
     <!-- ========================================
-         JAVASCRIPT
+         GAME SYSTEMS
     ======================================== -->
 
     <script src="./js/player-state.js"></script>
 
+    <script src="./js/world-state.js"></script>
+
     <script src="./js/operation.js"></script>
+
 
 </body>
 

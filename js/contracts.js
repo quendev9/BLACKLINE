@@ -1,5 +1,7 @@
 // ========================================
-// BLACKLINE CONTRACT SYSTEM
+// BLACKLINE
+// CONTRACT TERMINAL
+// BUILD 8.5
 // ========================================
 
 
@@ -7,114 +9,92 @@
 // CONTRACT DATABASE
 // ========================================
 
-const contracts = [
+const CONTRACTS = [
 
     {
-
         id: "CN-001",
 
-        classification:
-            "ELIMINATION CONTRACT",
+        title: "THE SILENT WITNESS",
 
-        title:
-            "THE SILENT WITNESS",
+        classification: "ELIMINATION CONTRACT",
 
-        target:
-            "MARCUS VALE",
+        target: "MARCUS VALE",
 
-        location:
-            "MANILA",
+        location: "MANILA",
 
-        difficulty:
-            "LOW",
+        difficulty: "LOW",
 
-        requiredLevel:
-            0,
+        requiredLevel: 0,
 
-        reward:
-            3500,
+        reward: 3500,
 
-        xp:
-            250,
+        xp: 250,
 
         description:
-            "A former network informant has disappeared with sensitive information concerning BLACKLINE operations. Locate the target and eliminate the threat before the information reaches outside authorities."
-
+            "Marcus Vale has been identified as a potential security threat to BLACKLINE interests. Locate the target, confirm identity, and resolve the assignment according to operational protocol."
     },
 
 
     {
-
         id: "CN-002",
 
-        classification:
-            "RECOVERY CONTRACT",
+        title: "DEAD DROP",
 
-        title:
-            "DEAD DROP",
+        classification: "RECOVERY CONTRACT",
 
-        target:
-            "UNKNOWN",
+        target: "UNKNOWN",
 
-        location:
-            "QUEZON CITY",
+        location: "QUEZON CITY",
 
-        difficulty:
-            "MEDIUM",
+        difficulty: "MEDIUM",
 
-        requiredLevel:
-            2,
+        requiredLevel: 2,
 
-        reward:
-            5500,
+        reward: 5500,
 
-        xp:
-            400,
+        xp: 400,
 
         description:
-            "A compromised contractor failed to deliver a classified package. Recover the package and determine what happened to the operative. Network exposure must be kept to an absolute minimum."
-
+            "A BLACKLINE asset has gone dark. Recover the package before it can be compromised. Operational details will be provided upon authorization."
     },
 
 
     {
-
         id: "CN-003",
 
-        classification:
-            "ELIMINATION CONTRACT",
+        title: "GHOST PROTOCOL",
 
-        title:
-            "GHOST PROTOCOL",
+        classification: "ELIMINATION CONTRACT",
 
-        target:
-            "ADRIAN CROSS",
+        target: "ADRIAN CROSS",
 
-        location:
-            "CEBU",
+        location: "CEBU",
 
-        difficulty:
-            "HIGH",
+        difficulty: "HIGH",
 
-        requiredLevel:
-            5,
+        requiredLevel: 5,
 
-        reward:
-            12000,
+        reward: 12000,
 
-        xp:
-            800,
+        xp: 800,
 
         description:
-            "An unidentified operative has breached multiple BLACKLINE systems. Intelligence suggests the operative is preparing to expose classified network information. Locate and neutralize the threat."
-
+            "Adrian Cross has breached multiple BLACKLINE security layers and disappeared from the network. Locate the target and terminate the threat."
     }
 
 ];
 
 
 // ========================================
-// ELEMENTS
+// PLAYER
+// ========================================
+
+const player =
+    getPlayer();
+
+
+// ========================================
+// DOM REFERENCES
 // ========================================
 
 const contractsGrid =
@@ -122,250 +102,620 @@ const contractsGrid =
         "contractsGrid"
     );
 
-
 const contractCount =
     document.getElementById(
         "contractCount"
     );
-
 
 const contractDetails =
     document.getElementById(
         "contractDetails"
     );
 
-
-const closeDetails =
-    document.getElementById(
-        "closeDetails"
+const detailsEmpty =
+    contractDetails.querySelector(
+        ".details-empty"
     );
 
+const detailsContent =
+    document.getElementById(
+        "detailsContent"
+    );
 
 const detailsClassification =
     document.getElementById(
         "detailsClassification"
     );
 
-
 const detailsTitle =
     document.getElementById(
         "detailsTitle"
     );
-
 
 const detailsId =
     document.getElementById(
         "detailsId"
     );
 
-
 const detailsDifficulty =
     document.getElementById(
         "detailsDifficulty"
     );
-
 
 const detailsTarget =
     document.getElementById(
         "detailsTarget"
     );
 
-
 const detailsLocation =
     document.getElementById(
         "detailsLocation"
     );
-
 
 const detailsLevel =
     document.getElementById(
         "detailsLevel"
     );
 
-
 const detailsReward =
     document.getElementById(
         "detailsReward"
     );
-
 
 const detailsXP =
     document.getElementById(
         "detailsXP"
     );
 
-
 const detailsDescription =
     document.getElementById(
         "detailsDescription"
     );
-
 
 const acceptContract =
     document.getElementById(
         "acceptContract"
     );
 
-
 const contractMessage =
     document.getElementById(
         "contractMessage"
     );
-
 
 const backButton =
     document.getElementById(
         "backButton"
     );
 
+const operativeCodename =
+    document.getElementById(
+        "operativeCodename"
+    );
 
-// ========================================
-// DISPLAY CONTRACT COUNT
-// ========================================
-
-if (contractCount) {
-
-    contractCount.textContent =
-        contracts.length;
-
-}
+const operativeId =
+    document.getElementById(
+        "operativeId"
+    );
 
 
 // ========================================
-// CREATE CONTRACT CARDS
+// SELECTED CONTRACT
 // ========================================
 
-function displayContracts() {
-
-    if (!contractsGrid) {
-        return;
-    }
+let selectedContract = null;
 
 
-    contractsGrid.innerHTML = "";
+// ========================================
+// WORLD STATE
+// ========================================
 
+function getContractWorldState(
+    contractId
+) {
 
-    contracts.forEach(
-        function (contract) {
+    const worldState =
+        getWorldState();
 
-            const card =
-                document.createElement(
-                    "div"
-                );
-
-
-            card.className =
-                "contract-card";
-
-
-            card.innerHTML = `
-
-                <div class="card-classification">
-
-                    ${contract.classification}
-
-                </div>
-
-
-                <h3>
-
-                    ${contract.title}
-
-                </h3>
-
-
-                <div class="card-id">
-
-                    ${contract.id}
-
-                </div>
-
-
-                <div class="card-info">
-
-                    <div>
-
-                        <span class="card-label">
-                            LOCATION
-                        </span>
-
-                        <span class="card-value">
-                            ${contract.location}
-                        </span>
-
-                    </div>
-
-
-                    <div>
-
-                        <span class="card-label">
-                            REWARD
-                        </span>
-
-                        <span class="card-value card-reward">
-
-                            $${contract.reward.toLocaleString()}
-
-                        </span>
-
-                    </div>
-
-
-                    <div>
-
-                        <span class="card-label">
-                            LEVEL
-                        </span>
-
-                        <span class="card-value">
-
-                            ${contract.requiredLevel}
-
-                        </span>
-
-                    </div>
-
-                </div>
-
-            `;
-
-
-            card.addEventListener(
-                "click",
-                function () {
-
-                    openContract(
-                        contract
-                    );
-
-                }
-            );
-
-
-            contractsGrid.appendChild(
-                card
-            );
-
-        }
+    return (
+        worldState.contracts[
+            contractId
+        ] || null
     );
 
 }
 
 
 // ========================================
-// OPEN CONTRACT
+// CONTRACT STATUS
 // ========================================
 
-function openContract(contract) {
+function getContractStatus(
+    contract
+) {
 
-    if (!contractDetails) {
-        return;
+    const worldRecord =
+        getContractWorldState(
+            contract.id
+        );
+
+
+    // ------------------------------------
+    // WORLD STATE TAKES PRIORITY
+    // ------------------------------------
+
+    if (worldRecord) {
+
+        if (
+            worldRecord.status ===
+            "failed"
+        ) {
+
+            return "failed";
+
+        }
+
+
+        if (
+            worldRecord.status ===
+            "resolved"
+        ) {
+
+            return "completed";
+
+        }
+
     }
 
 
-    const player =
-        getPlayer();
+    // ------------------------------------
+    // PLAYER ACTIVE CONTRACT
+    // ------------------------------------
 
+    if (
+        player.activeContract ===
+        contract.id
+    ) {
+
+        return "active";
+
+    }
+
+
+    // ------------------------------------
+    // OLD PLAYER STATE
+    // BACKUP COMPATIBILITY
+    // ------------------------------------
+
+    if (
+        Array.isArray(
+            player.completedContracts
+        ) &&
+        player.completedContracts.includes(
+            contract.id
+        )
+    ) {
+
+        return "completed";
+
+    }
+
+
+    // ------------------------------------
+    // LEVEL LOCK
+    // ------------------------------------
+
+    if (
+        player.level <
+        contract.requiredLevel
+    ) {
+
+        return "locked";
+
+    }
+
+
+    return "available";
+
+}
+
+
+// ========================================
+// STATUS TEXT
+// ========================================
+
+function getStatusText(
+    contract,
+    status
+) {
+
+    switch (status) {
+
+        case "available":
+
+            return "AVAILABLE";
+
+
+        case "active":
+
+            return "IN PROGRESS";
+
+
+        case "completed":
+
+            return "RESOLVED";
+
+
+        case "failed":
+
+            return "FAILED";
+
+
+        case "locked":
+
+            return (
+                `LVL ${contract.requiredLevel} REQUIRED`
+            );
+
+
+        default:
+
+            return "UNKNOWN";
+
+    }
+
+}
+
+
+// ========================================
+// CREATE CONTRACT RECORD
+// ========================================
+
+function createContractRecord(
+    contract
+) {
+
+    const status =
+        getContractStatus(
+            contract
+        );
+
+
+    const record =
+        document.createElement(
+            "div"
+        );
+
+
+    record.className =
+        "contract-record";
+
+
+    record.dataset.contractId =
+        contract.id;
+
+
+    if (
+        status === "locked"
+    ) {
+
+        record.classList.add(
+            "locked"
+        );
+
+    }
+
+
+    if (
+        status === "completed"
+    ) {
+
+        record.classList.add(
+            "completed"
+        );
+
+    }
+
+
+    if (
+        status === "failed"
+    ) {
+
+        record.classList.add(
+            "failed"
+        );
+
+    }
+
+
+    if (
+        status === "active"
+    ) {
+
+        record.classList.add(
+            "active"
+        );
+
+    }
+
+
+    // ====================================
+    // RECORD ID
+    // ====================================
+
+    const recordId =
+        document.createElement(
+            "div"
+        );
+
+    recordId.className =
+        "record-id";
+
+    recordId.textContent =
+        contract.id;
+
+
+    // ====================================
+    // RECORD INFORMATION
+    // ====================================
+
+    const recordInfo =
+        document.createElement(
+            "div"
+        );
+
+    recordInfo.className =
+        "record-info";
+
+
+    const recordTitle =
+        document.createElement(
+            "div"
+        );
+
+    recordTitle.className =
+        "record-title";
+
+    recordTitle.textContent =
+        contract.title;
+
+
+    const recordMeta =
+        document.createElement(
+            "div"
+        );
+
+    recordMeta.className =
+        "record-meta";
+
+
+    const recordDifficulty =
+        document.createElement(
+            "span"
+        );
+
+    recordDifficulty.textContent =
+        contract.difficulty;
+
+
+    const recordStatus =
+        document.createElement(
+            "span"
+        );
+
+    recordStatus.className =
+        "record-status";
+
+    recordStatus.textContent =
+        getStatusText(
+            contract,
+            status
+        );
+
+
+    recordMeta.appendChild(
+        recordDifficulty
+    );
+
+    recordMeta.appendChild(
+        recordStatus
+    );
+
+
+    recordInfo.appendChild(
+        recordTitle
+    );
+
+    recordInfo.appendChild(
+        recordMeta
+    );
+
+
+    record.appendChild(
+        recordId
+    );
+
+    record.appendChild(
+        recordInfo
+    );
+
+
+    // ====================================
+    // RECORD INTERACTION
+    // ====================================
+
+    if (
+        status !== "locked" &&
+        status !== "completed" &&
+        status !== "failed"
+    ) {
+
+        record.addEventListener(
+            "click",
+            () => {
+
+                selectContract(
+                    contract
+                );
+
+            }
+        );
+
+    }
+
+
+    return record;
+
+}
+
+
+// ========================================
+// RENDER CONTRACT DATABASE
+// ========================================
+
+function renderContracts() {
+
+    contractsGrid.innerHTML = "";
+
+
+    let availableCount = 0;
+
+
+    CONTRACTS.forEach(
+        (contract) => {
+
+            const status =
+                getContractStatus(
+                    contract
+                );
+
+
+            if (
+                status === "available" ||
+                status === "active"
+            ) {
+
+                availableCount++;
+
+            }
+
+
+            const record =
+                createContractRecord(
+                    contract
+                );
+
+
+            contractsGrid.appendChild(
+                record
+            );
+
+        }
+    );
+
+
+    contractCount.textContent =
+        availableCount;
+
+
+    updateOperativeInfo();
+
+}
+
+
+// ========================================
+// UPDATE OPERATIVE INFO
+// ========================================
+
+function updateOperativeInfo() {
+
+    if (
+        operativeCodename
+    ) {
+
+        operativeCodename.textContent =
+            player.codename;
+
+    }
+
+
+    if (
+        operativeId
+    ) {
+
+        operativeId.textContent =
+            player.contractorId;
+
+    }
+
+}
+
+
+// ========================================
+// SELECT CONTRACT
+// ========================================
+
+function selectContract(
+    contract
+) {
+
+    selectedContract =
+        contract;
+
+
+    // ------------------------------------
+    // UPDATE SELECTED VISUAL
+    // ------------------------------------
+
+    const records =
+        document.querySelectorAll(
+            ".contract-record"
+        );
+
+
+    records.forEach(
+        (record) => {
+
+            record.classList.remove(
+                "selected"
+            );
+
+        }
+    );
+
+
+    const selectedRecord =
+        document.querySelector(
+            `.contract-record[data-contract-id="${contract.id}"]`
+        );
+
+
+    if (
+        selectedRecord
+    ) {
+
+        selectedRecord.classList.add(
+            "selected"
+        );
+
+    }
+
+
+    // ------------------------------------
+    // SHOW DETAILS
+    // ------------------------------------
+
+    detailsEmpty.classList.add(
+        "hidden"
+    );
+
+    detailsContent.classList.remove(
+        "hidden"
+    );
+
+
+    // ------------------------------------
+    // POPULATE DETAILS
+    // ------------------------------------
 
     detailsClassification.textContent =
         contract.classification;
@@ -376,10 +726,12 @@ function openContract(contract) {
 
 
     detailsId.textContent =
-        contract.id;
+        contract.id +
+        " // OPERATIONAL RECORD";
 
 
     detailsDifficulty.textContent =
+        "DIFFICULTY // " +
         contract.difficulty;
 
 
@@ -411,279 +763,253 @@ function openContract(contract) {
         contract.description;
 
 
+    updateActionButton(
+        contract
+    );
+
+
+    contractMessage.textContent =
+        "";
+
+}
+
+
+// ========================================
+// UPDATE ACTION BUTTON
+// ========================================
+
+function updateActionButton(
+    contract
+) {
+
+    const status =
+        getContractStatus(
+            contract
+        );
+
+
+    acceptContract.disabled =
+        false;
+
+
+    acceptContract.textContent =
+        "ACCEPT CONTRACT";
+
+
     contractMessage.textContent =
         "";
 
 
-    // ====================================
-    // ACTIVE CONTRACT CHECK
-    // ====================================
+    switch (status) {
 
-    if (
-        player.activeContract !== null
-    ) {
 
-        if (
-            player.activeContract ===
-            contract.id
-        ) {
+        // ================================
+        // AVAILABLE
+        // ================================
+
+        case "available":
 
             acceptContract.disabled =
                 false;
 
             acceptContract.textContent =
-                "CONTINUE OPERATION";
+                "ACCEPT CONTRACT";
 
-        }
+            contractMessage.textContent =
+                "ASSIGNMENT AVAILABLE // AUTHORIZATION REQUIRED.";
 
-        else {
+            break;
+
+
+        // ================================
+        // ACTIVE
+        // ================================
+
+        case "active":
+
+            acceptContract.disabled =
+                false;
+
+            acceptContract.textContent =
+                "RESUME CONTRACT";
+
+            contractMessage.textContent =
+                "ASSIGNMENT IN PROGRESS // RETURN TO OPERATION.";
+
+            break;
+
+
+        // ================================
+        // COMPLETED
+        // ================================
+
+        case "completed":
 
             acceptContract.disabled =
                 true;
 
             acceptContract.textContent =
-                "CONTRACT ALREADY ACTIVE";
+                "CONTRACT RESOLVED";
 
-        }
+            contractMessage.textContent =
+                "RECORD SEALED // ASSIGNMENT COMPLETE.";
+
+            break;
+
+
+        // ================================
+        // FAILED
+        // ================================
+
+        case "failed":
+
+            acceptContract.disabled =
+                true;
+
+            acceptContract.textContent =
+                "CONTRACT FAILED";
+
+            contractMessage.textContent =
+                "RECORD SEALED // OPERATIONAL FAILURE.";
+
+            break;
+
+
+        // ================================
+        // LOCKED
+        // ================================
+
+        case "locked":
+
+            acceptContract.disabled =
+                true;
+
+            acceptContract.textContent =
+                "ACCESS DENIED";
+
+            contractMessage.textContent =
+                "CLEARANCE INSUFFICIENT // REQUIRED LEVEL: " +
+                contract.requiredLevel;
+
+            break;
 
     }
 
+}
 
-    // ====================================
-    // LEVEL CHECK
-    // ====================================
 
-    else if (
-        player.level >=
-        contract.requiredLevel
+// ========================================
+// ACCEPT / RESUME CONTRACT
+// ========================================
+
+function handleContractAction() {
+
+    if (
+        !selectedContract
     ) {
 
-        acceptContract.disabled =
-            false;
-
-        acceptContract.textContent =
-            "ACCEPT CONTRACT";
-
-    }
-
-    else {
-
-        acceptContract.disabled =
-            true;
-
-        acceptContract.textContent =
-            "LEVEL " +
-            contract.requiredLevel +
-            " REQUIRED";
+        return;
 
     }
 
 
-    contractDetails.classList.remove(
-        "hidden"
-    );
+    const status =
+        getContractStatus(
+            selectedContract
+        );
 
 
-    contractDetails.scrollIntoView({
-        behavior: "smooth"
+    // ------------------------------------
+    // RESOLVED / FAILED
+    // ------------------------------------
+
+    if (
+        status === "completed" ||
+        status === "failed"
+    ) {
+
+        return;
+
+    }
+
+
+    // ------------------------------------
+    // RESUME ACTIVE
+    // ------------------------------------
+
+    if (
+        status === "active"
+    ) {
+
+        window.location.href =
+            "./operation.html";
+
+        return;
+
+    }
+
+
+    // ------------------------------------
+    // CHECK LEVEL
+    // ------------------------------------
+
+    if (
+        player.level <
+        selectedContract.requiredLevel
+    ) {
+
+        contractMessage.textContent =
+            "ACCESS DENIED // INSUFFICIENT CLEARANCE.";
+
+        return;
+
+    }
+
+
+    // ------------------------------------
+    // ACCEPT CONTRACT
+    // ------------------------------------
+
+    updatePlayer({
+
+        activeContract:
+            selectedContract.id,
+
+        activeScene:
+            null
+
     });
 
 
-    acceptContract.dataset.contractId =
-        contract.id;
+    window.location.href =
+        "./operation.html";
 
 }
 
 
 // ========================================
-// ACCEPT / CONTINUE CONTRACT
+// BUTTON EVENTS
 // ========================================
 
-if (acceptContract) {
+acceptContract.addEventListener(
+    "click",
+    handleContractAction
+);
 
-    acceptContract.addEventListener(
-        "click",
-        function () {
 
-            const contractId =
-                acceptContract.dataset.contractId;
+backButton.addEventListener(
+    "click",
+    () => {
 
+        window.location.href =
+            "./dashboard.html";
 
-            const contract =
-                contracts.find(
-                    function (item) {
-
-                        return item.id ===
-                            contractId;
-
-                    }
-                );
-
-
-            if (!contract) {
-
-                return;
-
-            }
-
-
-            const player =
-                getPlayer();
-
-
-            // ----------------------------
-            // ALREADY ACTIVE
-            // ----------------------------
-
-            if (
-                player.activeContract ===
-                contract.id
-            ) {
-
-                window.location.href =
-                    "./operation.html";
-
-                return;
-
-            }
-
-
-            // ----------------------------
-            // ANOTHER CONTRACT ACTIVE
-            // ----------------------------
-
-            if (
-                player.activeContract !== null
-            ) {
-
-                contractMessage.textContent =
-                    "ACCESS DENIED — ANOTHER CONTRACT IS ACTIVE";
-
-                return;
-
-            }
-
-
-            // ----------------------------
-            // LEVEL CHECK
-            // ----------------------------
-
-            if (
-                player.level <
-                contract.requiredLevel
-            ) {
-
-                contractMessage.textContent =
-                    "ACCESS DENIED — INSUFFICIENT RANK";
-
-                return;
-
-            }
-
-
-            // ----------------------------
-            // START CONTRACT
-            // ----------------------------
-
-            const started =
-                startContract(
-                    contract.id
-                );
-
-
-            if (!started) {
-
-                contractMessage.textContent =
-                    "CONTRACT COULD NOT BE ACTIVATED.";
-
-                return;
-
-            }
-
-
-            // ----------------------------
-            // CONFIRM
-            // ----------------------------
-
-            contractMessage.textContent =
-                "CONTRACT ACCEPTED — OPERATION AUTHORIZED";
-
-
-            acceptContract.disabled =
-                false;
-
-
-            acceptContract.textContent =
-                "BEGIN OPERATION";
-
-
-            // ----------------------------
-            // GO TO OPERATION
-            // ----------------------------
-
-            setTimeout(
-                function () {
-
-                    window.location.href =
-                        "./operation.html";
-
-                },
-                700
-            );
-
-        }
-    );
-
-}
-
-
-// ========================================
-// CLOSE CONTRACT DETAILS
-// ========================================
-
-if (closeDetails) {
-
-    closeDetails.addEventListener(
-        "click",
-        function () {
-
-            contractDetails.classList.add(
-                "hidden"
-            );
-
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-
-        }
-    );
-
-}
-
-
-// ========================================
-// BACK TO DASHBOARD
-// ========================================
-
-if (backButton) {
-
-    backButton.addEventListener(
-        "click",
-        function () {
-
-            window.location.href =
-                "./dashboard.html";
-
-        }
-    );
-
-}
+    }
+);
 
 
 // ========================================
 // INITIALIZE
 // ========================================
 
-displayContracts();
+renderContracts();

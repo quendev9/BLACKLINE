@@ -10,7 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>BLACKLINE | Contracts</title>
+    <title>BLACKLINE | Contract Terminal</title>
 
     <link
         rel="stylesheet"
@@ -24,278 +24,414 @@
 
 
     <!-- ========================================
-         TOP BAR
+         BLACKLINE TERMINAL
     ========================================= -->
 
-    <header class="topbar">
+    <div class="terminal-shell">
 
-        <div class="brand">
 
-            <span class="brand-name">
-                BLACKLINE
+        <!-- ====================================
+             TOP BAR
+        ===================================== -->
+
+        <header class="topbar">
+
+            <div class="system-brand">
+
+                <div class="brand-main">
+                    BLACKLINE
+                </div>
+
+                <div class="brand-sub">
+                    CONTRACTOR NETWORK
+                </div>
+
+            </div>
+
+
+            <div class="topbar-center">
+
+                <span class="system-indicator"></span>
+
+                <span>
+                    NETWORK ONLINE
+                </span>
+
+            </div>
+
+
+            <button
+                id="backButton"
+                class="terminal-button back-button"
+            >
+                DASHBOARD
+            </button>
+
+        </header>
+
+
+
+        <!-- ====================================
+             SYSTEM BAR
+        ===================================== -->
+
+        <div class="system-bar">
+
+            <span>
+                TERMINAL: CONTRACT DATABASE
             </span>
 
-            <span class="network-status">
-                NETWORK ONLINE
+            <span>
+                ACCESS: CONTRACTOR 00417
+            </span>
+
+            <span>
+                CLEARANCE: ACTIVE
             </span>
 
         </div>
 
 
-        <button
-            id="backButton"
-            class="back-button"
-        >
-            DASHBOARD
-        </button>
 
-    </header>
+        <!-- ====================================
+             MAIN
+        ===================================== -->
+
+        <main class="terminal-main">
 
 
+            <!-- ==================================
+                 TERMINAL HEADER
+            =================================== -->
 
-    <!-- ========================================
-         MAIN CONTENT
-    ========================================= -->
-
-    <main class="contracts-container">
-
-
-        <!-- PAGE HEADER -->
-
-        <section class="page-header">
-
-            <div>
-
-                <p class="classification">
-                    BLACKLINE CONTRACTOR NETWORK
-                </p>
-
-                <h1>
-                    CONTRACT DATABASE
-                </h1>
-
-                <p class="page-description">
-                    Active assignments available to qualified
-                    contractors.
-                </p>
-
-            </div>
-
-
-            <div class="contract-count">
-
-                <span id="contractCount">
-                    0
-                </span>
-
-                <small>
-                    AVAILABLE
-                </small>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- ========================================
-             CONTRACT LIST
-        ========================================= -->
-
-        <section class="contracts-section">
-
-            <div
-                id="contractsGrid"
-                class="contracts-grid"
-            >
-            </div>
-
-        </section>
-
-
-
-        <!-- ========================================
-             CONTRACT DETAILS
-        ========================================= -->
-
-        <section
-            id="contractDetails"
-            class="contract-details hidden"
-        >
-
-            <button
-                id="closeDetails"
-                class="close-button"
-            >
-                ← BACK TO CONTRACTS
-            </button>
-
-
-            <div class="details-header">
+            <section class="terminal-header">
 
                 <div>
 
-                    <p
-                        id="detailsClassification"
-                        class="classification"
-                    >
-                    </p>
+                    <div class="section-code">
+                        BLACKLINE // NODE MNL-04
+                    </div>
 
-                    <h2 id="detailsTitle">
-                    </h2>
+                    <h1>
+                        CONTRACT TERMINAL
+                    </h1>
 
-                    <p
-                        id="detailsId"
-                        class="contract-id"
-                    >
+                    <p>
+                        Available assignments and operational records.
                     </p>
 
                 </div>
 
 
-                <div
-                    id="detailsDifficulty"
-                    class="difficulty"
+                <div class="operative-info">
+
+                    <span class="info-label">
+                        OPERATIVE
+                    </span>
+
+                    <strong id="operativeCodename">
+                        NIGHTFALL
+                    </strong>
+
+                    <span id="operativeId">
+                        00417
+                    </span>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ==================================
+                 TERMINAL CONTENT
+            =================================== -->
+
+            <section class="terminal-content">
+
+
+                <!-- =================================
+                     CONTRACT RECORDS
+                ================================== -->
+
+                <aside class="contract-list-panel">
+
+
+                    <div class="panel-header">
+
+                        <span>
+                            CONTRACT RECORDS
+                        </span>
+
+                        <span id="contractCount">
+                            0
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        id="contractsGrid"
+                        class="contract-list"
+                    >
+                    </div>
+
+
+                    <div class="panel-footer">
+
+                        DATABASE STATUS
+
+                        <span>
+                            SYNCHRONIZED
+                        </span>
+
+                    </div>
+
+                </aside>
+
+
+
+                <!-- =================================
+                     CONTRACT DETAILS
+                ================================== -->
+
+                <section
+                    id="contractDetails"
+                    class="contract-details"
                 >
-                </div>
-
-            </div>
 
 
-            <div class="details-grid">
+                    <div class="details-empty">
+
+                        <div class="empty-symbol">
+                            //
+                        </div>
+
+                        <h2>
+                            NO RECORD SELECTED
+                        </h2>
+
+                        <p>
+                            Select a contract record
+                            to access assignment data.
+                        </p>
+
+                    </div>
 
 
-                <div class="detail-panel">
+                    <!-- =============================
+                         ACTUAL DETAILS
+                    ============================== -->
 
-                    <span class="detail-label">
-                        TARGET
-                    </span>
-
-                    <span
-                        id="detailsTarget"
-                        class="detail-value"
+                    <div
+                        id="detailsContent"
+                        class="details-content hidden"
                     >
-                    </span>
-
-                </div>
 
 
-                <div class="detail-panel">
+                        <div class="details-top">
 
-                    <span class="detail-label">
-                        LOCATION
-                    </span>
+                            <div>
 
-                    <span
-                        id="detailsLocation"
-                        class="detail-value"
-                    >
-                    </span>
+                                <div
+                                    id="detailsClassification"
+                                    class="classification"
+                                >
+                                </div>
 
-                </div>
+                                <h2 id="detailsTitle">
+                                </h2>
 
+                                <div
+                                    id="detailsId"
+                                    class="details-id"
+                                >
+                                </div>
 
-                <div class="detail-panel">
-
-                    <span class="detail-label">
-                        REQUIRED LEVEL
-                    </span>
-
-                    <span
-                        id="detailsLevel"
-                        class="detail-value"
-                    >
-                    </span>
-
-                </div>
+                            </div>
 
 
-                <div class="detail-panel">
+                            <div
+                                id="detailsDifficulty"
+                                class="difficulty"
+                            >
+                            </div>
 
-                    <span class="detail-label">
-                        REWARD
-                    </span>
-
-                    <span
-                        id="detailsReward"
-                        class="detail-value reward"
-                    >
-                    </span>
-
-                </div>
-
-
-                <div class="detail-panel">
-
-                    <span class="detail-label">
-                        EXPERIENCE
-                    </span>
-
-                    <span
-                        id="detailsXP"
-                        class="detail-value"
-                    >
-                    </span>
-
-                </div>
-
-
-            </div>
+                        </div>
 
 
 
-            <div class="details-description">
+                        <!-- =========================
+                             DATA GRID
+                        ========================== -->
 
-                <span class="detail-label">
-                    CONTRACT BRIEF
-                </span>
-
-                <p id="detailsDescription">
-                </p>
-
-            </div>
+                        <div class="data-grid">
 
 
+                            <div class="data-cell">
 
-            <div class="details-actions">
+                                <span>
+                                    TARGET
+                                </span>
 
-                <button
-                    id="acceptContract"
-                    class="accept-button"
-                >
-                    ACCEPT CONTRACT
-                </button>
+                                <strong id="detailsTarget">
+                                </strong>
 
-            </div>
-
-
-            <div
-                id="contractMessage"
-                class="contract-message"
-            >
-            </div>
-
-        </section>
+                            </div>
 
 
-    </main>
+                            <div class="data-cell">
+
+                                <span>
+                                    LOCATION
+                                </span>
+
+                                <strong id="detailsLocation">
+                                </strong>
+
+                            </div>
+
+
+                            <div class="data-cell">
+
+                                <span>
+                                    REQUIRED LEVEL
+                                </span>
+
+                                <strong id="detailsLevel">
+                                </strong>
+
+                            </div>
+
+
+                            <div class="data-cell">
+
+                                <span>
+                                    REWARD
+                                </span>
+
+                                <strong
+                                    id="detailsReward"
+                                    class="reward"
+                                >
+                                </strong>
+
+                            </div>
+
+
+                            <div class="data-cell">
+
+                                <span>
+                                    EXPERIENCE
+                                </span>
+
+                                <strong id="detailsXP">
+                                </strong>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- =========================
+                             BRIEF
+                        ========================== -->
+
+                        <div class="brief-panel">
+
+                            <div class="brief-header">
+
+                                <span>
+                                    CONTRACT BRIEF
+                                </span>
+
+                                <span>
+                                    CLASSIFIED
+                                </span>
+
+                            </div>
+
+
+                            <p id="detailsDescription">
+                            </p>
+
+                        </div>
+
+
+
+                        <!-- =========================
+                             ACTION
+                        ========================== -->
+
+                        <div class="details-actions">
+
+
+                            <div
+                                id="contractMessage"
+                                class="contract-message"
+                            >
+                            </div>
+
+
+                            <button
+                                id="acceptContract"
+                                class="accept-button"
+                            >
+                                ACCEPT CONTRACT
+                            </button>
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+
+            </section>
+
+
+        </main>
+
+
+
+        <!-- ====================================
+             FOOTER
+        ===================================== -->
+
+        <footer class="terminal-footer">
+
+            <span>
+                BLACKLINE NETWORK
+            </span>
+
+            <span>
+                CONTRACTOR ACCESS // 00417
+            </span>
+
+            <span>
+                NODE MNL-04
+            </span>
+
+        </footer>
+
+
+    </div>
 
 
 
     <!-- ========================================
-         FOOTER
+         SCRIPTS
     ========================================= -->
 
-    <footer>
-
-        BLACKLINE NETWORK // CONTRACTOR ACCESS
-
-    </footer>
-
-
-
     <script src="./js/player-state.js"></script>
-    <script src="./js/contracts.js"></script> 
+
+    <script src="./js/world-state.js"></script>
+
+    <script src="./js/contracts.js"></script>
+
 
 </body>
 

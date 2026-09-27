@@ -1,5 +1,5 @@
 // ========================================
-// BLACKLINE OPERATION ENGINE
+// BLACKLINE OPERATION SYSTEM
 // ========================================
 
 
@@ -35,140 +35,63 @@ const operations = {
             250,
 
 
-        // ====================================
-        // STORY
-        // ====================================
-
         scenes: {
 
 
-            // =================================
-            // ACT I
-            // =================================
+            // ====================================
+            // BRIEFING
+            // ====================================
 
             briefing: {
 
-                status:
-                    "AWAITING DEPLOYMENT",
-
                 eyebrow:
-                    "MISSION BRIEFING",
+                    "BLACKLINE // SECURE CHANNEL",
 
                 title:
                     "THE SILENT WITNESS",
 
                 text:
-`CONTRACT ASSIGNMENT
+                    "CONTRACTOR 00417.\n\nYour first assignment has been authorized.\n\nMarcus Vale is a former BLACKLINE informant believed to possess information capable of compromising network operations.\n\nThe contract has remained unclaimed for approximately seventy-two hours. Senior contractors declined the assignment.\n\nYou are being given the contract because you are the newest eligible operative.\n\nLocate Marcus Vale. Confirm identity. Resolve the threat.",
 
-Contract CN-001 has remained unclaimed
-for approximately 72 hours.
+                choices: [
 
-Three senior contractors declined the
-assignment.
+                    {
+                        text:
+                            "ACCEPT THE ASSIGNMENT",
 
-BLACKLINE has automatically transferred
-the contract to the newest eligible
-contractor.
+                        next:
+                            "arrival"
 
-CONTRACTOR:
+                    }
 
-00417 — NIGHTFALL
-
-TARGET:
-
-Marcus Vale
-
-LOCATION:
-
-Manila
-
-PRIMARY OBJECTIVE:
-
-Locate Marcus Vale.
-
-Terminate the threat.
-
-Recover any BLACKLINE-sensitive
-information in his possession.
-
-NETWORK NOTE:
-
-The target is considered low priority.
-
-Proceed with discretion.`,
-
-                choices:
-                    null,
-
-                next:
-                    "arrival"
+                ]
 
             },
 
+
+            // ====================================
+            // ARRIVAL
+            // ====================================
 
             arrival: {
 
-                status:
-                    "OPERATIVE DEPLOYED",
-
                 eyebrow:
-                    "ACT I — ARRIVAL",
+                    "MANILA // 22:14",
 
                 title:
-                    "23:41 — MANILA",
+                    "ARRIVAL",
 
                 text:
-`Rain moves across the city as you reach
-the target's last known location.
-
-A three-story building stands across
-the street.
-
-According to BLACKLINE intelligence,
-Marcus Vale entered approximately
-forty minutes ago.
-
-No visual confirmation.
-
-No known associates.
-
-No backup.
-
-You check the contractor ID attached
-to your BLACKLINE profile.
-
-00417.
-
-Your first assignment.
-
-And somehow, nobody else wanted it.`,
+                    "Rain has turned the street into a sheet of reflected light.\n\nThe target district is quieter than the briefing suggested.\n\nYour target is believed to occupy the third floor of a residential building approximately two blocks ahead.\n\nNo support team is assigned.\n\nNo extraction vehicle is waiting.\n\nBLACKLINE has given you one instruction:\n\nResolve the target.",
 
                 choices: [
 
                     {
                         text:
-                            "Observe the building.",
+                            "APPROACH THE TARGET AREA",
 
                         next:
-                            "observation"
-
-                    },
-
-                    {
-                        text:
-                            "Enter through the front.",
-
-                        next:
-                            "frontEntry"
-
-                    },
-
-                    {
-                        text:
-                            "Search for another entrance.",
-
-                        next:
-                            "alternateEntry"
+                            "surveillance"
 
                     }
 
@@ -177,60 +100,44 @@ And somehow, nobody else wanted it.`,
             },
 
 
-            // =================================
-            // SURVEILLANCE PATH
-            // =================================
+            // ====================================
+            // SURVEILLANCE
+            // ====================================
 
-            observation: {
+            surveillance: {
 
-                status:
+                eyebrow:
+                    "TARGET AREA // 22:19",
+
+                title:
                     "SURVEILLANCE",
 
-                eyebrow:
-                    "ACT I — OBSERVATION",
-
-                title:
-                    "WATCHING THE BUILDING",
-
                 text:
-`You remain across the street.
-
-Five minutes pass.
-
-Then ten.
-
-The building appears completely quiet.
-
-Too quiet.
-
-A light turns on in a second-floor
-window.
-
-A silhouette crosses the room.
-
-Then you notice something strange.
-
-The curtains were closed when you arrived.
-
-Someone inside knew they were being watched.`,
+                    "You establish a position across the street.\n\nThird floor.\nApartment 3B.\n\nOne light is active.\n\nMovement behind the curtains confirms at least one occupant.\n\nYour briefing identifies Marcus as the sole occupant.\n\nSomething doesn't match.",
 
                 choices: [
 
                     {
                         text:
-                            "Continue observing.",
+                            "OBSERVE LONGER",
 
                         next:
-                            "continuedObservation"
+                            "secondFigure",
+
+                        choice:
+                            "observed_target_area"
 
                     },
 
                     {
                         text:
-                            "Approach the building.",
+                            "APPROACH THE BUILDING",
 
                         next:
-                            "approach"
+                            "frontEntrance",
+
+                        choice:
+                            "approached_immediately"
 
                     }
 
@@ -239,54 +146,44 @@ Someone inside knew they were being watched.`,
             },
 
 
-            continuedObservation: {
+            // ====================================
+            // SECOND FIGURE
+            // ====================================
 
-                status:
-                    "INTELLIGENCE UPDATE",
+            secondFigure: {
 
                 eyebrow:
-                    "ACT I — SURVEILLANCE",
+                    "SURVEILLANCE // 22:27",
 
                 title:
-                    "THE SECOND FIGURE",
+                    "SECOND FIGURE",
 
                 text:
-`Another silhouette appears.
-
-This one is completely still.
-
-It stands beside the window.
-
-Watching the street.
-
-Watching you.
-
-Your intelligence file listed only
-one occupant.
-
-Marcus Vale.
-
-Something is wrong.
-
-Your BLACKLINE terminal remains silent.`,
+                    "You wait.\n\nEight minutes.\n\nA second silhouette crosses the apartment.\n\nThen another.\n\nThe first figure appears to be Marcus.\nThe second cannot be identified from this distance.\n\nBLACKLINE intelligence reported no associates.\n\nA vehicle stops outside.\n\nThe unidentified individual leaves the building carrying a narrow black case.\n\nYou have a decision to make.",
 
                 choices: [
 
                     {
                         text:
-                            "Move closer.",
+                            "FOLLOW THE VEHICLE",
 
                         next:
-                            "approach"
+                            "followVehicle",
+
+                        choice:
+                            "followed_unknown_visitor"
 
                     },
 
                     {
                         text:
-                            "Continue watching.",
+                            "STAY WITH MARCUS",
 
                         next:
-                            "window"
+                            "frontEntrance",
+
+                        choice:
+                            "stayed_on_target"
 
                     }
 
@@ -295,52 +192,75 @@ Your BLACKLINE terminal remains silent.`,
             },
 
 
-            window: {
+            // ====================================
+            // FOLLOW VEHICLE
+            // ====================================
 
-                status:
-                    "UNIDENTIFIED ACTIVITY",
+            followVehicle: {
 
                 eyebrow:
-                    "ACT I — SURVEILLANCE",
+                    "UNIDENTIFIED CONTACT // 22:31",
 
                 title:
-                    "THE WINDOW",
+                    "THE BLACK CASE",
 
                 text:
-`The second figure disappears.
-
-A few seconds later, the light goes out.
-
-You wait.
-
-Nothing.
-
-Then your encrypted terminal
-briefly activates.
-
-One message appears.
-
-NO SENDER:
-
-"YOU ARE BEING WATCHED TOO."`,
+                    "You follow the vehicle for three blocks before losing it in traffic.\n\nYou return to the target building.\n\nThe detour cost you four minutes.\n\nWhen you reach the entrance, the building is still quiet.\n\nMarcus has not left.\n\nBut something has changed.\n\nThe third-floor window is now dark.",
 
                 choices: [
 
                     {
                         text:
-                            "Approach the building.",
+                            "ENTER THE BUILDING",
 
                         next:
-                            "approach"
+                            "frontEntrance"
+
+                    }
+
+                ]
+
+            },
+
+
+            // ====================================
+            // FRONT ENTRANCE
+            // ====================================
+
+            frontEntrance: {
+
+                eyebrow:
+                    "TARGET BUILDING // 22:36",
+
+                title:
+                    "ENTRY",
+
+                text:
+                    "The front entrance is unlocked.\n\nNo security desk.\nNo cameras visible from the lobby.\n\nYou climb the stairs.\n\nThird floor.\n\nApartment 3B.\n\nThe door is closed.\n\nYou hear movement inside.",
+
+                choices: [
+
+                    {
+                        text:
+                            "ENTER QUIETLY",
+
+                        next:
+                            "apartment",
+
+                        choice:
+                            "entered_quietly"
 
                     },
 
                     {
                         text:
-                            "Attempt to identify the sender.",
+                            "KNOCK",
 
                         next:
-                            "terminal"
+                            "knock",
+
+                        choice:
+                            "knocked_on_door"
 
                     }
 
@@ -349,37 +269,29 @@ NO SENDER:
             },
 
 
-            terminal: {
+            // ====================================
+            // KNOCK
+            // ====================================
 
-                status:
-                    "NETWORK ANOMALY",
+            knock: {
 
                 eyebrow:
-                    "ACT I — SIGNAL",
+                    "APARTMENT 3B",
 
                 title:
-                    "UNKNOWN CHANNEL",
+                    "NO ANSWER",
 
                 text:
-`You attempt to trace the message.
-
-The signal disappears immediately.
-
-No network record remains.
-
-Whoever sent it knew how to bypass
-BLACKLINE's communication system.
-
-That shouldn't be possible.`,
+                    "You knock twice.\n\nSilence.\n\nThen a voice from inside:\n\n\"You're late.\"\n\nThe voice belongs to Marcus.\n\nHe already knows someone is here.",
 
                 choices: [
 
                     {
                         text:
-                            "Enter the building.",
+                            "ENTER",
 
                         next:
-                            "inside"
+                            "apartment"
 
                     }
 
@@ -388,110 +300,56 @@ That shouldn't be possible.`,
             },
 
 
-            // =================================
-            // FRONT ENTRY PATH
-            // =================================
+            // ====================================
+            // APARTMENT
+            // ====================================
 
-            frontEntry: {
-
-                status:
-                    "DIRECT APPROACH",
+            apartment: {
 
                 eyebrow:
-                    "ACT I — ENTRY",
+                    "TARGET LOCATION // 22:39",
 
                 title:
-                    "THE FRONT DOOR",
+                    "APARTMENT 3B",
 
                 text:
-`You cross the street.
-
-The front entrance is unlocked.
-
-That immediately concerns you.
-
-BLACKLINE's file describes Marcus Vale
-as cautious and security-conscious.
-
-Someone unlocked this door.
-
-Whether they expected you or wanted
-someone to enter is unclear.`,
+                    "The apartment is almost completely dark.\n\nMarcus is nowhere in the main room.\n\nA laptop is open on a desk.\n\nSeveral documents have been spread across the floor.\n\nOne chair has been overturned.\n\nThere are two cups on the table.\n\nSomeone else was here recently.",
 
                 choices: [
 
                     {
                         text:
-                            "Enter.",
+                            "SEARCH THE ROOM",
 
                         next:
-                            "inside"
+                            "documents",
+
+                        choice:
+                            "searched_apartment"
 
                     },
 
                     {
                         text:
-                            "Step back and observe.",
+                            "ACCESS THE LAPTOP",
 
                         next:
-                            "observation"
+                            "laptop",
 
-                    }
-
-                ]
-
-            },
-
-
-            // =================================
-            // ALTERNATE ENTRY PATH
-            // =================================
-
-            alternateEntry: {
-
-                status:
-                    "ALTERNATE ROUTE",
-
-                eyebrow:
-                    "ACT I — ACCESS",
-
-                title:
-                    "SERVICE ENTRANCE",
-
-                text:
-`Behind the building you discover
-a narrow service entrance.
-
-The lock has already been damaged.
-
-Someone entered this way recently.
-
-Fresh marks surround the frame.
-
-But there are two separate sets
-of damage.
-
-One appears to be from outside.
-
-The other appears to be from inside.`,
-
-                choices: [
-
-                    {
-                        text:
-                            "Inspect the damage.",
-
-                        next:
-                            "evidence"
+                        choice:
+                            "accessed_laptop"
 
                     },
 
                     {
                         text:
-                            "Enter the building.",
+                            "CALL FOR MARCUS",
 
                         next:
-                            "inside"
+                            "marcus",
+
+                        choice:
+                            "called_for_marcus"
 
                     }
 
@@ -500,266 +358,42 @@ The other appears to be from inside.`,
             },
 
 
-            evidence: {
+            // ====================================
+            // DOCUMENTS
+            // ====================================
 
-                status:
-                    "EVIDENCE DISCOVERED",
+            documents: {
 
                 eyebrow:
-                    "ACT I — INVESTIGATION",
+                    "PHYSICAL EVIDENCE",
 
                 title:
-                    "SOMEONE ELSE WAS HERE",
+                    "THE DOCUMENTS",
 
                 text:
-`The damage is recent.
-
-But the second set of marks is stranger.
-
-Someone inside tried to force
-the door open.
-
-That means someone may have been
-trying to escape.
-
-Or trying to let someone in.`,
+                    "Most of the papers are meaningless.\n\nOld invoices. Addresses. Names.\n\nThen you find one page that isn't supposed to be here.\n\nAt the top is a BLACKLINE contractor number.\n\n00417.\n\nBelow it is a name.\n\nALEX MERCER.\n\nThe document is dated seven years ago.",
 
                 choices: [
 
                     {
                         text:
-                            "Enter.",
+                            "TAKE THE DOCUMENT",
 
                         next:
-                            "inside"
+                            "alexFile",
+
+                        choice:
+                            "took_alex_document"
 
                     },
 
                     {
                         text:
-                            "Search the exterior.",
-
-                        next:
-                            "exterior"
-
-                    }
-
-                ]
-
-            },
-
-
-            exterior: {
-
-                status:
-                    "EXTERIOR SEARCH",
-
-                eyebrow:
-                    "ACT I — INVESTIGATION",
-
-                title:
-                    "THE MARKINGS",
-
-                text:
-`Behind the building you find a small
-piece of paper caught beneath a drain.
-
-Most of it is unreadable.
-
-One line remains:
-
-00417 — DO NOT TRUST BLACKLINE.`,
-
-                choices: [
-
-                    {
-                        text:
-                            "Keep the evidence.",
-
-                        next:
-                            "inside"
-
-                    }
-
-                ]
-
-            },
-
-
-            // =================================
-            // ACT II
-            // =================================
-
-            approach: {
-
-                status:
-                    "TARGET AREA",
-
-                eyebrow:
-                    "ACT II — APPROACH",
-
-                title:
-                    "CLOSING DISTANCE",
-
-                text:
-`You approach the building.
-
-The street is almost empty.
-
-As you reach the entrance,
-your terminal vibrates.
-
-A new BLACKLINE message appears.
-
-NO SENDER.
-
-"DO NOT TRUST HIM."
-
-You stare at the message.
-
-The target hasn't even seen you yet.
-
-Someone already knows you're here.`,
-
-                choices: [
-
-                    {
-                        text:
-                            "Continue inside.",
-
-                        next:
-                            "inside"
-
-                    },
-
-                    {
-                        text:
-                            "Attempt to contact BLACKLINE.",
-
-                        next:
-                            "contact"
-
-                    }
-
-                ]
-
-            },
-
-
-            contact: {
-
-                status:
-                    "COMMUNICATION FAILURE",
-
-                eyebrow:
-                    "ACT II — NETWORK",
-
-                title:
-                    "NO RESPONSE",
-
-                text:
-`You establish a secure channel.
-
-Nothing.
-
-You try again.
-
-Still nothing.
-
-The network has gone silent.
-
-You check your connection.
-
-Everything is working.
-
-BLACKLINE simply isn't answering.`,
-
-                choices: [
-
-                    {
-                        text:
-                            "Continue the operation.",
-
-                        next:
-                            "inside"
-
-                    },
-
-                    {
-                        text:
-                            "Withdraw from the area.",
-
-                        next:
-                            "withdraw"
-
-                    }
-
-                ]
-
-            },
-
-
-            inside: {
-
-                status:
-                    "INTERIOR",
-
-                eyebrow:
-                    "ACT II — BUILDING",
-
-                title:
-                    "SOMEONE WAS HERE",
-
-                text:
-`The building is almost completely dark.
-
-You move through the first floor.
-
-A chair has been overturned.
-
-A glass lies broken on the floor.
-
-A laptop remains open.
-
-There is no sign of Marcus Vale.
-
-Then you hear footsteps above you.
-
-One person.
-
-Slow.
-
-Deliberate.
-
-Waiting.`,
-
-                choices: [
-
-                    {
-                        text:
-                            "Search the laptop.",
+                            "LEAVE IT AND CHECK THE LAPTOP",
 
                         next:
                             "laptop"
 
-                    },
-
-                    {
-                        text:
-                            "Move upstairs.",
-
-                        next:
-                            "upstairs"
-
-                    },
-
-                    {
-                        text:
-                            "Search the room.",
-
-                        next:
-                            "roomSearch"
-
                     }
 
                 ]
@@ -767,213 +401,38 @@ Waiting.`,
             },
 
 
-            roomSearch: {
-
-                status:
-                    "INVESTIGATION",
-
-                eyebrow:
-                    "ACT II — EVIDENCE",
-
-                title:
-                    "THE EMPTY ROOM",
-
-                text:
-`You search the room.
-
-Nothing useful.
-
-Then you notice a photograph
-half-hidden beneath the desk.
-
-It shows several people standing
-outside a BLACKLINE facility.
-
-One face has been marked out.
-
-On the back:
-
-"Before 00417."`,
-
-                choices: [
-
-                    {
-                        text:
-                            "Take the photograph.",
-
-                        next:
-                            "laptop"
-
-                    },
-
-                    {
-                        text:
-                            "Move upstairs.",
-
-                        next:
-                            "upstairs"
-
-                    }
-
-                ]
-
-            },
-
+            // ====================================
+            // LAPTOP
+            // ====================================
 
             laptop: {
 
-                status:
-                    "DATA RECOVERY",
-
                 eyebrow:
-                    "ACT II — INTELLIGENCE",
+                    "UNAUTHORIZED TERMINAL ACCESS",
 
                 title:
-                    "THE FILE",
+                    "THE LAPTOP",
 
                 text:
-`The laptop contains almost nothing.
-
-One file remains open.
-
-BLACKLINE_00417
-
-You freeze.
-
-00417.
-
-Your contractor ID.
-
-The file contains no text.
-
-Only one sentence:
-
-"YOU WERE NOT SUPPOSED TO RECEIVE THIS CONTRACT."`,
+                    "The laptop is still unlocked.\n\nA directory containing encrypted BLACKLINE records is open.\n\nYou recognize the network architecture immediately.\n\nThen you see the folder name:\n\n00417.\n\nThe system contains no current record for that contractor number.\n\nOnly an archived file.",
 
                 choices: [
 
                     {
                         text:
-                            "Open the file.",
+                            "OPEN 00417",
 
                         next:
-                            "file"
+                            "alexFile",
+
+                        choice:
+                            "opened_00417_file"
 
                     },
 
                     {
                         text:
-                            "Move upstairs.",
-
-                        next:
-                            "upstairs"
-
-                    }
-
-                ]
-
-            },
-
-
-            file: {
-
-                status:
-                    "CLASSIFIED DATA",
-
-                eyebrow:
-                    "ACT II — DISCOVERY",
-
-                title:
-                    "THE PREVIOUS 00417",
-
-                text:
-`The file contains an old photograph.
-
-Marcus Vale stands beside another
-BLACKLINE contractor.
-
-The contractor's face is partially
-obscured.
-
-But the ID is visible.
-
-00417.
-
-The date is seven years ago.
-
-You check your own profile.
-
-Your registration date:
-
-TODAY.`,
-
-                choices: [
-
-                    {
-                        text:
-                            "Continue upstairs.",
-
-                        next:
-                            "upstairs"
-
-                    }
-
-                ]
-
-            },
-
-
-            // =================================
-            // ACT III
-            // =================================
-
-            upstairs: {
-
-                status:
-                    "TARGET CONTACT",
-
-                eyebrow:
-                    "ACT III — CONTACT",
-
-                title:
-                    "THE ROOM",
-
-                text:
-`The footsteps stop.
-
-A door stands at the end
-of the hallway.
-
-You approach.
-
-The door opens before you touch it.
-
-Marcus Vale stands inside.
-
-He doesn't run.
-
-He doesn't fight.
-
-He looks directly at your contractor ID.
-
-00417.
-
-His expression changes.`,
-
-                choices: [
-
-                    {
-                        text:
-                            "Identify yourself.",
-
-                        next:
-                            "marcus"
-
-                    },
-
-                    {
-                        text:
-                            "Demand answers.",
+                            "SEARCH FOR MARCUS",
 
                         next:
                             "marcus"
@@ -984,63 +443,168 @@ His expression changes.`,
 
             },
 
+
+            // ====================================
+            // ALEX FILE
+            // ====================================
+
+            alexFile: {
+
+                eyebrow:
+                    "ARCHIVED BLACKLINE RECORD",
+
+                title:
+                    "ALEX MERCER",
+
+                text:
+                    "CONTRACTOR: ALEX MERCER\nID: 00417\nSTATUS: MISSING\n\nLast confirmed activity: seven years ago.\n\nThe rest of the record has been manually removed.\n\nNot corrupted.\n\nRemoved.\n\nSomeone deliberately erased it.",
+
+                choices: [
+
+                    {
+                        text:
+                            "READ THE FINAL ENTRY",
+
+                        next:
+                            "finalEntry",
+
+                        choice:
+                            "read_alex_record"
+
+                    },
+
+                    {
+                        text:
+                            "CLOSE THE FILE",
+
+                        next:
+                            "marcus"
+
+                    }
+
+                ]
+
+            },
+
+
+            // ====================================
+            // FINAL ENTRY
+            // ====================================
+
+            finalEntry: {
+
+                eyebrow:
+                    "ARCHIVED RECORD // RESTRICTED",
+
+                title:
+                    "FINAL ENTRY",
+
+                text:
+                    "The final surviving line contains only three words:\n\nPROJECT BLACK VEIL.\n\nNo explanation.\n\nNo project description.\n\nNo authorization record.\n\nThe file terminates immediately afterward.",
+
+                choices: [
+
+                    {
+                        text:
+                            "SEARCH FOR BLACK VEIL",
+
+                        next:
+                            "blackVeil",
+
+                        choice:
+                            "searched_black_veil"
+
+                    },
+
+                    {
+                        text:
+                            "FIND MARCUS",
+
+                        next:
+                            "marcus"
+
+                    }
+
+                ]
+
+            },
+
+
+            // ====================================
+            // BLACK VEIL
+            // ====================================
+
+            blackVeil: {
+
+                eyebrow:
+                    "SYSTEM SEARCH",
+
+                title:
+                    "NOT FOUND",
+
+                text:
+                    "You search the local database.\n\nNothing.\n\nYou search archived records.\n\nNothing.\n\nYou search the contractor network.\n\nACCESS DENIED.\n\nFor the first time tonight, the BLACKLINE system is refusing information that your authorization should allow you to access.\n\nA notification appears.\n\nREMOTE SESSION TERMINATED.",
+
+                choices: [
+
+                    {
+                        text:
+                            "FIND MARCUS",
+
+                        next:
+                            "marcus"
+
+                    }
+
+                ]
+
+            },
+
+
+            // ====================================
+            // MARCUS
+            // ====================================
 
             marcus: {
 
-                status:
+                eyebrow:
                     "TARGET CONTACT",
 
-                eyebrow:
-                    "ACT III — MARCUS VALE",
-
                 title:
-                    "THE SILENT WITNESS",
+                    "MARCUS VALE",
 
                 text:
-`Marcus looks at you.
-
-"You were sent here because nobody
-else wanted the job."
-
-He pauses.
-
-"That's not why I'm surprised."
-
-His eyes move to your contractor ID.
-
-"00417."
-
-He takes a breath.
-
-"Ask BLACKLINE who had that number
-before you."`,
+                    "Marcus is standing in the doorway behind you.\n\nHe isn't holding a weapon.\n\nHe looks at your contractor identification.\n\nHis expression changes.\n\n\"00417.\"\n\nHe says the number quietly.\n\nThen:\n\n\"They really gave you that number again.\"\n\nMarcus knows exactly what it means.",
 
                 choices: [
 
                     {
                         text:
-                            "Finish the contract.",
+                            "ASK ABOUT 00417",
 
                         next:
-                            "finalDecision"
+                            "question00417",
+
+                        choice:
+                            "questioned_00417"
 
                     },
 
                     {
                         text:
-                            "Ask what he knows.",
+                            "ORDER HIM TO SURRENDER",
 
                         next:
-                            "question"
+                            "surrender"
 
                     },
 
                     {
                         text:
-                            "Lower your weapon.",
+                            "RAISE YOUR WEAPON",
 
                         next:
-                            "lowerWeapon"
+                            "weapon"
 
                     }
 
@@ -1049,106 +613,50 @@ before you."`,
             },
 
 
-            question: {
+            // ====================================
+            // 00417
+            // ====================================
 
-                status:
-                    "INTELLIGENCE DISCOVERY",
+            question00417: {
 
                 eyebrow:
-                    "ACT III — REVELATION",
+                    "TARGET INTERROGATION",
 
                 title:
-                    "THE PREVIOUS CONTRACTOR",
+                    "THE NUMBER",
 
                 text:
-`Marcus tells you that BLACKLINE's
-contractor registry is incomplete.
-
-Contractor 00417 existed before you.
-
-The previous operative disappeared.
-
-His records were erased.
-
-Marcus was the last person to speak
-with him.
-
-Then Marcus gives you a name.
-
-"Alex Mercer."
-
-The name means nothing to you.
-
-But Marcus seems certain it eventually will.`,
+                    "Marcus doesn't answer immediately.\n\n\"You really don't know.\"\n\nHe looks toward the laptop.\n\n\"That's probably the point.\"\n\nHe tells you that Alex Mercer carried the same number before disappearing.\n\nSeven years ago.\n\nMarcus says Alex wasn't killed during an operation.\n\nHe was investigating something inside BLACKLINE.\n\nSomething called Project Black Veil.",
 
                 choices: [
 
                     {
                         text:
-                            "Demand proof.",
+                            "ASK WHAT BLACK VEIL IS",
 
                         next:
-                            "proof"
+                            "blackVeilReveal",
+
+                        choice:
+                            "asked_about_black_veil"
 
                     },
 
                     {
                         text:
-                            "Ask why BLACKLINE wants him dead.",
+                            "ASK WHAT HAPPENED TO ALEX",
 
                         next:
-                            "why"
+                            "alexFate",
 
-                    }
-
-                ]
-
-            },
-
-
-            why: {
-
-                status:
-                    "CLASSIFIED DISCLOSURE",
-
-                eyebrow:
-                    "ACT III — MOTIVE",
-
-                title:
-                    "WHY YOU WERE SENT",
-
-                text:
-`Marcus looks toward the window.
-
-"Because I know what happened
-to the previous 00417."
-
-He pauses.
-
-"And because BLACKLINE thinks
-I still have proof."
-
-He points toward the laptop.
-
-"You already found it."
-
-You realize the contract was never
-simply about Marcus Vale.`,
-
-                choices: [
-
-                    {
-                        text:
-                            "Ask about Alex Mercer.",
-
-                        next:
-                            "alex"
+                        choice:
+                            "asked_about_alex"
 
                     },
 
                     {
                         text:
-                            "End the conversation.",
+                            "END THE INTERROGATION",
 
                         next:
                             "finalDecision"
@@ -1160,90 +668,39 @@ simply about Marcus Vale.`,
             },
 
 
-            proof: {
+            // ====================================
+            // BLACK VEIL REVEAL
+            // ====================================
 
-                status:
-                    "EVIDENCE",
+            blackVeilReveal: {
 
                 eyebrow:
-                    "ACT III — PROOF",
+                    "MARCUS VALE // UNKNOWN INTELLIGENCE",
 
                 title:
-                    "THE FILE",
+                    "BLACK VEIL",
 
                 text:
-`Marcus points toward the laptop.
+                    "Marcus shakes his head.\n\n\"I don't know everything.\"\n\nHe tells you Alex discovered that BLACKLINE had been evaluating contractors through assignments that were never what they appeared to be.\n\nSome contractors passed.\n\nSome disappeared.\n\nThen Alex started asking questions.\n\nAfter that, his records vanished.\n\nMarcus looks directly at you.\n\n\"And now you're here.\"\n\nA pause.\n\n\"With his number.\"",
 
-"The file is already there."
-
-You realize the evidence was never
-meant to be hidden.
-
-Someone wanted you to find it.
-
-The question is why.`,
 
                 choices: [
 
                     {
                         text:
-                            "Ask about Alex Mercer.",
+                            "ASK WHY YOU WERE SENT",
 
                         next:
-                            "alex"
+                            "evaluationHint",
 
-                    }
-
-                ]
-
-            },
-
-
-            alex: {
-
-                status:
-                    "UNKNOWN OPERATIVE",
-
-                eyebrow:
-                    "ACT III — ALEX MERCER",
-
-                title:
-                    "THE NAME",
-
-                text:
-`Marcus tells you Alex Mercer was
-BLACKLINE contractor 00417.
-
-Seven years ago, Mercer discovered
-something inside the organization.
-
-He attempted to report it.
-
-Three days later, he disappeared.
-
-BLACKLINE declared him compromised.
-
-His identity was erased.
-
-His contractor number was eventually
-reassigned.
-
-To you.`,
-
-                choices: [
-
-                    {
-                        text:
-                            "Ask what Mercer discovered.",
-
-                        next:
-                            "secret"
+                        choice:
+                            "asked_about_assignment"
 
                     },
 
                     {
                         text:
-                            "Complete the assignment.",
+                            "RETURN TO THE CONTRACT",
 
                         next:
                             "finalDecision"
@@ -1255,96 +712,39 @@ To you.`,
             },
 
 
-            secret: {
+            // ====================================
+            // ALEX FATE
+            // ====================================
 
-                status:
-                    "CLASSIFIED",
+            alexFate: {
 
                 eyebrow:
-                    "ACT III — THE SECRET",
+                    "CLASSIFIED HISTORY",
 
                 title:
-                    "THE BLACKLINE FILE",
+                    "WHAT HAPPENED TO ALEX?",
 
                 text:
-`Marcus doesn't answer immediately.
+                    "Marcus says Alex was investigating internal BLACKLINE records when contact suddenly stopped.\n\nNo body was recovered.\n\nNo extraction record exists.\n\nNo termination order exists.\n\nYet his contractor profile was deleted.\n\nMarcus never found out why.\n\n\"BLACKLINE didn't lose Alex,\" he says.\n\n\"BLACKLINE removed Alex.\"",
 
-"I don't know everything."
-
-"But I know Mercer found a project."
-
-"A project BLACKLINE doesn't acknowledge."
-
-He looks directly at you.
-
-"And I think your arrival
-was planned long before tonight."
-
-Your terminal suddenly activates.
-
-BLACKLINE CONNECTION RESTORED.
-
-One message appears:
-
-"COMPLETE YOUR OBJECTIVE."`,
 
                 choices: [
 
                     {
                         text:
-                            "Continue listening.",
+                            "ASK WHY YOU HAVE HIS NUMBER",
 
                         next:
-                            "finalDecision"
+                            "evaluationHint",
 
-                    }
-
-                ]
-
-            },
-
-
-            lowerWeapon: {
-
-                status:
-                    "MISSION DEVIATION",
-
-                eyebrow:
-                    "ACT III — DECISION",
-
-                title:
-                    "A DIFFERENT CHOICE",
-
-                text:
-`You lower your weapon.
-
-Marcus doesn't move.
-
-For several seconds neither
-of you speaks.
-
-Then he places a small data drive
-on the table.
-
-"Take this."
-
-"You'll want to know what BLACKLINE
-doesn't want you to know."`,
-
-                choices: [
-
-                    {
-                        text:
-                            "Take the drive.",
-
-                        next:
-                            "drive"
+                        choice:
+                            "questioned_number_assignment"
 
                     },
 
                     {
                         text:
-                            "Refuse it.",
+                            "RETURN TO THE CONTRACT",
 
                         next:
                             "finalDecision"
@@ -1356,44 +756,35 @@ doesn't want you to know."`,
             },
 
 
-            drive: {
+            // ====================================
+            // EVALUATION HINT
+            // ====================================
 
-                status:
-                    "UNAUTHORIZED EVIDENCE",
+            evaluationHint: {
 
                 eyebrow:
-                    "ACT III — DATA ACQUIRED",
+                    "MARCUS VALE",
 
                 title:
-                    "THE DRIVE",
+                    "THE REAL QUESTION",
 
                 text:
-`You take the drive.
-
-Marcus sits down.
-
-"You have a choice now."
-
-"Do what BLACKLINE sent you here to do."
-
-"Or find out why they sent you."
-
-Before you can answer,
-your terminal vibrates again.
-
-OBJECTIVE:
-
-ELIMINATE TARGET.
-
-TIME:
-
-00:04:59`,
+                    "Marcus looks at you for several seconds.\n\n\"You're asking the wrong question.\"\n\nHe points toward the door.\n\n\"The question isn't why they gave you 00417.\"\n\nHe points toward the laptop.\n\n\"The question is why they sent you here.\"\n\nYou hear movement somewhere in the hallway.\n\nSomeone else may have arrived.",
 
                 choices: [
 
                     {
                         text:
-                            "Complete the assignment.",
+                            "CHECK THE HALLWAY",
+
+                        next:
+                            "hallway"
+
+                    },
+
+                    {
+                        text:
+                            "FOCUS ON MARCUS",
 
                         next:
                             "finalDecision"
@@ -1405,64 +796,155 @@ TIME:
             },
 
 
-            // =================================
-            // ACT IV
-            // =================================
+            // ====================================
+            // SURRENDER
+            // ====================================
+
+            surrender: {
+
+                eyebrow:
+                    "TARGET CONTACT",
+
+                title:
+                    "SURRENDER",
+
+                text:
+                    "Marcus slowly raises his hands.\n\n\"You can complete the contract.\"\n\nHe pauses.\n\n\"But before you do, understand something.\"\n\nHe looks at your identification.\n\n\"If they gave you 00417, they already know what you're going to do.\"\n\nThe hallway outside goes silent.",
+
+                choices: [
+
+                    {
+                        text:
+                            "QUESTION HIM",
+
+                        next:
+                            "question00417"
+
+                    },
+
+                    {
+                        text:
+                            "COMPLETE THE OBJECTIVE",
+
+                        next:
+                            "finalDecision"
+
+                    }
+
+                ]
+
+            },
+
+
+            // ====================================
+            // WEAPON
+            // ====================================
+
+            weapon: {
+
+                eyebrow:
+                    "TARGET CONTACT",
+
+                title:
+                    "THE WEAPON",
+
+                text:
+                    "You raise your weapon.\n\nMarcus doesn't move.\n\nHe looks almost disappointed.\n\n\"There it is.\"\n\nHe lowers his eyes toward your contractor ID.\n\n\"Exactly what they wanted to see.\"\n\nFor a moment, neither of you moves.",
+
+                choices: [
+
+                    {
+                        text:
+                            "ASK WHAT HE MEANS",
+
+                        next:
+                            "evaluationHint"
+
+                    },
+
+                    {
+                        text:
+                            "CONTINUE",
+
+                        next:
+                            "finalDecision"
+
+                    }
+
+                ]
+
+            },
+
+
+            // ====================================
+            // HALLWAY
+            // ====================================
+
+            hallway: {
+
+                eyebrow:
+                    "UNIDENTIFIED MOVEMENT",
+
+                title:
+                    "THE HALLWAY",
+
+                text:
+                    "You check the hallway.\n\nEmpty.\n\nNo footsteps.\nNo doors opening.\n\nYou return to the apartment.\n\nMarcus is still there.\n\nBut the laptop screen has changed.\n\nA single message is displayed:\n\nOPERATION STATUS: OBSERVED.",
+
+                choices: [
+
+                    {
+                        text:
+                            "RETURN TO MARCUS",
+
+                        next:
+                            "finalDecision"
+
+                    }
+
+                ]
+
+            },
+
+
+            // ====================================
+            // FINAL DECISION
+            // ====================================
 
             finalDecision: {
 
-                status:
-                    "FINAL DECISION",
-
                 eyebrow:
-                    "ACT IV — CHOICE",
+                    "MISSION OBJECTIVE",
 
                 title:
                     "THE DECISION",
 
                 text:
-`Marcus waits.
-
-The contract remains active.
-
-The original objective remains unchanged.
-
-But now you know the assignment
-is connected to something larger.
-
-The network wants the target gone.
-
-Marcus claims he knows why.
-
-You have only seconds to decide
-what kind of contractor you are.`,
+                    "The original order remains unchanged.\n\nMarcus Vale is the target.\n\nElimination is authorized.\n\nBut tonight you discovered information that wasn't included in your briefing.\n\nA deleted contractor.\nA duplicated identification number.\nA project that officially doesn't exist.\n\nAnd the growing possibility that someone has been watching this operation from the beginning.",
 
                 choices: [
 
                     {
                         text:
-                            "Complete the contract.",
+                            "ELIMINATE MARCUS",
 
                         next:
-                            "complete"
+                            "complete",
+
+                        choice:
+                            "eliminate_marcus"
 
                     },
 
                     {
                         text:
-                            "Refuse the contract.",
+                            "LET MARCUS GO",
 
                         next:
-                            "refuse"
+                            "escape",
 
-                    },
-
-                    {
-                        text:
-                            "Let Marcus disappear.",
-
-                        next:
-                            "letGo"
+                        choice:
+                            "let_marcus_escape"
 
                     }
 
@@ -1471,166 +953,56 @@ what kind of contractor you are.`,
             },
 
 
-            // =================================
-            // ENDINGS
-            // =================================
+            // ====================================
+            // SUCCESS
+            // ====================================
 
             complete: {
 
-                status:
-                    "OBJECTIVE COMPLETE",
-
                 eyebrow:
-                    "ACT V — COMPLETION",
+                    "CONTRACT RESOLVED",
 
                 title:
-                    "CONTRACT COMPLETE",
+                    "TARGET ELIMINATED",
 
                 text:
-`The operation reaches its conclusion.
-
-BLACKLINE confirms the objective.
-
-CN-001 has been completed.
-
-Your first contract is officially
-closed.
-
-But before leaving, you look once
-more at the file containing the
-previous 00417.
-
-The photograph is gone.
-
-Someone accessed the laptop
-while you were inside.
-
-Your terminal displays one final message:
-
-"GOOD WORK, CONTRACTOR."
-
-You don't remember giving BLACKLINE
-permission to watch you.`,
-
-                choices:
-                    null,
+                    "Marcus Vale is dead.\n\nThe immediate objective is complete.\n\nYou secure the area and prepare to leave.\n\nThen the BLACKLINE terminal activates.\n\nCONTRACT CN-001: RESOLVED.\n\nREWARD AUTHORIZED.\n\n250 XP AUTHORIZED.\n\nA final line appears beneath the standard confirmation:\n\nEVALUATION DATA RECEIVED.",
 
                 ending:
-                    "complete"
+                    "complete",
+
+                outcome:
+                    "marcus_eliminated",
+
+                choice:
+                    "eliminate_marcus"
 
             },
 
 
-            refuse: {
+            // ====================================
+            // FAILURE
+            // ====================================
 
-                status:
-                    "CONTRACT REFUSED",
-
-                eyebrow:
-                    "ACT V — REFUSAL",
-
-                title:
-                    "YOU REFUSE",
-
-                text:
-`You refuse to complete the assignment.
-
-The network records your decision.
-
-No reward is issued.
-
-No XP is awarded.
-
-CN-001 remains unresolved.
-
-Marcus looks at you.
-
-"You just made yourself
-very interesting to them."
-
-Your terminal disconnects.
-
-BLACKLINE has ended the session.`,
-
-                choices:
-                    null,
-
-                ending:
-                    "refused"
-
-            },
-
-
-            letGo: {
-
-                status:
-                    "UNAUTHORIZED OUTCOME",
+            escape: {
 
                 eyebrow:
-                    "ACT V — DISAPPEARANCE",
+                    "CONTRACT FAILED",
 
                 title:
-                    "NO WITNESS",
+                    "TARGET ESCAPED",
 
                 text:
-`You step aside.
-
-Marcus disappears through a
-secondary exit.
-
-You remain alone in the room.
-
-BLACKLINE asks for confirmation
-of the target's status.
-
-You don't answer.
-
-A minute later, the network
-marks the operation as unresolved.
-
-But Marcus is gone.
-
-And so is the evidence.`,
-
-                choices:
-                    null,
+                    "Marcus disappears into the night.\n\nThe objective has not been completed.\n\nYour BLACKLINE terminal remains silent.\n\nNo reward.\n\nNo XP.\n\nNo congratulations.\n\nThen a final message appears:\n\nCN-001: FAILED.\n\nEVALUATION RESULT: INSUFFICIENT.\n\nThe message disappears before you can read anything else.",
 
                 ending:
-                    "incomplete"
+                    "failed",
 
-            },
+                outcome:
+                    "marcus_escaped",
 
-
-            withdraw: {
-
-                status:
-                    "OPERATION ABORTED",
-
-                eyebrow:
-                    "ACT V — WITHDRAWAL",
-
-                title:
-                    "YOU LEAVE",
-
-                text:
-`You leave the area.
-
-The contract remains unresolved.
-
-BLACKLINE records the operation
-as incomplete.
-
-Whatever Marcus Vale knows
-remains unknown.
-
-But the question of contractor
-00417 remains unanswered.`,
-
-                choices:
-                    null,
-
-                ending:
-                    "incomplete"
+                choice:
+                    "let_marcus_escape"
 
             }
 
@@ -1645,7 +1017,7 @@ But the question of contractor
 // PLAYER
 // ========================================
 
-const player =
+let player =
     getPlayer();
 
 
@@ -1655,6 +1027,25 @@ const player =
 
 const activeContract =
     player.activeContract;
+
+
+// ========================================
+// OPERATION
+// ========================================
+
+const operation =
+    operations[
+        activeContract
+    ];
+
+
+// ========================================
+// CURRENT SCENE
+// ========================================
+
+let currentScene =
+    player.activeScene ||
+    "briefing";
 
 
 // ========================================
@@ -1674,11 +1065,6 @@ const operationId =
 const operationClassification =
     document.getElementById(
         "operationClassification"
-    );
-
-const sceneStatus =
-    document.getElementById(
-        "sceneStatus"
     );
 
 const sceneNumber =
@@ -1701,7 +1087,7 @@ const sceneText =
         "sceneText"
     );
 
-const choicesElement =
+const choicesContainer =
     document.getElementById(
         "choices"
     );
@@ -1733,113 +1119,89 @@ const rewardElement =
 
 
 // ========================================
-// OPERATION STATE
+// NO ACTIVE CONTRACT
 // ========================================
 
-let currentScene =
-    "briefing";
+if (!operation) {
 
-let sceneIndex =
-    1;
+    if (sceneTitle) {
 
-
-// ========================================
-// LOAD OPERATION
-// ========================================
-
-function loadOperation() {
-
-    if (!activeContract) {
-
-        showNoOperation();
-
-        return;
+        sceneTitle.textContent =
+            "NO OPERATION ASSIGNED";
 
     }
 
 
-    const operation =
-        operations[
-            activeContract
-        ];
+    if (sceneText) {
 
-
-    if (!operation) {
-
-        showNoOperation();
-
-        return;
+        sceneText.textContent =
+            "There is currently no active operation assigned to this contractor.";
 
     }
 
+
+    if (actionButton) {
+
+        actionButton.style.display =
+            "block";
+
+
+        actionButton.textContent =
+            "RETURN TO CONTRACTS";
+
+
+        actionButton.onclick =
+            function () {
+
+                window.location.href =
+                    "./contracts.html";
+
+            };
+
+    }
+
+}
+
+
+// ========================================
+// INITIALIZE OPERATION
+// ========================================
+
+if (
+    operation &&
+    sceneTitle
+) {
 
     operationTitle.textContent =
         operation.title;
 
+
     operationId.textContent =
         operation.id;
+
 
     operationClassification.textContent =
         operation.classification;
 
+
     targetElement.textContent =
         operation.target;
+
 
     locationElement.textContent =
         operation.location;
 
+
     difficultyElement.textContent =
         operation.difficulty;
+
 
     rewardElement.textContent =
         "$" +
         operation.reward.toLocaleString();
 
 
-    renderScene(
-        operation,
-        currentScene
-    );
-
-}
-
-
-// ========================================
-// NO ACTIVE OPERATION
-// ========================================
-
-function showNoOperation() {
-
-    sceneStatus.textContent =
-        "NO ACTIVE CONTRACT";
-
-    sceneEyebrow.textContent =
-        "NETWORK STATUS";
-
-    sceneTitle.textContent =
-        "NO OPERATION ASSIGNED";
-
-    sceneText.textContent =
-        "There is currently no active contract assigned to this contractor.";
-
-    choicesElement.classList.add(
-        "hidden"
-    );
-
-    actionButton.classList.remove(
-        "hidden"
-    );
-
-    actionButton.textContent =
-        "RETURN TO CONTRACTS";
-
-    actionButton.onclick =
-        function () {
-
-            window.location.href =
-                "./contracts.html";
-
-        };
+    renderScene();
 
 }
 
@@ -1848,22 +1210,26 @@ function showNoOperation() {
 // RENDER SCENE
 // ========================================
 
-function renderScene(
-    operation,
-    sceneId
-) {
+function renderScene() {
+
+    if (!operation) {
+
+        return;
+
+    }
+
 
     const scene =
         operation.scenes[
-            sceneId
+            currentScene
         ];
 
 
     if (!scene) {
 
         console.error(
-            "SCENE NOT FOUND:",
-            sceneId
+            "BLACKLINE SCENE NOT FOUND:",
+            currentScene
         );
 
         return;
@@ -1871,116 +1237,77 @@ function renderScene(
     }
 
 
-    sceneStatus.textContent =
-        scene.status;
+    // ------------------------------------
+    // SAVE CURRENT SCENE
+    // ------------------------------------
 
-    sceneEyebrow.textContent =
-        scene.eyebrow;
+    updatePlayer({
 
-    sceneTitle.textContent =
-        scene.title;
+        activeScene:
+            currentScene
 
-    sceneText.textContent =
-        scene.text;
+    });
+
+
+    // ------------------------------------
+    // SCENE NUMBER
+    // ------------------------------------
+
+    const sceneKeys =
+        Object.keys(
+            operation.scenes
+        );
+
+
+    const index =
+        sceneKeys.indexOf(
+            currentScene
+        );
+
 
     sceneNumber.textContent =
-        "SCENE " +
-        String(sceneIndex).padStart(
+        String(
+            index + 1
+        ).padStart(
             2,
             "0"
         );
 
 
-    choicesElement.innerHTML =
+    // ------------------------------------
+    // SCENE CONTENT
+    // ------------------------------------
+
+    sceneEyebrow.textContent =
+        scene.eyebrow;
+
+
+    sceneTitle.textContent =
+        scene.title;
+
+
+    sceneText.textContent =
+        scene.text;
+
+
+    // ------------------------------------
+    // CLEAR CHOICES
+    // ------------------------------------
+
+    choicesContainer.innerHTML =
         "";
 
 
+    // ------------------------------------
+    // ENDING
+    // ------------------------------------
+
     if (
-        scene.choices &&
-        scene.choices.length > 0
+        scene.ending
     ) {
 
-        choicesElement.classList.remove(
-            "hidden"
-        );
-
-        actionButton.classList.add(
-            "hidden"
-        );
-
-
-        scene.choices.forEach(
-            function (
-                choice,
-                index
-            ) {
-
-                const button =
-                    document.createElement(
-                        "button"
-                    );
-
-
-                button.type =
-                    "button";
-
-                button.className =
-                    "choice-button";
-
-
-                button.innerHTML = `
-
-                    <span class="choice-number">
-
-                        ${String(
-                            index + 1
-                        ).padStart(
-                            2,
-                            "0"
-                        )}
-
-                    </span>
-
-                    <span class="choice-text">
-
-                        ${choice.text}
-
-                    </span>
-
-                `;
-
-
-                button.addEventListener(
-                    "click",
-                    function () {
-
-                        selectChoice(
-                            operation,
-                            choice
-                        );
-
-                    }
-                );
-
-
-                choicesElement.appendChild(
-                    button
-                );
-
-            }
-        );
-
-    }
-
-    else {
-
-        choicesElement.classList.add(
-            "hidden"
-        );
-
-        actionButton.classList.remove(
-            "hidden"
-        );
+        actionButton.style.display =
+            "block";
 
 
         if (
@@ -1989,7 +1316,7 @@ function renderScene(
         ) {
 
             actionButton.textContent =
-                "PROCESS CONTRACT";
+                "RESOLVE CONTRACT";
 
         }
 
@@ -2000,47 +1327,109 @@ function renderScene(
 
         }
 
+
+        return;
+
     }
 
-}
+
+    actionButton.style.display =
+        "none";
 
 
-// ========================================
-// SELECT CHOICE
-// ========================================
+    // ------------------------------------
+    // CHOICES
+    // ------------------------------------
 
-function selectChoice(
-    operation,
-    choice
-) {
+    scene.choices.forEach(
+        function (choice, index) {
 
-    currentScene =
-        choice.next;
-
-    sceneIndex++;
+            const button =
+                document.createElement(
+                    "button"
+                );
 
 
-    renderScene(
-        operation,
-        currentScene
+            button.className =
+                "choice-button";
+
+
+            button.innerHTML = `
+
+                <span class="choice-number">
+                    ${String(
+                        index + 1
+                    ).padStart(2, "0")}
+                </span>
+
+                <span class="choice-text">
+                    ${choice.text}
+                </span>
+
+            `;
+
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    // --------------------
+                    // RECORD CHOICE
+                    // --------------------
+
+                    if (
+                        choice.choice
+                    ) {
+
+                        recordChoice(
+                            operation.id,
+                            choice.choice
+                        );
+
+                    }
+
+
+                    // --------------------
+                    // MOVE SCENE
+                    // --------------------
+
+                    currentScene =
+                        choice.next;
+
+
+                    // --------------------
+                    // SAVE SCENE
+                    // --------------------
+
+                    updatePlayer({
+
+                        activeScene:
+                            currentScene
+
+                    });
+
+
+                    renderScene();
+
+                }
+            );
+
+
+            choicesContainer.appendChild(
+                button
+            );
+
+        }
     );
 
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-
 }
 
 
 // ========================================
-// COMPLETE OPERATION
+// SUCCESSFUL RESOLUTION
 // ========================================
 
-function processCompletion(
-    operation
-) {
+function resolveSuccessfulContract() {
 
     const scene =
         operation.scenes[
@@ -2059,19 +1448,98 @@ function processCompletion(
     }
 
 
-    // ====================================
-    // COMPLETE CONTRACT
-    // ====================================
+    recordContractOutcome(
+        operation.id,
+        scene.outcome,
+        "resolved"
+    );
+
+
+    if (
+        scene.outcome ===
+        "marcus_eliminated"
+    ) {
+
+        setWorldFlag(
+            "marcusEliminated",
+            true
+        );
+
+    }
+
 
     completeContract(
+        operation.id,
         operation.reward,
         operation.xp
     );
 
 
-    // ====================================
-    // REDIRECT
-    // ====================================
+    window.location.href =
+        "./dashboard.html";
+
+}
+
+
+// ========================================
+// FAILED RESOLUTION
+// ========================================
+
+function resolveFailedContract() {
+
+    const scene =
+        operation.scenes[
+            currentScene
+        ];
+
+
+    if (
+        !scene ||
+        scene.ending !==
+        "failed"
+    ) {
+
+        return;
+
+    }
+
+
+    recordContractOutcome(
+        operation.id,
+        scene.outcome,
+        "failed"
+    );
+
+
+    if (
+        scene.choice
+    ) {
+
+        recordChoice(
+            operation.id,
+            scene.choice
+        );
+
+    }
+
+
+    if (
+        scene.outcome ===
+        "marcus_escaped"
+    ) {
+
+        setWorldFlag(
+            "marcusEscaped",
+            true
+        );
+
+    }
+
+
+    failContract(
+        operation.id
+    );
+
 
     window.location.href =
         "./dashboard.html";
@@ -2083,90 +1551,57 @@ function processCompletion(
 // ACTION BUTTON
 // ========================================
 
-actionButton.addEventListener(
-    "click",
-    function () {
+if (actionButton) {
 
-        const operation =
-            operations[
-                activeContract
-            ];
+    actionButton.addEventListener(
+        "click",
+        function () {
 
+            if (!operation) {
 
-        if (!operation) {
+                window.location.href =
+                    "./contracts.html";
 
-            window.location.href =
-                "./contracts.html";
+                return;
 
-            return;
-
-        }
+            }
 
 
-        const scene =
-            operation.scenes[
-                currentScene
-            ];
+            const scene =
+                operation.scenes[
+                    currentScene
+                ];
 
 
-        // --------------------------------
-        // BEGIN OPERATION
-        // --------------------------------
+            if (!scene) {
 
-        if (
-            currentScene ===
-            "briefing"
-        ) {
+                return;
 
-            currentScene =
-                scene.next;
-
-            sceneIndex++;
+            }
 
 
-            renderScene(
-                operation,
-                currentScene
-            );
+            if (
+                scene.ending ===
+                "complete"
+            ) {
+
+                resolveSuccessfulContract();
+
+                return;
+
+            }
 
 
-            return;
+            if (
+                scene.ending ===
+                "failed"
+            ) {
 
-        }
+                resolveFailedContract();
 
-
-        // --------------------------------
-        // COMPLETE
-        // --------------------------------
-
-        if (
-            scene &&
-            scene.ending ===
-            "complete"
-        ) {
-
-            processCompletion(
-                operation
-            );
-
-            return;
+            }
 
         }
+    );
 
-
-        // --------------------------------
-        // OTHER ENDINGS
-        // --------------------------------
-
-        window.location.href =
-            "./contracts.html";
-
-    }
-);
-
-
-// ========================================
-// INITIALIZE
-// ========================================
-
-loadOperation();
+}
