@@ -1,94 +1,43 @@
-// ========================================
-// BLACKLINE WORLD STATE
-// ========================================
-// WORLD STATE remembers what happened
-// inside the BLACKLINE universe.
-//
-// PLAYER STATE:
-// XP, money, rank, inventory, etc.
-//
-// WORLD STATE:
-// Choices, outcomes, characters, story flags.
-// ========================================
-
-
-// ========================================
-// DEFAULT WORLD STATE
-// ========================================
-
 const DEFAULT_WORLD_STATE = {
-
-    // ------------------------------------
-    // CONTRACT HISTORY
-    // ------------------------------------
-
     contracts: {},
-
-
-    // ------------------------------------
-    // PLAYER CHOICES
-    // ------------------------------------
 
     choices: {},
 
+    flags: {},
 
-    // ------------------------------------
-    // STORY FLAGS
-    // ------------------------------------
-
-    flags: {
-
-        marcusEscaped: false,
-
-        marcusCaptured: false,
-
-        marcusEliminated: false,
-
-        alexMercerDiscovered: false
-
+    progression: {
+        route: "normal"
     }
-
 };
 
-
-// ========================================
-// CREATE CLEAN DEFAULT STATE
-// ========================================
 
 function createDefaultWorldState() {
 
     return {
-
         contracts: {},
 
         choices: {},
 
-        flags: {
+        flags: {},
 
-            marcusEscaped: false,
-
-            marcusCaptured: false,
-
-            marcusEliminated: false,
-
-            alexMercerDiscovered: false
-
+        progression: {
+            route: "normal"
         }
-
     };
-
 }
 
 
-// ========================================
-// LOAD WORLD STATE
-// ========================================
+/*
+ * ========================================
+ * GET WORLD STATE
+ * ========================================
+ */
 
 function getWorldState() {
 
     const savedWorldState =
         localStorage.getItem(
-            "blackline_world_state"
+            "blackline_world"
         );
 
 
@@ -97,64 +46,64 @@ function getWorldState() {
         const newWorldState =
             createDefaultWorldState();
 
-
-        saveWorldState(
-            newWorldState
-        );
-
+        saveWorldState(newWorldState);
 
         return newWorldState;
-
     }
 
 
     try {
 
         const worldState =
-            JSON.parse(
-                savedWorldState
-            );
+            JSON.parse(savedWorldState);
 
 
-        // --------------------------------
-        // SAFETY
-        // --------------------------------
+        /*
+         * --------------------------------
+         * DATA REPAIR
+         * --------------------------------
+         */
 
-        if (
-            !worldState.contracts
-        ) {
+        if (!worldState.contracts) {
 
             worldState.contracts = {};
-
         }
 
 
-        if (
-            !worldState.choices
-        ) {
+        if (!worldState.choices) {
 
             worldState.choices = {};
-
         }
 
 
-        if (
-            !worldState.flags
-        ) {
+        if (!worldState.flags) {
 
             worldState.flags = {};
+        }
 
+
+        if (!worldState.progression) {
+
+            worldState.progression = {
+                route: "normal"
+            };
+        }
+
+
+        if (!worldState.progression.route) {
+
+            worldState.progression.route =
+                "normal";
         }
 
 
         return worldState;
 
     }
-
     catch (error) {
 
         console.error(
-            "BLACKLINE WORLD STATE CORRUPTED.",
+            "BLACKLINE WORLD DATA CORRUPTED.",
             error
         );
 
@@ -162,40 +111,33 @@ function getWorldState() {
         const newWorldState =
             createDefaultWorldState();
 
-
-        saveWorldState(
-            newWorldState
-        );
-
+        saveWorldState(newWorldState);
 
         return newWorldState;
-
     }
-
 }
 
 
-// ========================================
-// SAVE WORLD STATE
-// ========================================
+/*
+ * ========================================
+ * SAVE WORLD STATE
+ * ========================================
+ */
 
-function saveWorldState(
-    worldState
-) {
+function saveWorldState(worldState) {
 
     localStorage.setItem(
-        "blackline_world_state",
-        JSON.stringify(
-            worldState
-        )
+        "blackline_world",
+        JSON.stringify(worldState)
     );
-
 }
 
 
-// ========================================
-// RECORD CONTRACT OUTCOME
-// ========================================
+/*
+ * ========================================
+ * CONTRACT OUTCOMES
+ * ========================================
+ */
 
 function recordContractOutcome(
     contractId,
@@ -207,9 +149,42 @@ function recordContractOutcome(
         getWorldState();
 
 
-    worldState.contracts[
-        contractId
-    ] = {
+    if (
+        status !== "resolved" &&
+        status !== "failed"
+    ) {
+
+        console.error(
+            "BLACKLINE: INVALID CONTRACT STATUS.",
+            status
+        );
+
+        return null;
+    }
+
+
+    /*
+     * --------------------------------
+     * TERMINAL STATE PROTECTION
+     * --------------------------------
+     */
+
+    const existingRecord =
+        worldState.contracts[contractId];
+
+
+    if (existingRecord) {
+
+        console.warn(
+            "BLACKLINE: CONTRACT RECORD IS SEALED.",
+            contractId
+        );
+
+        return existingRecord;
+    }
+
+
+    const contractRecord = {
 
         status: status,
 
@@ -217,23 +192,24 @@ function recordContractOutcome(
 
         timestamp:
             new Date().toISOString()
-
     };
 
 
-    saveWorldState(
-        worldState
-    );
+    worldState.contracts[contractId] =
+        contractRecord;
 
 
-    return worldState;
+    saveWorldState(worldState);
 
+    return contractRecord;
 }
 
 
-// ========================================
-// RECORD PLAYER CHOICE
-// ========================================
+/*
+ * ========================================
+ * CHOICES
+ * ========================================
+ */
 
 function recordChoice(
     contractId,
@@ -244,103 +220,129 @@ function recordChoice(
         getWorldState();
 
 
-    worldState.choices[
-        contractId
-    ] = choice;
+    if (!worldState.choices[contractId]) {
+
+        worldState.choices[contractId] = [];
+    }
 
 
-    saveWorldState(
-        worldState
+    worldState.choices[contractId].push(
+        {
+            choice: choice,
+
+            timestamp:
+                new Date().toISOString()
+        }
     );
 
 
-    return worldState;
-
+    saveWorldState(worldState);
 }
 
 
-// ========================================
-// SET WORLD FLAG
-// ========================================
+/*
+ * ========================================
+ * FLAGS
+ * ========================================
+ */
 
 function setWorldFlag(
     flag,
-    value = true
+    value
 ) {
 
     const worldState =
         getWorldState();
 
 
-    worldState.flags[
-        flag
-    ] = value;
+    worldState.flags[flag] =
+        value;
 
 
-    saveWorldState(
-        worldState
-    );
-
+    saveWorldState(worldState);
 
     return worldState;
-
 }
 
 
-// ========================================
-// GET WORLD FLAG
-// ========================================
+function getWorldFlag(flag) {
 
-function getWorldFlag(
-    flag
-) {
+    const worldState =
+        getWorldState();
+
+    return worldState.flags[flag];
+}
+
+
+/*
+ * ========================================
+ * PROGRESSION ROUTE
+ * ========================================
+ */
+
+function getProgressionRoute() {
+
+    const worldState =
+        getWorldState();
+
+    return worldState.progression.route;
+}
+
+
+function setProgressionRoute(route) {
 
     const worldState =
         getWorldState();
 
 
-    return Boolean(
-        worldState.flags[
-            flag
-        ]
-    );
+    worldState.progression.route =
+        route;
 
+
+    saveWorldState(worldState);
+
+    return worldState.progression.route;
 }
 
 
-// ========================================
-// GET CONTRACT OUTCOME
-// ========================================
+/*
+ * ========================================
+ * CONTRACT LOOKUPS
+ * ========================================
+ */
 
-function getContractOutcome(
+function getContractRecord(
     contractId
 ) {
 
     const worldState =
         getWorldState();
 
-
-    const contract =
-        worldState.contracts[
-            contractId
-        ];
-
-
-    if (!contract) {
-
-        return null;
-
-    }
-
-
-    return contract.outcome;
-
+    return worldState.contracts[
+        contractId
+    ] || null;
 }
 
 
-// ========================================
-// GET PLAYER CHOICE
-// ========================================
+function getContractOutcome(
+    contractId
+) {
+
+    const record =
+        getContractRecord(
+            contractId
+        );
+
+
+    if (!record) {
+
+        return null;
+    }
+
+
+    return record.outcome;
+}
+
 
 function getChoice(
     contractId
@@ -349,32 +351,71 @@ function getChoice(
     const worldState =
         getWorldState();
 
-
-    return (
-        worldState.choices[
-            contractId
-        ] || null
-    );
-
+    return worldState.choices[
+        contractId
+    ] || [];
 }
 
 
-// ========================================
-// CHECK CONTRACT RESOLUTION
-// ========================================
+/*
+ * ========================================
+ * CONTRACT STATE
+ * ========================================
+ */
 
 function isContractResolved(
     contractId
 ) {
 
-    const worldState =
-        getWorldState();
-
-
-    return Boolean(
-        worldState.contracts[
+    const record =
+        getContractRecord(
             contractId
-        ]
-    );
+        );
 
+
+    return (
+        record &&
+        record.status === "resolved"
+    );
 }
+
+
+function isContractFailed(
+    contractId
+) {
+
+    const record =
+        getContractRecord(
+            contractId
+        );
+
+
+    return (
+        record &&
+        record.status === "failed"
+    );
+}
+
+
+function isContractSealed(
+    contractId
+) {
+
+    const record =
+        getContractRecord(
+            contractId
+        );
+
+
+    if (!record) {
+
+        return false;
+    }
+
+
+    return (
+        record.status === "resolved" ||
+        record.status === "failed"
+    );
+}
+

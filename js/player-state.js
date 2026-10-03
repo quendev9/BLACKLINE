@@ -1,22 +1,10 @@
-// ========================================
-// BLACKLINE PLAYER STATE
-// ========================================
-
-
-// ========================================
-// DEFAULT PLAYER
-// ========================================
-
 const DEFAULT_PLAYER = {
-
     codename: "NIGHTFALL",
-
     contractorId: "00417",
 
     level: 0,
 
     xp: 0,
-
     xpRequired: 500,
 
     money: 0,
@@ -26,36 +14,23 @@ const DEFAULT_PLAYER = {
     inventory: {},
 
     activeContract: null,
-
     activeScene: null,
 
     completedContracts: []
-
 };
 
-
-// ========================================
-// CREATE DEFAULT PLAYER
-// ========================================
 
 function createDefaultPlayer() {
 
     return {
-
         ...DEFAULT_PLAYER,
 
         inventory: {},
 
         completedContracts: []
-
     };
-
 }
 
-
-// ========================================
-// LOAD PLAYER
-// ========================================
 
 function getPlayer() {
 
@@ -70,69 +45,59 @@ function getPlayer() {
         const newPlayer =
             createDefaultPlayer();
 
-        savePlayer(
-            newPlayer
-        );
+        savePlayer(newPlayer);
 
         return newPlayer;
-
     }
 
 
     try {
 
         const player =
-            JSON.parse(
-                savedPlayer
-            );
+            JSON.parse(savedPlayer);
 
+
+        /*
+         * ----------------------------------------
+         * DATA REPAIR
+         * ----------------------------------------
+         */
 
         if (!player.inventory) {
 
             player.inventory = {};
-
         }
 
 
-        if (
-            !Array.isArray(
-                player.completedContracts
-            )
-        ) {
+        if (!Array.isArray(
+            player.completedContracts
+        )) {
 
             player.completedContracts = [];
-
         }
 
 
-        if (
-            !Object.prototype.hasOwnProperty.call(
-                player,
-                "activeContract"
-            )
-        ) {
+        if (!Object.prototype.hasOwnProperty.call(
+            player,
+            "activeContract"
+        )) {
 
             player.activeContract = null;
-
         }
 
 
-        if (
-            !Object.prototype.hasOwnProperty.call(
-                player,
-                "activeScene"
-            )
-        ) {
+        if (!Object.prototype.hasOwnProperty.call(
+            player,
+            "activeScene"
+        )) {
 
             player.activeScene = null;
-
         }
 
 
         return player;
 
     }
-
     catch (error) {
 
         console.error(
@@ -144,139 +109,78 @@ function getPlayer() {
         const newPlayer =
             createDefaultPlayer();
 
-        savePlayer(
-            newPlayer
-        );
+        savePlayer(newPlayer);
 
         return newPlayer;
-
     }
-
 }
 
 
-// ========================================
-// SAVE PLAYER
-// ========================================
-
-function savePlayer(
-    player
-) {
+function savePlayer(player) {
 
     localStorage.setItem(
         "blackline_player",
-        JSON.stringify(
-            player
-        )
+        JSON.stringify(player)
     );
-
 }
 
 
-// ========================================
-// UPDATE PLAYER
-// ========================================
-
-function updatePlayer(
-    changes
-) {
+function updatePlayer(changes) {
 
     const player =
         getPlayer();
-
 
     Object.assign(
         player,
         changes
     );
 
-
-    savePlayer(
-        player
-    );
-
+    savePlayer(player);
 
     return player;
-
 }
 
 
-// ========================================
-// ADD MONEY
-// ========================================
+function addMoney(amount) {
 
-function addMoney(
-    amount
-) {
+    const player =
+        getPlayer();
+
+    player.money += amount;
+
+    savePlayer(player);
+
+    return player;
+}
+
+
+function removeMoney(amount) {
 
     const player =
         getPlayer();
 
 
-    player.money +=
-        amount;
-
-
-    savePlayer(
-        player
-    );
-
-
-    return player;
-
-}
-
-
-// ========================================
-// REMOVE MONEY
-// ========================================
-
-function removeMoney(
-    amount
-) {
-
-    const player =
-        getPlayer();
-
-
-    if (
-        player.money <
-        amount
-    ) {
+    if (player.money < amount) {
 
         return false;
-
     }
 
 
-    player.money -=
-        amount;
+    player.money -= amount;
 
-
-    savePlayer(
-        player
-    );
-
+    savePlayer(player);
 
     return true;
-
 }
 
 
-// ========================================
-// ADD XP
-// ========================================
-
-function addXP(
-    amount
-) {
+function addXP(amount) {
 
     const player =
         getPlayer();
 
 
-    player.xp +=
-        amount;
+    player.xp += amount;
 
 
     while (
@@ -287,7 +191,6 @@ function addXP(
         player.xp -=
             player.xpRequired;
 
-
         player.level++;
 
 
@@ -295,23 +198,27 @@ function addXP(
             Math.floor(
                 player.xpRequired * 1.5
             );
-
     }
 
 
-    savePlayer(
-        player
-    );
-
+    savePlayer(player);
 
     return player;
-
 }
 
 
-// ========================================
-// COMPLETE CONTRACT
-// ========================================
+/*
+ * ========================================
+ * CONTRACT COMPLETION
+ * ========================================
+ *
+ * A contract can only reward the player
+ * once.
+ *
+ * Once a contract exists inside
+ * completedContracts, another completion
+ * attempt is rejected.
+ */
 
 function completeContract(
     contractId,
@@ -323,16 +230,11 @@ function completeContract(
         getPlayer();
 
 
-    player.money +=
-        reward;
-
-
-    player.xp +=
-        xp;
-
-
-    player.contractsCompleted++;
-
+    /*
+     * ----------------------------------------
+     * DUPLICATE COMPLETION PROTECTION
+     * ----------------------------------------
+     */
 
     if (
         !Array.isArray(
@@ -341,30 +243,64 @@ function completeContract(
     ) {
 
         player.completedContracts = [];
-
     }
 
 
     if (
-        !player.completedContracts.includes(
+        player.completedContracts.includes(
             contractId
         )
     ) {
 
-        player.completedContracts.push(
+        console.warn(
+            "BLACKLINE: CONTRACT ALREADY RESOLVED.",
             contractId
         );
 
+        return player;
     }
 
 
-    player.activeContract =
-        null;
+    /*
+     * ----------------------------------------
+     * APPLY REWARD
+     * ----------------------------------------
+     */
+
+    player.money += reward;
+
+    player.xp += xp;
+
+    player.contractsCompleted++;
 
 
-    player.activeScene =
-        null;
+    /*
+     * ----------------------------------------
+     * RECORD COMPLETION
+     * ----------------------------------------
+     */
 
+    player.completedContracts.push(
+        contractId
+    );
+
+
+    /*
+     * ----------------------------------------
+     * CLEAR ACTIVE OPERATION
+     * ----------------------------------------
+     */
+
+    player.activeContract = null;
+
+    player.activeScene = null;
+
+
+    /*
+     * ----------------------------------------
+     * LEVEL UP
+     * ----------------------------------------
+     */
 
     while (
         player.xp >=
@@ -374,7 +310,6 @@ function completeContract(
         player.xp -=
             player.xpRequired;
 
-
         player.level++;
 
 
@@ -382,31 +317,37 @@ function completeContract(
             Math.floor(
                 player.xpRequired * 1.5
             );
-
     }
 
 
-    savePlayer(
-        player
-    );
-
+    savePlayer(player);
 
     return player;
-
 }
 
 
-// ========================================
-// FAIL CONTRACT
-// ========================================
+/*
+ * ========================================
+ * CONTRACT FAILURE
+ * ========================================
+ *
+ * A failed contract is also permanently
+ * resolved.
+ *
+ * Failure does NOT provide XP or money.
+ */
 
-function failContract(
-    contractId
-) {
+function failContract(contractId) {
 
     const player =
         getPlayer();
 
+
+    /*
+     * ----------------------------------------
+     * DUPLICATE FAILURE PROTECTION
+     * ----------------------------------------
+     */
 
     if (
         !Array.isArray(
@@ -415,36 +356,52 @@ function failContract(
     ) {
 
         player.completedContracts = [];
-
     }
 
 
     if (
-        !player.completedContracts.includes(
+        player.completedContracts.includes(
             contractId
         )
     ) {
 
-        player.completedContracts.push(
+        console.warn(
+            "BLACKLINE: CONTRACT ALREADY RESOLVED.",
             contractId
         );
 
+        return player;
     }
 
 
-    player.activeContract =
-        null;
+    /*
+     * ----------------------------------------
+     * RECORD FAILURE
+     * ----------------------------------------
+     *
+     * We still place the contract inside
+     * completedContracts because this array
+     * represents contracts that can no longer
+     * be replayed.
+     */
 
-
-    player.activeScene =
-        null;
-
-
-    savePlayer(
-        player
+    player.completedContracts.push(
+        contractId
     );
 
 
-    return player;
+    /*
+     * ----------------------------------------
+     * CLEAR ACTIVE OPERATION
+     * ----------------------------------------
+     */
 
+    player.activeContract = null;
+
+    player.activeScene = null;
+
+
+    savePlayer(player);
+
+    return player;
 }

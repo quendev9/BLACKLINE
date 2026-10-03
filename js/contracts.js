@@ -1,7 +1,20 @@
 // ========================================
-// BLACKLINE
-// CONTRACT TERMINAL
-// BUILD 8.5
+// BLACKLINE CONTRACT DATABASE
+// ========================================
+// BUILD 8.75
+//
+// Contract states:
+//
+// LOCKED
+// AVAILABLE
+// ACTIVE
+// COMPLETED
+// FAILED
+//
+// Completed and failed contracts remain
+// viewable for historical inspection.
+//
+// They cannot be replayed.
 // ========================================
 
 
@@ -16,19 +29,26 @@ const CONTRACTS = [
 
         title: "THE SILENT WITNESS",
 
-        classification: "ELIMINATION CONTRACT",
+        classification:
+            "ELIMINATION CONTRACT",
 
-        target: "MARCUS VALE",
+        target:
+            "MARCUS VALE",
 
-        location: "MANILA",
+        location:
+            "MANILA",
 
-        difficulty: "LOW",
+        difficulty:
+            "LOW",
 
-        requiredLevel: 0,
+        requiredLevel:
+            0,
 
-        reward: 3500,
+        reward:
+            3500,
 
-        xp: 250,
+        xp:
+            250,
 
         description:
             "Marcus Vale has been identified as a potential security threat to BLACKLINE interests. Locate the target, confirm identity, and resolve the assignment according to operational protocol."
@@ -40,19 +60,26 @@ const CONTRACTS = [
 
         title: "DEAD DROP",
 
-        classification: "RECOVERY CONTRACT",
+        classification:
+            "RECOVERY CONTRACT",
 
-        target: "UNKNOWN",
+        target:
+            "UNKNOWN",
 
-        location: "QUEZON CITY",
+        location:
+            "QUEZON CITY",
 
-        difficulty: "MEDIUM",
+        difficulty:
+            "MEDIUM",
 
-        requiredLevel: 2,
+        requiredLevel:
+            2,
 
-        reward: 5500,
+        reward:
+            5500,
 
-        xp: 400,
+        xp:
+            400,
 
         description:
             "A BLACKLINE asset has gone dark. Recover the package before it can be compromised. Operational details will be provided upon authorization."
@@ -64,19 +91,26 @@ const CONTRACTS = [
 
         title: "GHOST PROTOCOL",
 
-        classification: "ELIMINATION CONTRACT",
+        classification:
+            "ELIMINATION CONTRACT",
 
-        target: "ADRIAN CROSS",
+        target:
+            "ADRIAN CROSS",
 
-        location: "CEBU",
+        location:
+            "CEBU",
 
-        difficulty: "HIGH",
+        difficulty:
+            "HIGH",
 
-        requiredLevel: 5,
+        requiredLevel:
+            5,
 
-        reward: 12000,
+        reward:
+            12000,
 
-        xp: 800,
+        xp:
+            800,
 
         description:
             "Adrian Cross has breached multiple BLACKLINE security layers and disappeared from the network. Locate the target and terminate the threat."
@@ -89,13 +123,23 @@ const CONTRACTS = [
 // PLAYER
 // ========================================
 
-const player =
+let player =
     getPlayer();
 
 
 // ========================================
-// DOM REFERENCES
+// DOM ELEMENTS
 // ========================================
+
+const operativeCodename =
+    document.getElementById(
+        "operativeCodename"
+    );
+
+const operativeId =
+    document.getElementById(
+        "operativeId"
+    );
 
 const contractsGrid =
     document.getElementById(
@@ -112,10 +156,23 @@ const contractDetails =
         "contractDetails"
     );
 
+
+// IMPORTANT:
+// The HTML uses:
+//
+// class="details-empty"
+//
+// NOT:
+//
+// id="detailsEmpty"
+//
+// Therefore we use querySelector().
+
 const detailsEmpty =
-    contractDetails.querySelector(
+    document.querySelector(
         ".details-empty"
     );
+
 
 const detailsContent =
     document.getElementById(
@@ -172,29 +229,19 @@ const detailsDescription =
         "detailsDescription"
     );
 
-const acceptContract =
-    document.getElementById(
-        "acceptContract"
-    );
-
 const contractMessage =
     document.getElementById(
         "contractMessage"
     );
 
+const acceptContract =
+    document.getElementById(
+        "acceptContract"
+    );
+
 const backButton =
     document.getElementById(
         "backButton"
-    );
-
-const operativeCodename =
-    document.getElementById(
-        "operativeCodename"
-    );
-
-const operativeId =
-    document.getElementById(
-        "operativeId"
     );
 
 
@@ -206,7 +253,7 @@ let selectedContract = null;
 
 
 // ========================================
-// WORLD STATE
+// GET WORLD STATE FOR CONTRACT
 // ========================================
 
 function getContractWorldState(
@@ -215,6 +262,7 @@ function getContractWorldState(
 
     const worldState =
         getWorldState();
+
 
     return (
         worldState.contracts[
@@ -226,7 +274,7 @@ function getContractWorldState(
 
 
 // ========================================
-// CONTRACT STATUS
+// GET CONTRACT STATUS
 // ========================================
 
 function getContractStatus(
@@ -240,35 +288,37 @@ function getContractStatus(
 
 
     // ------------------------------------
-    // WORLD STATE TAKES PRIORITY
+    // FAILED
     // ------------------------------------
 
-    if (worldRecord) {
+    if (
+        worldRecord &&
+        worldRecord.status ===
+        "failed"
+    ) {
 
-        if (
-            worldRecord.status ===
-            "failed"
-        ) {
-
-            return "failed";
-
-        }
-
-
-        if (
-            worldRecord.status ===
-            "resolved"
-        ) {
-
-            return "completed";
-
-        }
+        return "failed";
 
     }
 
 
     // ------------------------------------
-    // PLAYER ACTIVE CONTRACT
+    // COMPLETED
+    // ------------------------------------
+
+    if (
+        worldRecord &&
+        worldRecord.status ===
+        "resolved"
+    ) {
+
+        return "completed";
+
+    }
+
+
+    // ------------------------------------
+    // ACTIVE
     // ------------------------------------
 
     if (
@@ -282,8 +332,7 @@ function getContractStatus(
 
 
     // ------------------------------------
-    // OLD PLAYER STATE
-    // BACKUP COMPATIBILITY
+    // PLAYER HISTORY
     // ------------------------------------
 
     if (
@@ -314,31 +363,26 @@ function getContractStatus(
     }
 
 
+    // ------------------------------------
+    // AVAILABLE
+    // ------------------------------------
+
     return "available";
 
 }
 
 
 // ========================================
-// STATUS TEXT
+// GET STATUS TEXT
 // ========================================
 
 function getStatusText(
-    contract,
     status
 ) {
 
-    switch (status) {
-
-        case "available":
-
-            return "AVAILABLE";
-
-
-        case "active":
-
-            return "IN PROGRESS";
-
+    switch (
+        status
+    ) {
 
         case "completed":
 
@@ -350,11 +394,19 @@ function getStatusText(
             return "FAILED";
 
 
+        case "active":
+
+            return "ACTIVE";
+
+
         case "locked":
 
-            return (
-                `LVL ${contract.requiredLevel} REQUIRED`
-            );
+            return "LOCKED";
+
+
+        case "available":
+
+            return "AVAILABLE";
 
 
         default:
@@ -371,14 +423,9 @@ function getStatusText(
 // ========================================
 
 function createContractRecord(
-    contract
+    contract,
+    status
 ) {
-
-    const status =
-        getContractStatus(
-            contract
-        );
-
 
     const record =
         document.createElement(
@@ -394,173 +441,47 @@ function createContractRecord(
         contract.id;
 
 
-    if (
-        status === "locked"
-    ) {
+    // ------------------------------------
+    // STATUS CLASS
+    // ------------------------------------
 
-        record.classList.add(
-            "locked"
-        );
-
-    }
-
-
-    if (
-        status === "completed"
-    ) {
-
-        record.classList.add(
-            "completed"
-        );
-
-    }
-
-
-    if (
-        status === "failed"
-    ) {
-
-        record.classList.add(
-            "failed"
-        );
-
-    }
-
-
-    if (
-        status === "active"
-    ) {
-
-        record.classList.add(
-            "active"
-        );
-
-    }
-
-
-    // ====================================
-    // RECORD ID
-    // ====================================
-
-    const recordId =
-        document.createElement(
-            "div"
-        );
-
-    recordId.className =
-        "record-id";
-
-    recordId.textContent =
-        contract.id;
-
-
-    // ====================================
-    // RECORD INFORMATION
-    // ====================================
-
-    const recordInfo =
-        document.createElement(
-            "div"
-        );
-
-    recordInfo.className =
-        "record-info";
-
-
-    const recordTitle =
-        document.createElement(
-            "div"
-        );
-
-    recordTitle.className =
-        "record-title";
-
-    recordTitle.textContent =
-        contract.title;
-
-
-    const recordMeta =
-        document.createElement(
-            "div"
-        );
-
-    recordMeta.className =
-        "record-meta";
-
-
-    const recordDifficulty =
-        document.createElement(
-            "span"
-        );
-
-    recordDifficulty.textContent =
-        contract.difficulty;
-
-
-    const recordStatus =
-        document.createElement(
-            "span"
-        );
-
-    recordStatus.className =
-        "record-status";
-
-    recordStatus.textContent =
-        getStatusText(
-            contract,
-            status
-        );
-
-
-    recordMeta.appendChild(
-        recordDifficulty
-    );
-
-    recordMeta.appendChild(
-        recordStatus
+    record.classList.add(
+        `status-${status}`
     );
 
 
-    recordInfo.appendChild(
-        recordTitle
-    );
+    // ------------------------------------
+    // RECORD CONTENT
+    // ------------------------------------
 
-    recordInfo.appendChild(
-        recordMeta
-    );
+    record.innerHTML = `
+
+        <div class="record-main">
+
+            <div class="record-id">
+                ${contract.id}
+            </div>
+
+            <div class="record-title">
+                ${contract.title}
+            </div>
+
+        </div>
 
 
-    record.appendChild(
-        recordId
-    );
+        <div class="record-meta">
 
-    record.appendChild(
-        recordInfo
-    );
+            <span>
+                ${contract.difficulty}
+            </span>
 
+            <span>
+                ${getStatusText(status)}
+            </span>
 
-    // ====================================
-    // RECORD INTERACTION
-    // ====================================
+        </div>
 
-    if (
-        status !== "locked" &&
-        status !== "completed" &&
-        status !== "failed"
-    ) {
-
-        record.addEventListener(
-            "click",
-            () => {
-
-                selectContract(
-                    contract
-                );
-
-            }
-        );
-
-    }
+    `;
 
 
     return record;
@@ -569,19 +490,53 @@ function createContractRecord(
 
 
 // ========================================
-// RENDER CONTRACT DATABASE
+// UPDATE OPERATIVE INFO
+// ========================================
+
+function updateOperativeInfo() {
+
+    player =
+        getPlayer();
+
+
+    if (operativeCodename) {
+
+        operativeCodename.textContent =
+            player.codename;
+
+    }
+
+
+    if (operativeId) {
+
+        operativeId.textContent =
+            player.contractorId;
+
+    }
+
+}
+
+
+// ========================================
+// RENDER CONTRACTS
 // ========================================
 
 function renderContracts() {
 
-    contractsGrid.innerHTML = "";
+    player =
+        getPlayer();
 
 
-    let availableCount = 0;
+    contractsGrid.innerHTML =
+        "";
+
+
+    contractCount.textContent =
+        `${CONTRACTS.length} RECORDS`;
 
 
     CONTRACTS.forEach(
-        (contract) => {
+        function (contract) {
 
             const status =
                 getContractStatus(
@@ -589,19 +544,10 @@ function renderContracts() {
                 );
 
 
-            if (
-                status === "available" ||
-                status === "active"
-            ) {
-
-                availableCount++;
-
-            }
-
-
             const record =
                 createContractRecord(
-                    contract
+                    contract,
+                    status
                 );
 
 
@@ -613,41 +559,96 @@ function renderContracts() {
     );
 
 
-    contractCount.textContent =
-        availableCount;
-
-
     updateOperativeInfo();
 
 }
 
 
 // ========================================
-// UPDATE OPERATIVE INFO
+// FIND CONTRACT
 // ========================================
 
-function updateOperativeInfo() {
+function findContract(
+    contractId
+) {
 
-    if (
-        operativeCodename
-    ) {
+    return CONTRACTS.find(
+        function (contract) {
 
-        operativeCodename.textContent =
-            player.codename;
+            return (
+                contract.id ===
+                contractId
+            );
 
-    }
-
-
-    if (
-        operativeId
-    ) {
-
-        operativeId.textContent =
-            player.contractorId;
-
-    }
+        }
+    ) || null;
 
 }
+
+
+// ========================================
+// CONTRACT GRID CLICK HANDLER
+// ========================================
+// The entire contract grid listens for
+// clicks.
+//
+// This means clicking:
+//
+// - the contract ID
+// - the contract title
+// - the difficulty
+// - the status
+//
+// will select the record.
+// ========================================
+
+contractsGrid.addEventListener(
+    "click",
+    function (event) {
+
+        const record =
+            event.target.closest(
+                ".contract-record"
+            );
+
+
+        if (!record) {
+
+            return;
+
+        }
+
+
+        const contractId =
+            record.dataset.contractId;
+
+
+        if (!contractId) {
+
+            return;
+
+        }
+
+
+        const contract =
+            findContract(
+                contractId
+            );
+
+
+        if (!contract) {
+
+            return;
+
+        }
+
+
+        selectContract(
+            contract
+        );
+
+    }
+);
 
 
 // ========================================
@@ -663,58 +664,31 @@ function selectContract(
 
 
     // ------------------------------------
-    // UPDATE SELECTED VISUAL
+    // SHOW DETAILS
     // ------------------------------------
 
-    const records =
-        document.querySelectorAll(
-            ".contract-record"
+    if (detailsEmpty) {
+
+        detailsEmpty.style.display =
+            "none";
+
+    }
+
+
+    if (detailsContent) {
+
+        detailsContent.classList.remove(
+            "hidden"
         );
 
-
-    records.forEach(
-        (record) => {
-
-            record.classList.remove(
-                "selected"
-            );
-
-        }
-    );
-
-
-    const selectedRecord =
-        document.querySelector(
-            `.contract-record[data-contract-id="${contract.id}"]`
-        );
-
-
-    if (
-        selectedRecord
-    ) {
-
-        selectedRecord.classList.add(
-            "selected"
-        );
+        detailsContent.style.display =
+            "block";
 
     }
 
 
     // ------------------------------------
-    // SHOW DETAILS
-    // ------------------------------------
-
-    detailsEmpty.classList.add(
-        "hidden"
-    );
-
-    detailsContent.classList.remove(
-        "hidden"
-    );
-
-
-    // ------------------------------------
-    // POPULATE DETAILS
+    // BASIC INFORMATION
     // ------------------------------------
 
     detailsClassification.textContent =
@@ -726,12 +700,10 @@ function selectContract(
 
 
     detailsId.textContent =
-        contract.id +
-        " // OPERATIONAL RECORD";
+        contract.id;
 
 
     detailsDifficulty.textContent =
-        "DIFFICULTY // " +
         contract.difficulty;
 
 
@@ -744,32 +716,46 @@ function selectContract(
 
 
     detailsLevel.textContent =
-        "LEVEL " +
         contract.requiredLevel;
 
 
     detailsReward.textContent =
-        "$" +
-        contract.reward.toLocaleString();
+        `$${contract.reward.toLocaleString()}`;
 
 
     detailsXP.textContent =
-        "+" +
-        contract.xp +
-        " XP";
+        `${contract.xp} XP`;
 
 
     detailsDescription.textContent =
         contract.description;
 
 
+    // ------------------------------------
+    // CURRENT STATE
+    // ------------------------------------
+
+    const status =
+        getContractStatus(
+            contract
+        );
+
+
+    const worldRecord =
+        getContractWorldState(
+            contract.id
+        );
+
+
+    // ------------------------------------
+    // UPDATE ACTION
+    // ------------------------------------
+
     updateActionButton(
-        contract
+        contract,
+        status,
+        worldRecord
     );
-
-
-    contractMessage.textContent =
-        "";
 
 }
 
@@ -779,119 +765,156 @@ function selectContract(
 // ========================================
 
 function updateActionButton(
-    contract
+    contract,
+    status,
+    worldRecord
 ) {
 
-    const status =
-        getContractStatus(
-            contract
-        );
+    // ------------------------------------
+    // COMPLETED
+    // ------------------------------------
+
+    if (
+        status === "completed"
+    ) {
+
+        acceptContract.disabled =
+            true;
 
 
-    acceptContract.disabled =
-        false;
+        acceptContract.textContent =
+            "CONTRACT RESOLVED";
 
 
-    acceptContract.textContent =
-        "ACCEPT CONTRACT";
+        contractMessage.textContent =
+            getOutcomeMessage(
+                worldRecord
+            );
 
 
-    contractMessage.textContent =
-        "";
+        contractMessage.style.display =
+            "block";
 
 
-    switch (status) {
+        return;
+
+    }
 
 
-        // ================================
-        // AVAILABLE
-        // ================================
+    // ------------------------------------
+    // FAILED
+    // ------------------------------------
 
-        case "available":
+    if (
+        status === "failed"
+    ) {
 
-            acceptContract.disabled =
-                false;
-
-            acceptContract.textContent =
-                "ACCEPT CONTRACT";
-
-            contractMessage.textContent =
-                "ASSIGNMENT AVAILABLE // AUTHORIZATION REQUIRED.";
-
-            break;
+        acceptContract.disabled =
+            true;
 
 
-        // ================================
-        // ACTIVE
-        // ================================
-
-        case "active":
-
-            acceptContract.disabled =
-                false;
-
-            acceptContract.textContent =
-                "RESUME CONTRACT";
-
-            contractMessage.textContent =
-                "ASSIGNMENT IN PROGRESS // RETURN TO OPERATION.";
-
-            break;
+        acceptContract.textContent =
+            "CONTRACT FAILED";
 
 
-        // ================================
-        // COMPLETED
-        // ================================
-
-        case "completed":
-
-            acceptContract.disabled =
-                true;
-
-            acceptContract.textContent =
-                "CONTRACT RESOLVED";
-
-            contractMessage.textContent =
-                "RECORD SEALED // ASSIGNMENT COMPLETE.";
-
-            break;
+        contractMessage.textContent =
+            getOutcomeMessage(
+                worldRecord
+            );
 
 
-        // ================================
-        // FAILED
-        // ================================
-
-        case "failed":
-
-            acceptContract.disabled =
-                true;
-
-            acceptContract.textContent =
-                "CONTRACT FAILED";
-
-            contractMessage.textContent =
-                "RECORD SEALED // OPERATIONAL FAILURE.";
-
-            break;
+        contractMessage.style.display =
+            "block";
 
 
-        // ================================
-        // LOCKED
-        // ================================
+        return;
 
-        case "locked":
+    }
 
-            acceptContract.disabled =
-                true;
 
-            acceptContract.textContent =
-                "ACCESS DENIED";
+    // ------------------------------------
+    // ACTIVE
+    // ------------------------------------
 
-            contractMessage.textContent =
-                "CLEARANCE INSUFFICIENT // REQUIRED LEVEL: " +
-                contract.requiredLevel;
+    if (
+        status === "active"
+    ) {
 
-            break;
+        acceptContract.disabled =
+            false;
+
+
+        acceptContract.textContent =
+            "RESUME CONTRACT";
+
+
+        contractMessage.textContent =
+            "ACTIVE OPERATION DETECTED. RESUME FROM LAST KNOWN POSITION.";
+
+
+        contractMessage.style.display =
+            "block";
+
+
+        return;
+
+    }
+
+
+    // ------------------------------------
+    // LOCKED
+    // ------------------------------------
+
+    if (
+        status === "locked"
+    ) {
+
+        acceptContract.disabled =
+            true;
+
+
+        acceptContract.textContent =
+            "ACCESS LOCKED";
+
+
+        contractMessage.textContent =
+            `REQUIRES LEVEL ${contract.requiredLevel}.`;
+
+
+        contractMessage.style.display =
+            "block";
+
+
+        return;
+
+    }
+
+
+    // ------------------------------------
+    // AVAILABLE
+    // ------------------------------------
+
+    if (
+        status === "available"
+    ) {
+
+        acceptContract.disabled =
+            false;
+
+
+        acceptContract.textContent =
+            "ACCEPT CONTRACT";
+
+
+        contractMessage.textContent =
+            "CONTRACT AVAILABLE FOR AUTHORIZATION.";
+
+
+        contractMessage.style.display =
+            "block";
+
+
+        return;
 
     }
 
@@ -899,33 +922,129 @@ function updateActionButton(
 
 
 // ========================================
-// ACCEPT / RESUME CONTRACT
+// GET OUTCOME MESSAGE
+// ========================================
+
+function getOutcomeMessage(
+    worldRecord
+) {
+
+    if (!worldRecord) {
+
+        return "CONTRACT HISTORY UNAVAILABLE.";
+
+    }
+
+
+    switch (
+        worldRecord.outcome
+    ) {
+
+        case "marcus_eliminated":
+
+            return "OUTCOME RECORDED: TARGET ELIMINATED. CONTRACT PERMANENTLY RESOLVED.";
+
+
+        case "marcus_escaped":
+
+            return "OUTCOME RECORDED: TARGET ESCAPED. CONTRACT PERMANENTLY CLOSED.";
+
+
+        default:
+
+            return `OUTCOME RECORDED: ${String(
+                worldRecord.outcome
+            )
+                .replaceAll(
+                    "_",
+                    " "
+                )
+                .toUpperCase()}.`;
+
+    }
+
+}
+
+
+// ========================================
+// HANDLE CONTRACT ACTION
 // ========================================
 
 function handleContractAction() {
 
-    if (
-        !selectedContract
-    ) {
+    if (!selectedContract) {
 
         return;
 
     }
 
 
-    const status =
-        getContractStatus(
-            selectedContract
+    // ------------------------------------
+    // REFRESH PLAYER STATE
+    // ------------------------------------
+
+    player =
+        getPlayer();
+
+
+    // ------------------------------------
+    // REFRESH WORLD STATE
+    // ------------------------------------
+
+    const worldRecord =
+        getContractWorldState(
+            selectedContract.id
         );
 
 
     // ------------------------------------
-    // RESOLVED / FAILED
+    // SEALED CONTRACT
+    // ------------------------------------
+    //
+    // Viewing is allowed.
+    //
+    // Starting is NOT allowed.
     // ------------------------------------
 
     if (
-        status === "completed" ||
-        status === "failed"
+        worldRecord &&
+        (
+            worldRecord.status ===
+            "resolved" ||
+
+            worldRecord.status ===
+            "failed"
+        )
+    ) {
+
+        updateActionButton(
+            selectedContract,
+
+            worldRecord.status ===
+                "resolved"
+                ? "completed"
+                : "failed",
+
+            worldRecord
+        );
+
+
+        return;
+
+    }
+
+
+    // ------------------------------------
+    // PLAYER HISTORY FALLBACK
+    // ------------------------------------
+
+    if (
+        Array.isArray(
+            player.completedContracts
+        ) &&
+        player.completedContracts.includes(
+            selectedContract.id
+        )
     ) {
 
         return;
@@ -934,23 +1053,7 @@ function handleContractAction() {
 
 
     // ------------------------------------
-    // RESUME ACTIVE
-    // ------------------------------------
-
-    if (
-        status === "active"
-    ) {
-
-        window.location.href =
-            "./operation.html";
-
-        return;
-
-    }
-
-
-    // ------------------------------------
-    // CHECK LEVEL
+    // LEVEL CHECK
     // ------------------------------------
 
     if (
@@ -958,16 +1061,13 @@ function handleContractAction() {
         selectedContract.requiredLevel
     ) {
 
-        contractMessage.textContent =
-            "ACCESS DENIED // INSUFFICIENT CLEARANCE.";
-
         return;
 
     }
 
 
     // ------------------------------------
-    // ACCEPT CONTRACT
+    // START / RESUME CONTRACT
     // ------------------------------------
 
     updatePlayer({
@@ -976,7 +1076,10 @@ function handleContractAction() {
             selectedContract.id,
 
         activeScene:
-            null
+            player.activeContract ===
+                selectedContract.id
+                ? player.activeScene
+                : null
 
     });
 
@@ -988,7 +1091,7 @@ function handleContractAction() {
 
 
 // ========================================
-// BUTTON EVENTS
+// ACTION BUTTON
 // ========================================
 
 acceptContract.addEventListener(
@@ -997,9 +1100,13 @@ acceptContract.addEventListener(
 );
 
 
+// ========================================
+// BACK BUTTON
+// ========================================
+
 backButton.addEventListener(
     "click",
-    () => {
+    function () {
 
         window.location.href =
             "./dashboard.html";
@@ -1009,7 +1116,7 @@ backButton.addEventListener(
 
 
 // ========================================
-// INITIALIZE
+// INITIAL RENDER
 // ========================================
 
 renderContracts();
